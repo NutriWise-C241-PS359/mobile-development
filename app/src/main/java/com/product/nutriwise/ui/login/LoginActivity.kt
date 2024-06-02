@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.product.nutriwise.R
 import com.product.nutriwise.databinding.ActivityLoginBinding
+import com.product.nutriwise.ui.main.MainActivity
 import com.product.nutriwise.ui.signup.SignupActivity
 
 class LoginActivity : AppCompatActivity() {
@@ -18,6 +19,11 @@ class LoginActivity : AppCompatActivity() {
 
         binding.tvToSignup.setOnClickListener {
             startActivity(Intent(this, SignupActivity::class.java))
+            finish()
+        }
+
+        binding.btnLogin.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
     }

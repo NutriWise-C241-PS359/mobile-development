@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">NutriWise</string>
+    <string name="logo_setting">logo_setting</string>
+    <string name="logo_app">logo_app</string>
+    <string name="tv_title_login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="to_signup">Belum punya akun?</string>
+    <string name="tv_title_signup">Signup</string>
+    <string name="to_login">Udah punya akun?</string>
+    <string name="gender">Gender</string>
+    <string name="next">Lanjut</string>
+    <string name="activity">Aktifitas</string>
+    <string name="umur">Umur</string>
+    <string name="berat_badan">Berat Badan</string>
+    <string name="tinggi_badan">Tinggi Badan</string>
+    <string name="tambah_photo">Tambah photo</string>
 </resources>

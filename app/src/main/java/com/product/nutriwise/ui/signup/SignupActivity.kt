@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.product.nutriwise.R
 import com.product.nutriwise.databinding.ActivitySignupBinding
 import com.product.nutriwise.ui.inputProfile.InputProfileActivity
+import com.product.nutriwise.ui.inputTarget.InputTargetActivity
 import com.product.nutriwise.ui.login.LoginActivity
 
 class SignupActivity : AppCompatActivity() {
@@ -23,7 +24,7 @@ class SignupActivity : AppCompatActivity() {
         }
 
         binding.btnSignup.setOnClickListener {
-            startActivity(Intent(this, InputProfileActivity::class.java))
+            startActivity(Intent(this, InputTargetActivity::class.java))
             finish()
         }
     }

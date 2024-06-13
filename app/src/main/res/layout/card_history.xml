@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    style="@style/CV_Style">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+<!--        <ImageView-->
+<!--            android:id="@+id/img_item_photo"-->
+<!--            android:layout_width="70dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            card_view:layout_constraintBottom_toBottomOf="parent"-->
+<!--            card_view:layout_constraintStart_toStartOf="parent"-->
+<!--            card_view:layout_constraintTop_toTopOf="parent"-->
+<!--            tools:src="@tools:sample/avatars"/>-->
+
+        <TextView
+            android:id="@+id/tv_date_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.005"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            android:text="dd/mm/yyyy"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_totalcal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@+id/tv_date_history"
+            android:text="Total Kalori: 1000kkal"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toEndOf="@id/tv_date_history"
+            card_view:layout_constraintTop_toTopOf="@id/tv_date_history" />
+
+        <TextView
+            android:id="@+id/tv_breakfast_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Label Sarapan"
+            android:textStyle="bold"
+            card_view:layout_constraintStart_toStartOf="@id/tv_date_history"
+            card_view:layout_constraintTop_toBottomOf="@id/tv_date_history"/>
+
+        <TextView
+            android:id="@+id/tv_label_calorie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Label Kalori Sarapan"
+            android:textSize="16sp"
+            card_view:layout_constraintStart_toStartOf="@+id/tv_breakfast_history"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_breakfast_history" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

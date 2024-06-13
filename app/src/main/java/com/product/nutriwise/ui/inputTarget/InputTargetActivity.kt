@@ -12,7 +12,7 @@ import java.util.*
 class InputTargetActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityInputTargetBinding
-
+//test123
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityInputTargetBinding.inflate(layoutInflater)

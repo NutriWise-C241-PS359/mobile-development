@@ -1,21 +1,21 @@
 <resources>
     <string name="app_name">NutriWise</string>
-    <string name="logo_setting">logo_setting</string>
+    <string name="logo_setting">Pengaturan Bahasa</string>
     <string name="logo_app">logo_app</string>
     <string name="tv_title_login">Login</string>
-    <string name="username">Username</string>
-    <string name="password">Password</string>
+    <string name="name">Nama Lengkap</string>
+    <string name="username">Nama Akun</string>
+    <string name="password">Kata Sandi</string>
     <string name="to_signup">Belum punya akun?</string>
-    <string name="tv_title_signup">Signup</string>
-    <string name="to_login">Udah punya akun?</string>
-    <string name="gender">Gender</string>
-    <string name="next">Lanjut</string>
-    <string name="activity">Aktifitas</string>
-    <string name="umur">Umur</string>
+    <string name="tv_title_signup">Daftar</string>
+    <string name="to_login">Sudah punya akun?</string>
+    <string name="gender">Jenis Kelamin</string>
+    <string name="next">Selanjutnya</string>
+    <string name="activity">Aktivitas</string>
+    <string name="umur">Usia</string>
     <string name="berat_badan">Berat Badan</string>
     <string name="tinggi_badan">Tinggi Badan</string>
     <string name="tambah_photo">Tambah photo</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="name">Nama</string>
 </resources>

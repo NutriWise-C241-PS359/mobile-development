@@ -2,11 +2,13 @@ package com.product.nutriwise.ui.inputTarget
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.product.nutriwise.databinding.ActivityInputTargetBinding
 import com.product.nutriwise.ui.main.MainActivity
+import java.text.SimpleDateFormat
 import java.util.*
 
 class InputTargetActivity : AppCompatActivity() {
@@ -21,6 +23,12 @@ class InputTargetActivity : AppCompatActivity() {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DAY_OF_YEAR,14)
         val today = calendar.timeInMillis
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val dateToday: Date
+        dateToday = calendar.time
+        val format = dateFormat.format(dateToday)
+
+        Log.d("tangal", format)
 
         val constraintsBuilder = CalendarConstraints.Builder()
             .setValidator(DateValidatorPointForwardCustom.from(today))
@@ -39,6 +47,11 @@ class InputTargetActivity : AppCompatActivity() {
         }
 
         binding.tvSkip.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+
+        binding.btnNext.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }

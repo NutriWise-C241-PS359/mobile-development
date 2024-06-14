@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/option_breakfast"
+        android:title="@string/opsisarapan"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/option_lunch"
+        android:title="@string/opsimakansiang"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/option_dinner"
+        android:title="@string/opsimakanmalam"
+        app:showAsAction="never"/>
+</menu>

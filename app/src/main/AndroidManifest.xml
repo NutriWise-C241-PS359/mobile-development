@@ -15,6 +15,22 @@
         android:theme="@style/Theme.NutriWise"
         tools:targetApi="31">
         <activity
+            android:name=".ui.main.history.DinnerActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.main.history.HistoryDetailActivity" />
+        <activity
+            android:name=".ui.main.history.LunchActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.main.history.HistoryDetailActivity"  />
+        <activity
+            android:name=".ui.main.history.BreakfastActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.main.history.HistoryDetailActivity"  />
+        <activity
+            android:name=".ui.main.history.HistoryDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.main.history.HistoryFragment"  />
+        <activity
             android:name=".ui.inputTarget.InputTargetActivity"
             android:exported="false" />
         <activity

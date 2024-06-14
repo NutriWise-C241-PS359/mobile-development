@@ -2,20 +2,36 @@
     <string name="app_name">NutriWise</string>
     <string name="logo_setting">Pengaturan Bahasa</string>
     <string name="logo_app">Logo Aplikasi</string>
-    <string name="tv_title_login">Masuk</string>
     <string name="name">Nama Lengkap</string>
     <string name="username">Nama Akun</string>
     <string name="password">Kata Sandi</string>
     <string name="to_signup">Belum punya akun?</string>
     <string name="tv_title_signup">Daftar</string>
+
+    <string name="tv_title_login">Masuk</string>
     <string name="to_login">Sudah punya akun?</string>
-    <string name="gender">Jenis Kelamin</string>
-    <string name="next">Selanjutnya</string>
-    <string name="activity">Aktivitas</string>
+
     <string name="umur">Usia</string>
+    <string name="gender">Jenis Kelamin</string>
+    <string name="activity">Aktivitas</string>
     <string name="berat_badan">Berat Badan</string>
     <string name="tinggi_badan">Tinggi Badan</string>
     <string name="tambah_photo">Tambah Photo</string>
+    <string name="next">Selanjutnya</string>
+
+    <string name="tgl_history">DD/MM/YYYY</string>
+    <string name="label_totalkalori_harian">Total Kalori: </string>
+    <string name="total_kalori_harian">1000</string>
+    <string name="satuan_kalori_harian">kkal</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="history">History</string>
+    <string name="profile">Profile</string>
+    <string name="opsisarapan">Sarapan</string>
+    <string name="opsimakansiang">Makan Siang</string>
+    <string name="opsimakanmalam">Makan Malam</string>
+    <string name="hint">Tekan menu titik tiga di kanan atas untuk melihat komposisi nutrisi harian Anda berdasarkan waktu makan</string>
+    <string name="nama_makanan">Nama Makanan</string>
 </resources>

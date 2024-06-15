@@ -1,4 +1,4 @@
-package com.product.nutriwise.ui.inputTarget
+package com.product.nutriwise.ui.signup.inputTarget
 
 import android.content.Intent
 import android.os.Bundle

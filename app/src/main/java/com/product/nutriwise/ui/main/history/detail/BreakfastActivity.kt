@@ -1,4 +1,4 @@
-package com.product.nutriwise.ui.main.history
+package com.product.nutriwise.ui.main.history.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

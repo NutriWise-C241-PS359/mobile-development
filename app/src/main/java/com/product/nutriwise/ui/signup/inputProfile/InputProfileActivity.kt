@@ -1,4 +1,4 @@
-package com.product.nutriwise.ui.inputProfile
+package com.product.nutriwise.ui.signup.inputProfile
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.widget.ArrayAdapter
 import com.product.nutriwise.R
 import com.product.nutriwise.databinding.ActivityInputProfileBinding
-import com.product.nutriwise.ui.inputTarget.InputTargetActivity
+import com.product.nutriwise.ui.signup.inputTarget.InputTargetActivity
 
 class InputProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInputProfileBinding

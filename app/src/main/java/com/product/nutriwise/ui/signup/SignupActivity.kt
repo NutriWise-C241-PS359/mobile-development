@@ -12,8 +12,8 @@ import com.product.nutriwise.data.remote.response.ErrorResponse
 import com.product.nutriwise.data.remote.response.Users
 import com.product.nutriwise.data.remote.retrofit.ApiConfig
 import com.product.nutriwise.databinding.ActivitySignupBinding
-import com.product.nutriwise.ui.inputProfile.InputProfileActivity
-import com.product.nutriwise.ui.inputTarget.InputTargetActivity
+import com.product.nutriwise.ui.signup.inputProfile.InputProfileActivity
+import com.product.nutriwise.ui.signup.inputTarget.InputTargetActivity
 import com.product.nutriwise.ui.login.LoginActivity
 import com.product.nutriwise.ui.main.MainActivity
 import kotlinx.coroutines.launch
@@ -27,8 +27,6 @@ class SignupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
 
         binding.apply {
             btnSignup.setOnClickListener {

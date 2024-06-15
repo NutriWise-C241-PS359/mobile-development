@@ -1,12 +1,17 @@
 package com.product.nutriwise.ui.main.home
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentTransaction
 import com.product.nutriwise.databinding.FragmentHomeBinding
+import com.product.nutriwise.ui.login.LoginActivity
+import com.product.nutriwise.ui.main.home.recomendation.RecomendationActivity
 import kotlin.properties.Delegates
 
 class HomeFragment : Fragment() {
@@ -35,6 +40,7 @@ class HomeFragment : Fragment() {
         binding.piCalorie.max = maxCalorie as Int
         binding.piCalorie.progress = proCalorie as Int
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

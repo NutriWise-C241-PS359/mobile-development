@@ -34,4 +34,5 @@
     <string name="opsimakanmalam">Makan Malam</string>
     <string name="hint">Tekan menu titik tiga di kanan atas untuk melihat komposisi nutrisi harian Anda berdasarkan waktu makan</string>
     <string name="nama_makanan">Nama Makanan</string>
+    <string name="failed">Kesalahan</string>
 </resources>

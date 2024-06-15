@@ -3,10 +3,20 @@ package com.product.nutriwise.ui.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.lifecycleScope
+import com.google.gson.Gson
 import com.product.nutriwise.R
+import com.product.nutriwise.data.remote.response.ErrorResponse
+import com.product.nutriwise.data.remote.retrofit.ApiConfig
+import com.product.nutriwise.data.remote.retrofit.ApiService
 import com.product.nutriwise.databinding.ActivityLoginBinding
 import com.product.nutriwise.ui.main.MainActivity
 import com.product.nutriwise.ui.signup.SignupActivity
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class LoginActivity : AppCompatActivity() {
 
@@ -17,14 +27,52 @@ class LoginActivity : AppCompatActivity() {
         binding =ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.tvToSignup.setOnClickListener {
-            startActivity(Intent(this, SignupActivity::class.java))
-            finish()
-        }
+        binding.apply {
+            btnLogin.setOnClickListener {
+                val user = etUsername.text.toString().trim()
+                val password = etPassword.text.toString().trim()
+                Log.d(TAG, "User dan pass: $user  /  $password")
+                loginUser(user, password)
+            }
 
-        binding.btnLogin.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            tvToSignup.setOnClickListener {
+                startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
+                finish()
+            }
         }
+    }
+
+    private fun loginUser(user: String, password: String){
+        val apiService = ApiConfig.getApiService()
+        lifecycleScope.launch {
+            try {
+                //Api dicoding
+                //val response = apiService.login(user, password)
+                val response = apiService.login1(user,password)
+                showToast(response.message.toString())
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finish()
+            }catch (e: HttpException) {
+                val errorBody = e.response()?.errorBody()?.string()
+                val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
+                showErrorDialog(errorResponse.message.toString())
+            }
+        }
+    }
+    private fun showToast(message: String){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showErrorDialog(message: String) {
+        AlertDialog.Builder(this).setTitle(R.string.failed).setMessage(message)
+            .setPositiveButton("Ok") { dialog, _ ->
+                dialog.dismiss()
+            }.show()
+    }
+
+    companion object{
+        val TAG = "LoginActivityLOG"
     }
 }

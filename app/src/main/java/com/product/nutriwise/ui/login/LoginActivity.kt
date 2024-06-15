@@ -5,21 +5,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import com.google.gson.Gson
 import com.product.nutriwise.R
+import com.product.nutriwise.data.local.preference.UserModel
 import com.product.nutriwise.data.remote.response.ErrorResponse
 import com.product.nutriwise.data.remote.retrofit.ApiConfig
-import com.product.nutriwise.data.remote.retrofit.ApiService
 import com.product.nutriwise.databinding.ActivityLoginBinding
+import com.product.nutriwise.ui.ViewModelFactory
 import com.product.nutriwise.ui.main.MainActivity
 import com.product.nutriwise.ui.signup.SignupActivity
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
 class LoginActivity : AppCompatActivity() {
-
+    private val viewModel by viewModels<LoginViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +35,6 @@ class LoginActivity : AppCompatActivity() {
             btnLogin.setOnClickListener {
                 val user = etUsername.text.toString().trim()
                 val password = etPassword.text.toString().trim()
-                Log.d(TAG, "User dan pass: $user  /  $password")
                 loginUser(user, password)
             }
 
@@ -46,10 +49,10 @@ class LoginActivity : AppCompatActivity() {
         val apiService = ApiConfig.getApiService()
         lifecycleScope.launch {
             try {
-                //Api dicoding
-                //val response = apiService.login(user, password)
-                val response = apiService.login1(user,password)
+                val response = apiService.login1(user, password)
                 showToast(response.message.toString())
+                Log.d(TAG, "loginUser: ${response.user?.name.toString()} dan ${response.user?.token.toString()}")
+                viewModel.saveSession(UserModel(user, response.user?.name.toString(), response.user?.token.toString()))
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
@@ -73,6 +76,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     companion object{
-        val TAG = "LoginActivityLOG"
+        const val TAG = "LoginActivityLOG"
     }
 }

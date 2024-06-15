@@ -7,14 +7,14 @@ data class LoginResponse(
 	@field:SerializedName("message")
 	val message: String? = null,
 
-	@field:SerializedName("users")
-	val users: Users? = null,
+	@field:SerializedName("user")
+	val user: User? = null,
 
 	@field:SerializedName("status")
 	val status: String? = null
 )
 
-data class Users(
+data class User(
 
 	@field:SerializedName("name")
 	val name: String? = null,

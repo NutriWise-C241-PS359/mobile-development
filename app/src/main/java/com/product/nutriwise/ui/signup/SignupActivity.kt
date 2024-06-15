@@ -9,11 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import com.google.gson.Gson
 import com.product.nutriwise.R
 import com.product.nutriwise.data.remote.response.ErrorResponse
-import com.product.nutriwise.data.remote.response.Users
 import com.product.nutriwise.data.remote.retrofit.ApiConfig
 import com.product.nutriwise.databinding.ActivitySignupBinding
-import com.product.nutriwise.ui.signup.inputProfile.InputProfileActivity
-import com.product.nutriwise.ui.signup.inputTarget.InputTargetActivity
 import com.product.nutriwise.ui.login.LoginActivity
 import com.product.nutriwise.ui.main.MainActivity
 import kotlinx.coroutines.launch

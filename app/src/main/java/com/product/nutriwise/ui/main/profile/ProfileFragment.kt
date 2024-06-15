@@ -10,6 +10,7 @@ import com.product.nutriwise.R
 import com.product.nutriwise.databinding.FragmentHomeBinding
 import com.product.nutriwise.databinding.FragmentProfileBinding
 import com.product.nutriwise.ui.login.LoginActivity
+import com.product.nutriwise.ui.webView.WebViewActivity
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
@@ -22,6 +23,10 @@ class ProfileFragment : Fragment() {
         binding.btnLogout.setOnClickListener {
             startActivity(Intent(requireContext(), LoginActivity::class.java))
             requireActivity().finish()
+        }
+
+        binding.btnWebview.setOnClickListener {
+            startActivity((Intent(requireContext(),WebViewActivity::class.java)))
         }
     }
 

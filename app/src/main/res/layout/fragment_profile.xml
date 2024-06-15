@@ -82,6 +82,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_edt_profile"/>
 
+        <Button
+            android:id="@+id/btn_webview"
+            android:layout_width="176dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Tes webView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_logout"/>
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideHorizontal"
             android:layout_width="wrap_content"

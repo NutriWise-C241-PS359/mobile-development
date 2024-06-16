@@ -56,11 +56,11 @@ class LoginActivity : AppCompatActivity() {
                 val getProfileResponse = apiService.getUser(BR+response.user?.token.toString())
                 viewModel.saveProfile(
                     ProfileModel(
-                        getProfileResponse.usia ?: 0,
-                        getProfileResponse.gender ?: false,
-                        getProfileResponse.tinggibadan ?: 0,
-                        getProfileResponse.beratbadan ?: 0,
-                        getProfileResponse.aktivitas ?: 0
+                        getProfileResponse.profile?.usia ?: 0,
+                        getProfileResponse.profile?.gender ?: false,
+                        getProfileResponse.profile?.tinggibadan ?: 0,
+                        getProfileResponse.profile?.beratbadan ?: 0,
+                        getProfileResponse.profile?.aktivitas ?: 0
                     )
                 )
                 Log.d(TAG, "loginUser: ${getProfileResponse}")

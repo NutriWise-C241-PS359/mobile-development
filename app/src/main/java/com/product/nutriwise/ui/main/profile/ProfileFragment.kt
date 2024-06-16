@@ -39,6 +39,7 @@ class ProfileFragment : Fragment() {
         }
 
         binding.btnLogout.setOnClickListener {
+            viewModel.clearProfile()
             viewModel.logout()
             startActivity(Intent(requireContext(), LoginActivity::class.java))
             requireActivity().finish()

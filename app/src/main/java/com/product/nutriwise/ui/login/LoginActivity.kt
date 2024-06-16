@@ -3,14 +3,13 @@ package com.product.nutriwise.ui.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import com.google.gson.Gson
 import com.product.nutriwise.R
-import com.product.nutriwise.data.local.preference.UserModel
+import com.product.nutriwise.data.local.preference.user.UserModel
 import com.product.nutriwise.data.remote.response.ErrorResponse
 import com.product.nutriwise.data.remote.retrofit.ApiConfig
 import com.product.nutriwise.databinding.ActivityLoginBinding

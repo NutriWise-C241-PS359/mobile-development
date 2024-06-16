@@ -1,4 +1,4 @@
-package com.product.nutriwise.data.local.preference
+package com.product.nutriwise.data.local.preference.user
 
 import kotlinx.coroutines.flow.Flow
 

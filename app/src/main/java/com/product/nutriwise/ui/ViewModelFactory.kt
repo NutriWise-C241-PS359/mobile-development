@@ -3,11 +3,13 @@ package com.product.nutriwise.ui
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.product.nutriwise.data.local.preference.UserRepository
+import com.product.nutriwise.data.local.preference.user.UserRepository
 import com.product.nutriwise.di.Injection
 import com.product.nutriwise.ui.login.LoginViewModel
 import com.product.nutriwise.ui.main.home.HomeViewModel
 import com.product.nutriwise.ui.main.profile.ProfileViewModel
+import com.product.nutriwise.ui.signup.SignupViewModel
+import com.product.nutriwise.ui.signup.inputProfile.InputProfileViewModel
 
 
 class ViewModelFactory (
@@ -18,6 +20,12 @@ class ViewModelFactory (
         return when {
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(userRepository) as T
+            }
+            modelClass.isAssignableFrom(SignupViewModel::class.java) -> {
+                SignupViewModel(userRepository) as T
+            }
+            modelClass.isAssignableFrom(InputProfileViewModel::class.java) -> {
+                InputProfileViewModel(userRepository) as T
             }
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(userRepository) as T

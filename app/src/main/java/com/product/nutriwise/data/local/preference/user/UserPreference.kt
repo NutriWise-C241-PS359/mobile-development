@@ -1,4 +1,4 @@
-package com.product.nutriwise.data.local.preference
+package com.product.nutriwise.data.local.preference.user
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -49,7 +49,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         private val TOKEN_KEY = stringPreferencesKey("token")
         private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")
 
-        fun getInstance(dataStore: DataStore<Preferences>): UserPreference{
+        fun getInstance(dataStore: DataStore<Preferences>): UserPreference {
             return INSTANCE ?: synchronized(this) {
                 val instance = UserPreference(dataStore)
                 INSTANCE = instance

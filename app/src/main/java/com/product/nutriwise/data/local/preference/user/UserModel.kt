@@ -1,4 +1,4 @@
-package com.product.nutriwise.data.local.preference
+package com.product.nutriwise.data.local.preference.user
 
 class UserModel (
     val username: String,

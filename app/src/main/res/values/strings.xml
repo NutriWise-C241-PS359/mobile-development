@@ -37,7 +37,7 @@
     <string name="nama_makanan">Nama Makanan</string>
     <string name="failed">Kesalahan</string>
     <string name="hi_nama">Hi, Nama</string>
-    <string name="bmi_00_error">BMI: 00 (error)</string>
+    <string name="bmi">BMI: </string>
     <string name="jumlah_kalori_hari">Jumlah kalori/hari</string>
     <string name="progress_kalori">(1000/5000)</string>
     <string name="title_cv_breakfast">Breakfast</string>

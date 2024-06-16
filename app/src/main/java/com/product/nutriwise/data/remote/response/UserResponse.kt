@@ -17,23 +17,23 @@ data class UserResponse(
 data class Profile(
 
 	@field:SerializedName("usia")
-	val usia: Int? = null,
+	val usia: Int? = 0,
 
 	@field:SerializedName("tinggibadan")
-	val tinggibadan: Int? = null,
+	val tinggibadan: Int? = 0,
 
 	@field:SerializedName("gender")
-	val gender: Boolean? = null,
+	val gender: Boolean? = false,
 
 	@field:SerializedName("beratbadan")
-	val beratbadan: Int? = null,
+	val beratbadan: Int? = 0,
 
 	@field:SerializedName("name")
-	val name: String? = null,
+	val name: String? = "",
 
 	@field:SerializedName("username")
-	val username: String? = null,
+	val username: String? = "",
 
 	@field:SerializedName("aktivitas")
-	val aktivitas: Int? = null
+	val aktivitas: Int? = 0
 )

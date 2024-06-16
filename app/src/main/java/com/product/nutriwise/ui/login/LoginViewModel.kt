@@ -1,6 +1,8 @@
 package com.product.nutriwise.ui.login
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.product.nutriwise.data.local.preference.profile.ProfileModel
 import com.product.nutriwise.data.local.preference.profile.ProfileRepository
@@ -15,6 +17,10 @@ class LoginViewModel(
         viewModelScope.launch {
             userRepository.saveSession(userModel)
         }
+    }
+
+    fun getSession(): LiveData<UserModel> {
+        return userRepository.getSession().asLiveData()
     }
 
     fun saveProfile(profileModel: ProfileModel){

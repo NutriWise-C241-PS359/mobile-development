@@ -19,6 +19,7 @@ import com.product.nutriwise.databinding.ActivityLoginBinding
 import com.product.nutriwise.ui.ViewModelFactory
 import com.product.nutriwise.ui.main.MainActivity
 import com.product.nutriwise.ui.signup.SignupActivity
+import com.product.nutriwise.ui.signup.inputProfile.InputProfileActivity
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 

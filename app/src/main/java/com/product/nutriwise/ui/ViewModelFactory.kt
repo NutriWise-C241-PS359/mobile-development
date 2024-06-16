@@ -11,6 +11,7 @@ import com.product.nutriwise.ui.main.home.HomeViewModel
 import com.product.nutriwise.ui.main.profile.ProfileViewModel
 import com.product.nutriwise.ui.signup.SignupViewModel
 import com.product.nutriwise.ui.signup.inputProfile.InputProfileViewModel
+import com.product.nutriwise.ui.splash.SplashViewModel
 
 
 class ViewModelFactory (
@@ -20,6 +21,9 @@ class ViewModelFactory (
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
+            modelClass.isAssignableFrom(SplashViewModel::class.java) -> {
+                SplashViewModel(userRepository) as T
+            }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(userRepository , profileRepository) as T
             }
@@ -30,7 +34,7 @@ class ViewModelFactory (
                 InputProfileViewModel(userRepository) as T
             }
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
-                HomeViewModel(userRepository) as T
+                HomeViewModel(userRepository, profileRepository) as T
             }
             modelClass.isAssignableFrom(ProfileViewModel::class.java)-> {
                 ProfileViewModel(userRepository, profileRepository) as T

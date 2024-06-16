@@ -3,6 +3,7 @@ package com.product.nutriwise.ui.signup
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -47,11 +48,12 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun register(name: String, user: String, password: String){
+        showLoading(true)
         val apiService = ApiConfig.getApiService()
         lifecycleScope.launch {
             try {
                 val response = apiService.register(name, user, password)
-                showToast(response.message.toString())
+                showLoading(false)
                 val responseLogin = apiService.login(user, password)
                 viewModel.saveSession(UserModel(name, user, responseLogin.user?.token.toString()))
                 val intent = Intent(this@SignupActivity, InputProfileActivity::class.java)
@@ -59,6 +61,7 @@ class SignupActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }catch (e: HttpException) {
+                showLoading(false)
                 val errorBody = e.response()?.errorBody()?.string()
                 val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
                 showErrorDialog(errorResponse.message.toString())
@@ -74,6 +77,10 @@ class SignupActivity : AppCompatActivity() {
             .setPositiveButton("Ok") { dialog, _ ->
                 dialog.dismiss()
             }.show()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressCircular.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     companion object{

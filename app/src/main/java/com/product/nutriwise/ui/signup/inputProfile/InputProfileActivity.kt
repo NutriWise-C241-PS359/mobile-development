@@ -3,6 +3,7 @@ package com.product.nutriwise.ui.signup.inputProfile
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -69,11 +70,12 @@ class InputProfileActivity : AppCompatActivity() {
     }
 
     private fun updateProfile(token: String, usia: Int, gender: Boolean, tinggibadan: Double, beratbadan: Double, aktivitas: Int){
+        showLoading(true)
         val apiService = ApiConfig.getApiService()
         lifecycleScope.launch {
             try {
                 val response = apiService.updateUser(token, usia, gender, tinggibadan, beratbadan, aktivitas)
-                showToast(response.message.toString())
+                showLoading(false)
                 viewModel.saveProfile(
                     ProfileModel(
                         usia,
@@ -88,6 +90,7 @@ class InputProfileActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }catch (e: HttpException) {
+                showLoading(false)
                 val errorBody = e.response()?.errorBody()?.string()
                 val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
                 showErrorDialog(errorResponse.message.toString())
@@ -105,6 +108,10 @@ class InputProfileActivity : AppCompatActivity() {
             .setPositiveButton("Ok") { dialog, _ ->
                 dialog.dismiss()
             }.show()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressCircular.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     companion object{

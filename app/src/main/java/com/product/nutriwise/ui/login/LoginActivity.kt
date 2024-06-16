@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -29,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding =ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.apply {
@@ -47,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUser(user: String, password: String){
+        showLoading(true)
         val apiService = ApiConfig.getApiService()
         lifecycleScope.launch {
             try {
@@ -63,18 +65,24 @@ class LoginActivity : AppCompatActivity() {
                         getProfileResponse.profile?.aktivitas ?: 0
                     )
                 )
-                Log.d(TAG, "loginUser: ${getProfileResponse}")
+                showLoading(false)
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
                 finish()
             }catch (e: HttpException) {
+                showLoading(false)
                 val errorBody = e.response()?.errorBody()?.string()
                 val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
                 showErrorDialog(errorResponse.message.toString())
             }
         }
     }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressCircular.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
     private fun showToast(message: String){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
@@ -87,7 +95,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     companion object{
-        const val TAG = "LoginActivityLOG"
         const val BR = "Bearer "
     }
 }

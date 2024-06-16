@@ -6,13 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.product.nutriwise.R
 import com.product.nutriwise.databinding.FragmentHomeBinding
 import com.product.nutriwise.databinding.FragmentProfileBinding
+import com.product.nutriwise.ui.ViewModelFactory
 import com.product.nutriwise.ui.login.LoginActivity
 import com.product.nutriwise.ui.webView.WebViewActivity
 
 class ProfileFragment : Fragment() {
+    private lateinit var viewModel: ProfileViewModel
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
@@ -20,7 +23,10 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireContext())).get(ProfileViewModel::class.java)
+
         binding.btnLogout.setOnClickListener {
+            viewModel.logout()
             startActivity(Intent(requireContext(), LoginActivity::class.java))
             requireActivity().finish()
         }

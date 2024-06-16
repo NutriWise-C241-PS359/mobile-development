@@ -7,6 +7,7 @@ import com.product.nutriwise.data.local.preference.UserRepository
 import com.product.nutriwise.di.Injection
 import com.product.nutriwise.ui.login.LoginViewModel
 import com.product.nutriwise.ui.main.home.HomeViewModel
+import com.product.nutriwise.ui.main.profile.ProfileViewModel
 
 
 class ViewModelFactory (
@@ -20,6 +21,9 @@ class ViewModelFactory (
             }
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(userRepository) as T
+            }
+            modelClass.isAssignableFrom(ProfileViewModel::class.java)-> {
+                ProfileViewModel(userRepository) as T
             }
            else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

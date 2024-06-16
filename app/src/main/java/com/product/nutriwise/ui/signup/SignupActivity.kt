@@ -13,6 +13,7 @@ import com.product.nutriwise.data.remote.retrofit.ApiConfig
 import com.product.nutriwise.databinding.ActivitySignupBinding
 import com.product.nutriwise.ui.login.LoginActivity
 import com.product.nutriwise.ui.main.MainActivity
+import com.product.nutriwise.ui.signup.inputProfile.InputProfileActivity
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
@@ -47,7 +48,7 @@ class SignupActivity : AppCompatActivity() {
             try {
                 val response = apiService.register(name, user, password)
                 showToast(response.message.toString())
-                val intent = Intent(this@SignupActivity, MainActivity::class.java)
+                val intent = Intent(this@SignupActivity, InputProfileActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
                 finish()

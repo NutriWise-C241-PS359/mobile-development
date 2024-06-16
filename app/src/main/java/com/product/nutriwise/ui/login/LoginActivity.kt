@@ -51,7 +51,6 @@ class LoginActivity : AppCompatActivity() {
             try {
                 val response = apiService.login1(user, password)
                 showToast(response.message.toString())
-                Log.d(TAG, "loginUser: ${response.user?.name.toString()} dan ${response.user?.token.toString()}")
                 viewModel.saveSession(UserModel(user, response.user?.name.toString(), response.user?.token.toString()))
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK

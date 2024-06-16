@@ -52,7 +52,7 @@ class SignupActivity : AppCompatActivity() {
             try {
                 val response = apiService.register(name, user, password)
                 showToast(response.message.toString())
-                val responseLogin = apiService.login1(user, password)
+                val responseLogin = apiService.login(user, password)
                 viewModel.saveSession(UserModel(name, user, responseLogin.user?.token.toString()))
                 val intent = Intent(this@SignupActivity, InputProfileActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK

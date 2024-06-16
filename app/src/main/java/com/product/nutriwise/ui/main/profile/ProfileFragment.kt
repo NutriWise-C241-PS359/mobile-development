@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.product.nutriwise.R
 import com.product.nutriwise.databinding.FragmentHomeBinding
 import com.product.nutriwise.databinding.FragmentProfileBinding
@@ -24,6 +25,18 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireContext())).get(ProfileViewModel::class.java)
+
+        viewModel.getSession().observe(viewLifecycleOwner){
+            binding.tvNameProfile.setText(it.name)
+        }
+        viewModel.getProfile().observe(viewLifecycleOwner){
+            binding.apply {
+                tvTbProfile2.setText(it.tinggibadan.toString())
+                tvBbProfile2.setText(it.beratbadan.toString())
+                tvGenderProfile2.setText(it.gender.toString())
+                tvActivityProfile2.setText(it.aktivitas.toString())
+            }
+        }
 
         binding.btnLogout.setOnClickListener {
             viewModel.logout()

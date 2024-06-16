@@ -10,6 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/guideHorizontal"
+            android:contentDescription="@string/logo_app" />
+
         <TextView
             android:id="@+id/tv_name_profile"
             android:layout_width="wrap_content"
@@ -33,6 +43,15 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
+            android:id="@+id/tv_tb_profile2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_name_profile"
+            app:layout_constraintStart_toEndOf="@+id/tv_tb_profile"/>
+
+        <TextView
             android:id="@+id/tv_bb_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,6 +60,16 @@
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/tv_tb_profile"
             app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_bb_profile2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_tb_profile"
+            app:layout_constraintStart_toEndOf="@id/tv_bb_profile"/>
+
 
         <TextView
             android:id="@+id/tv_gender_profile"
@@ -53,6 +82,15 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
+            android:id="@+id/tv_gender_profile2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_bb_profile"
+            app:layout_constraintStart_toEndOf="@id/tv_gender_profile"/>
+
+        <TextView
             android:id="@+id/tv_activity_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,6 +99,15 @@
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/tv_gender_profile"
             app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_activity_profile2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_gender_profile"
+            app:layout_constraintStart_toEndOf="@id/tv_activity_profile"/>
 
         <Button
             android:id="@+id/btn_edt_profile"

@@ -2,8 +2,10 @@ package com.product.nutriwise.data.remote.retrofit
 
 import com.product.nutriwise.data.remote.response.ErrorResponse
 import com.product.nutriwise.data.remote.response.LoginResponse
+import com.product.nutriwise.data.remote.response.UserResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -11,7 +13,7 @@ import retrofit2.http.PUT
 interface ApiService {
     @FormUrlEncoded
     @POST("login")
-    suspend fun login1 (
+    suspend fun login (
         @Field("username") username: String,
         @Field("password") password: String
     ) : LoginResponse
@@ -34,4 +36,9 @@ interface ApiService {
         @Field("beratbadan") beratbadan: Int,
         @Field("aktivitas") aktivitas: String
     ) : ErrorResponse
+
+    @GET("users")
+    suspend fun getUser(
+        @Header("Authorization") token: String
+    ): UserResponse
 }

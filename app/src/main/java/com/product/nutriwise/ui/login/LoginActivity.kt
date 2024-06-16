@@ -3,12 +3,14 @@ package com.product.nutriwise.ui.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import com.google.gson.Gson
 import com.product.nutriwise.R
+import com.product.nutriwise.data.local.preference.profile.ProfileModel
 import com.product.nutriwise.data.local.preference.user.UserModel
 import com.product.nutriwise.data.remote.response.ErrorResponse
 import com.product.nutriwise.data.remote.retrofit.ApiConfig
@@ -48,9 +50,20 @@ class LoginActivity : AppCompatActivity() {
         val apiService = ApiConfig.getApiService()
         lifecycleScope.launch {
             try {
-                val response = apiService.login1(user, password)
+                val response = apiService.login(user, password)
                 showToast(response.message.toString())
                 viewModel.saveSession(UserModel(user, response.user?.name.toString(), response.user?.token.toString()))
+                val getProfileResponse = apiService.getUser(BR+response.user?.token.toString())
+                viewModel.saveProfile(
+                    ProfileModel(
+                        getProfileResponse.usia ?: 0,
+                        getProfileResponse.gender ?: false,
+                        getProfileResponse.tinggibadan ?: 0,
+                        getProfileResponse.beratbadan ?: 0,
+                        getProfileResponse.aktivitas ?: 0
+                    )
+                )
+                Log.d(TAG, "loginUser: ${getProfileResponse}")
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
@@ -75,5 +88,6 @@ class LoginActivity : AppCompatActivity() {
 
     companion object{
         const val TAG = "LoginActivityLOG"
+        const val BR = "Bearer "
     }
 }

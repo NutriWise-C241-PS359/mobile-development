@@ -32,9 +32,9 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Field("usia") usia: Int,
         @Field("gender") gender: Boolean,
-        @Field("tinggibadan") tinggibandan: Int,
-        @Field("beratbadan") beratbadan: Int,
-        @Field("aktivitas") aktivitas: String
+        @Field("tinggibadan") tinggibandan: Double,
+        @Field("beratbadan") beratbadan: Double,
+        @Field("aktivitas") aktivitas: Int
     ) : ErrorResponse
 
     @GET("users")

@@ -8,12 +8,16 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
+import com.google.gson.Gson
 import com.product.nutriwise.R
+import com.product.nutriwise.data.local.preference.profile.ProfileModel
+import com.product.nutriwise.data.remote.response.ErrorResponse
 import com.product.nutriwise.data.remote.retrofit.ApiConfig
 import com.product.nutriwise.databinding.ActivityInputProfileBinding
 import com.product.nutriwise.ui.ViewModelFactory
 import com.product.nutriwise.ui.signup.inputTarget.InputTargetActivity
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class InputProfileActivity : AppCompatActivity() {
     private val viewModel by viewModels<InputProfileViewModel> {
@@ -50,29 +54,45 @@ class InputProfileActivity : AppCompatActivity() {
             btnNext.setOnClickListener {
                 val usia = etUmur.text.toString().trim()
                 val gender = dbGender.text.toString().trim()
-                val tinggibandan = etTb.text.toString().trim()
-                val beratbadan = etBb.text.toString().trim()
+                val tinggibandan = etTb.text.toString().trim().toDouble()
+                val beratbadan = etBb.text.toString().trim().toDouble()
                 val aktivitas = dbActivity.text.toString().trim()
 
                 val genderValue = genderMap[gender] ?: false
                 val activityValue = activityMap[aktivitas] ?: 1
                 viewModel.getSession().observe(this@InputProfileActivity){
                     val token = BR+it.token
-                    updateProfile(token, usia.toInt(), genderValue, tinggibandan.toInt(), beratbadan.toInt(), activityValue.toString())
+                    updateProfile(token, usia.toInt(), genderValue, tinggibandan, beratbadan, activityValue)
                 }
             }
         }
     }
 
-    private fun updateProfile(token: String, usia: Int, gender: Boolean, tinggibadan: Int, beratbadan: Int, aktivitas: String){
+    private fun updateProfile(token: String, usia: Int, gender: Boolean, tinggibadan: Double, beratbadan: Double, aktivitas: Int){
         val apiService = ApiConfig.getApiService()
         lifecycleScope.launch {
-            val response = apiService.updateUser(token, usia, gender, tinggibadan, beratbadan, aktivitas)
-            showToast(response.message.toString())
-            val intent = Intent(this@InputProfileActivity, InputTargetActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-            finish()
+            try {
+                val response = apiService.updateUser(token, usia, gender, tinggibadan, beratbadan, aktivitas)
+                showToast(response.message.toString())
+                viewModel.saveProfile(
+                    ProfileModel(
+                        usia,
+                        gender,
+                        tinggibadan,
+                        beratbadan,
+                        aktivitas
+                    )
+                )
+                val intent = Intent(this@InputProfileActivity, InputTargetActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finish()
+            }catch (e: HttpException) {
+                val errorBody = e.response()?.errorBody()?.string()
+                val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
+                showErrorDialog(errorResponse.message.toString())
+            }
+
         }
     }
 

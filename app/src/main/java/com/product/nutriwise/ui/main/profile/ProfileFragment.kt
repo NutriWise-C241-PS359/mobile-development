@@ -7,9 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import com.product.nutriwise.R
-import com.product.nutriwise.databinding.FragmentHomeBinding
 import com.product.nutriwise.databinding.FragmentProfileBinding
 import com.product.nutriwise.ui.ViewModelFactory
 import com.product.nutriwise.ui.login.LoginActivity

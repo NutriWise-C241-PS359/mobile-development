@@ -31,7 +31,7 @@ class ViewModelFactory (
                 SignupViewModel(userRepository) as T
             }
             modelClass.isAssignableFrom(InputProfileViewModel::class.java) -> {
-                InputProfileViewModel(userRepository) as T
+                InputProfileViewModel(userRepository, profileRepository) as T
             }
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(userRepository, profileRepository) as T

@@ -38,7 +38,7 @@ class HomeFragment : Fragment() {
         binding.apply {
 
             viewModel.getProfile().observe(viewLifecycleOwner){
-                val bmi = Utils.calculateBMI(it.beratbadan.toDouble(),it.tinggibadan.toDouble())
+                val bmi = Utils.calculateBMI(it.beratbadan,it.tinggibadan)
                 val categoryBMI = Utils.getBMICategory(bmi, it.gender)
 
                 tvTitleBmi2.text = String.format(" %.2f ", bmi)

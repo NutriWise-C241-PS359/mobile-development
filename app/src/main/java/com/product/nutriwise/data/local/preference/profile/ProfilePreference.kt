@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.doublePreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -28,8 +29,8 @@ class ProfilePreference private constructor(private val dataStore: DataStore<Pre
             ProfileModel(
                 it[UMUR_KEY] ?: 0,
                 it[GENDER_KEY] ?: false,
-                it[TINGGIBADAN_KEY] ?: 0,
-                it[BERATBADAN_KEY] ?: 0,
+                it[TINGGIBADAN_KEY] ?: 0.0,
+                it[BERATBADAN_KEY] ?: 0.0,
                 it[AKTIVITAS_KEY] ?: 0
             )
         }
@@ -47,8 +48,8 @@ class ProfilePreference private constructor(private val dataStore: DataStore<Pre
 
         private val UMUR_KEY = intPreferencesKey("umur")
         private val GENDER_KEY = booleanPreferencesKey("gender")
-        private val TINGGIBADAN_KEY = intPreferencesKey("tinggibadan")
-        private val BERATBADAN_KEY = intPreferencesKey("beratbadan")
+        private val TINGGIBADAN_KEY = doublePreferencesKey("tinggibadan")
+        private val BERATBADAN_KEY = doublePreferencesKey("beratbadan")
         private val AKTIVITAS_KEY = intPreferencesKey("aktifitas")
 
         fun getInstance(dataStore: DataStore<Preferences>): ProfilePreference {

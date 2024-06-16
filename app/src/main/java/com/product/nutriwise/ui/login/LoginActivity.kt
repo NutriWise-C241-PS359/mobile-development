@@ -3,7 +3,6 @@ package com.product.nutriwise.ui.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -19,7 +18,6 @@ import com.product.nutriwise.databinding.ActivityLoginBinding
 import com.product.nutriwise.ui.ViewModelFactory
 import com.product.nutriwise.ui.main.MainActivity
 import com.product.nutriwise.ui.signup.SignupActivity
-import com.product.nutriwise.ui.signup.inputProfile.InputProfileActivity
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
@@ -61,8 +59,8 @@ class LoginActivity : AppCompatActivity() {
                     ProfileModel(
                         getProfileResponse.profile?.usia ?: 0,
                         getProfileResponse.profile?.gender ?: false,
-                        getProfileResponse.profile?.tinggibadan ?: 0,
-                        getProfileResponse.profile?.beratbadan ?: 0,
+                        getProfileResponse.profile?.tinggibadan ?: 0.0,
+                        getProfileResponse.profile?.beratbadan ?: 0.0,
                         getProfileResponse.profile?.aktivitas ?: 0
                     )
                 )

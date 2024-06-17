@@ -8,10 +8,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
+import com.product.nutriwise.R
 import com.product.nutriwise.databinding.FragmentHomeBinding
 import com.product.nutriwise.ui.ViewModelFactory
 import com.product.nutriwise.ui.main.home.recomendation.RecomendationActivity
+import com.product.nutriwise.ui.signup.SignupActivity
+import com.product.nutriwise.ui.signup.inputProfile.InputProfileActivity
 import com.product.nutriwise.utils.Utils
 
 class HomeFragment : Fragment() {
@@ -38,6 +42,9 @@ class HomeFragment : Fragment() {
         binding.apply {
 
             viewModel.getProfile().observe(viewLifecycleOwner){
+                if (it.beratbadan == 0.0){
+                    showErrorDialog("Belum isi data profile")
+                }
                 val bmi = Utils.calculateBMI(it.beratbadan,it.tinggibadan)
                 val categoryBMI = Utils.getBMICategory(bmi, it.gender)
 
@@ -76,5 +83,17 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showErrorDialog(message: String) {
+        AlertDialog.Builder(requireContext()).setTitle(R.string.failed).setMessage(message)
+            .setPositiveButton("Ok") { dialog, _ ->
+                val intent = Intent(requireContext(), InputProfileActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                intent.putExtra(SignupActivity.EK, 0)
+                startActivity(intent)
+            }
+            .setCancelable(false)
+            .show()
     }
 }

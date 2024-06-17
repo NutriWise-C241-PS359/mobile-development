@@ -17,10 +17,10 @@
         <activity
             android:name=".ui.webView.WebViewActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.main.home.recomendation.webView.WebViewActivity"
-            android:exported="false"
-            android:parentActivityName=".ui.main.home.recomendation.RecomendationActivity" />
+<!--        <activity-->
+<!--            android:name=".ui.main.home.recomendation.webView.WebViewActivity"-->
+<!--            android:exported="false"-->
+<!--            android:parentActivityName=".ui.main.home.recomendation.RecomendationActivity" />-->
         <activity
             android:name=".ui.main.home.recomendation.RecomendationActivity"
             android:exported="false"

@@ -9,6 +9,10 @@ class UserRepository private constructor(
         userPreference.saveSession(userModel)
     }
 
+    suspend fun updateName(newName: String) {
+        userPreference.updateName(newName)
+    }
+
     fun getSession(): Flow<UserModel>{
         return userPreference.getSession()
     }

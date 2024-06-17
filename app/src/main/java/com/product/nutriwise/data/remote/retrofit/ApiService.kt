@@ -41,4 +41,11 @@ interface ApiService {
     suspend fun getUser(
         @Header("Authorization") token: String
     ): UserResponse
+
+    @FormUrlEncoded
+    @PUT("updateName")
+    suspend fun updateName(
+        @Header("Authorization") token: String,
+        @Field("name") name: String,
+    ) : ErrorResponse
 }

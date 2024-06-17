@@ -21,6 +21,10 @@ class ProfileViewModel(
         return profileRepository.getProfile().asLiveData()
     }
 
+    suspend fun updateName(newName: String) {
+        userRepository.updateName(newName)
+    }
+
     fun clearProfile() {
         viewModelScope.launch {
             profileRepository.clearProfile()

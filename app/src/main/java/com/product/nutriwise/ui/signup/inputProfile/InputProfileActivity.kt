@@ -3,6 +3,7 @@ package com.product.nutriwise.ui.signup.inputProfile
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -16,6 +17,8 @@ import com.product.nutriwise.data.remote.response.ErrorResponse
 import com.product.nutriwise.data.remote.retrofit.ApiConfig
 import com.product.nutriwise.databinding.ActivityInputProfileBinding
 import com.product.nutriwise.ui.ViewModelFactory
+import com.product.nutriwise.ui.main.MainActivity
+import com.product.nutriwise.ui.main.profile.ProfileFragment
 import com.product.nutriwise.ui.signup.inputTarget.InputTargetActivity
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -25,6 +28,8 @@ class InputProfileActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
     private lateinit var binding: ActivityInputProfileBinding
+    private var value: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityInputProfileBinding.inflate(layoutInflater)
@@ -50,8 +55,21 @@ class InputProfileActivity : AppCompatActivity() {
         val activityList = activityMap.keys.toList()
         val adapterActivity = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, activityList)
         binding.dbActivity.setAdapter(adapterActivity)
-
+        value = intent.getIntExtra(EK,0)
         binding.apply {
+            if (value == 1){
+                viewModel.getProfile().observe(this@InputProfileActivity){
+                    etBb.setText(it.beratbadan.toString())
+                    etTb.setText(it.tinggibadan.toString())
+                    etUmur.setText(it.umur.toString())
+//                    if (it.gender == true) {
+//                        dbGender.setText("Laki-laki")
+//                    } else {
+//                        dbGender.setText("perempuan")
+//                    }
+//                    dbActivity.setText(activityList[it.aktivitas - 1]) // Adjusted to set correct activity
+                }
+            }
             btnNext.setOnClickListener {
                 val usia = etUmur.text.toString().trim()
                 val gender = dbGender.text.toString().trim()
@@ -76,19 +94,37 @@ class InputProfileActivity : AppCompatActivity() {
             try {
                 val response = apiService.updateUser(token, usia, gender, tinggibadan, beratbadan, aktivitas)
                 showLoading(false)
-                viewModel.saveProfile(
-                    ProfileModel(
-                        usia,
-                        gender,
-                        tinggibadan,
-                        beratbadan,
-                        aktivitas
+                Log.d("TAG", "updateProfile: $value")
+                if (value == 0) {
+                    viewModel.saveProfile(
+                        ProfileModel(
+                            usia,
+                            gender,
+                            tinggibadan,
+                            beratbadan,
+                            aktivitas
+                        )
                     )
-                )
-                val intent = Intent(this@InputProfileActivity, InputTargetActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
-                finish()
+                    val intent = Intent(this@InputProfileActivity, InputTargetActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                    finish()
+                }else {
+                    Log.d(" buorvbow sdvevwrvd ", "updateProfile: $tinggibadan")
+                    viewModel.updateProfile(
+                        ProfileModel(
+                            usia,
+                            gender,
+                            tinggibadan,
+                            beratbadan,
+                            aktivitas
+                        )
+                    )
+                    val intent = Intent(this@InputProfileActivity, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                    finish()
+                }
             }catch (e: HttpException) {
                 showLoading(false)
                 val errorBody = e.response()?.errorBody()?.string()
@@ -116,5 +152,6 @@ class InputProfileActivity : AppCompatActivity() {
 
     companion object{
         const val BR = "Bearer "
+        const val EK = "EDIT_KEY"
     }
 }

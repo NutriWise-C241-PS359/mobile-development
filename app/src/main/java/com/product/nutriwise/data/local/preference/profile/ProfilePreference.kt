@@ -24,6 +24,16 @@ class ProfilePreference private constructor(private val dataStore: DataStore<Pre
         }
     }
 
+    suspend fun updateProfile(updatedProfile: ProfileModel) {
+        dataStore.edit { preferences ->
+            preferences[UMUR_KEY] = updatedProfile.umur
+            preferences[GENDER_KEY] = updatedProfile.gender
+            preferences[TINGGIBADAN_KEY] = updatedProfile.tinggibadan
+            preferences[BERATBADAN_KEY] = updatedProfile.beratbadan
+            preferences[AKTIVITAS_KEY] = updatedProfile.aktivitas
+        }
+    }
+
     fun getProfile(): Flow<ProfileModel> {
         return dataStore.data.map {
             ProfileModel(

@@ -21,4 +21,14 @@ class InputProfileViewModel(private val userRepository: UserRepository,
             profileRepository.saveProfile(profileModel)
         }
     }
+
+    fun getProfile(): LiveData<ProfileModel> {
+        return profileRepository.getProfile().asLiveData()
+    }
+
+    fun updateProfile(profileModel: ProfileModel) {
+        viewModelScope.launch {
+            profileRepository.updateProfile(profileModel)
+        }
+    }
 }

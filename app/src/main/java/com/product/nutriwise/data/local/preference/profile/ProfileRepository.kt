@@ -9,6 +9,10 @@ class ProfileRepository private constructor(
         profilePreference.saveProfile(profileModel)
     }
 
+    suspend fun updateProfile(profileModel: ProfileModel) {
+        profilePreference.updateProfile(profileModel)
+    }
+
     fun getProfile(): Flow<ProfileModel> {
         return profilePreference.getProfile()
     }

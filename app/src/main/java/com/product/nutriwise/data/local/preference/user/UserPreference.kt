@@ -35,6 +35,12 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         }
     }
 
+    suspend fun updateName(newName: String) {
+        dataStore.edit {
+            it[NAME_KEY] = newName
+        }
+    }
+
     suspend fun logout() {
         dataStore.edit {
             it.clear()

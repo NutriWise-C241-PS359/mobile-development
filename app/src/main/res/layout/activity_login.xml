@@ -30,11 +30,12 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="25dp"
         android:text="@string/tv_title_login"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="24sp"
+        android:fontFamily="@font/autour_one"
         app:layout_constraintTop_toBottomOf="@id/guideHorizontal"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -71,13 +72,28 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:id="@+id/tv_confirmacc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Belum punya akun?"
+        android:textColor="@color/black"
+        android:fontFamily="@font/autour_one"
+        app:layout_constraintTop_toBottomOf="@id/layout_password"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
         android:id="@+id/tv_to_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="6dp"
         android:text="@string/to_signup"
+        android:textStyle="bold"
+        android:textColor="#FF7F3E"
+        android:fontFamily="@font/autour_one"
         app:layout_constraintTop_toBottomOf="@id/layout_password"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toEndOf="@id/tv_confirmacc"/>
 
     <Button
         android:id="@+id/btn_login"
@@ -85,6 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:text="@string/tv_title_login"
+        android:fontFamily="@font/autour_one"
         app:layout_constraintTop_toBottomOf="@id/tv_to_signup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

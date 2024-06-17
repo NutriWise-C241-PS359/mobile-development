@@ -53,10 +53,11 @@
 
     <Button
         android:id="@+id/btn_next"
-        android:layout_width="138dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/next"
+        android:fontFamily="@font/autour_one"
         app:layout_constraintTop_toBottomOf="@id/layout_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -67,12 +68,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Skip Target.."
+        android:textStyle="bold"
+        android:textColor="#FF7F3E"
+        android:fontFamily="@font/autour_one"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_next"/>
-
-
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideHorizontal"

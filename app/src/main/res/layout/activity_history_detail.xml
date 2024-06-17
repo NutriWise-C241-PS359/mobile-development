@@ -10,51 +10,53 @@
         android:id="@+id/label_detailtotcal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="14dp"
         android:text="@string/label_totalkalori_harian"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="16sp"
+        android:fontFamily="@font/autour_one"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
-
-
 
     <TextView
         android:id="@+id/history_totcal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="4dp"
         android:text="@string/total_kalori_harian"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:textSize="16sp"
+        android:fontFamily="@font/autour_one"
         app:layout_constraintStart_toEndOf="@id/label_detailtotcal"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/label_detailtotcal"/>
 
     <TextView
         android:id="@+id/history_satuantotcal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="2dp"
         android:text="@string/satuan_kalori_harian"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:textSize="16sp"
+        android:fontFamily="@font/autour_one"
         app:layout_constraintStart_toEndOf="@id/history_totcal"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/label_detailtotcal"/>
 
     <TextView
         android:id="@+id/hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/hint"
         android:textSize="12sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/autour_one"
         app:layout_constraintStart_toStartOf="@id/label_detailtotcal"
-        app:layout_constraintTop_toBottomOf="@id/label_detailtotcal"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/label_detailtotcal"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

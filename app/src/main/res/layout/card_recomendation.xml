@@ -26,23 +26,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="18dp"
             card_view:layout_constraintStart_toEndOf="@id/gmaps"
             card_view:layout_constraintTop_toTopOf="@id/gmaps"
             android:text="@string/kategori_food"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:fontFamily="@font/autour_one"/>
 
         <TextView
             android:id="@+id/tv_namefood"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="13dp"
             card_view:layout_constraintStart_toEndOf="@id/gmaps"
             card_view:layout_constraintTop_toBottomOf="@id/tv_category"
             android:text="@string/nama_recomendation"
-            android:textSize="14sp"/>
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/autour_one"/>
 
         <TextView
             android:id="@+id/tv_foodcal"
@@ -53,7 +57,9 @@
             card_view:layout_constraintStart_toEndOf="@id/gmaps"
             card_view:layout_constraintTop_toBottomOf="@id/tv_namefood"
             android:text="@string/kalori_recomendation"
-            android:textSize="14sp"/>
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/autour_one"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -61,6 +67,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:text="@string/button_addrecomendation"
+            android:fontFamily="@font/autour_one"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"/>
 

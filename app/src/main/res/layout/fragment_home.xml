@@ -35,6 +35,7 @@
                     android:text="@string/hi_nama"
                     android:textSize="25sp"
                     android:textColor="@color/white"
+                    android:fontFamily="@font/autour_one"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,6 +46,7 @@
                     android:layout_marginTop="16dp"
                     android:text="@string/bmi"
                     android:textColor="@color/white"
+                    android:fontFamily="@font/autour_one"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
@@ -54,6 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:textColor="@color/white"
+                    android:fontFamily="@font/autour_one"
                     app:layout_constraintStart_toEndOf="@id/tv_title_bmi"
                     app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
@@ -63,6 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:textColor="@color/white"
+                    android:fontFamily="@font/autour_one"
                     app:layout_constraintStart_toEndOf="@id/tv_title_bmi2"
                     app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
@@ -73,6 +77,7 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/jumlah_kalori_hari"
                     android:textColor="@color/white"
+                    android:fontFamily="@font/autour_one"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_title_bmi" />
 
@@ -82,6 +87,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/progress_kalori"
                     android:textColor="@color/white"
+                    android:fontFamily="@font/autour_one"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_title_cal" />
 
@@ -137,6 +143,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
+                    android:fontFamily="@font/autour_one"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -148,8 +155,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="@string/needcal"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:textColor="@color/black"
+                    android:fontFamily="@font/akaya_telivigala"
                     app:layout_constraintStart_toStartOf="@id/addbreakfast"
                     app:layout_constraintTop_toBottomOf="@id/addbreakfast" />
 
@@ -158,8 +166,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/fillcal"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:textColor="@color/black"
+                    android:fontFamily="@font/akaya_telivigala"
                     android:layout_marginEnd="25dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/addbreakfast" />
@@ -172,6 +181,7 @@
                     android:layout_marginEnd="16dp"
                     android:text="@string/addfood"
                     android:textSize="12sp"
+                    android:fontFamily="@font/autour_one"
                     android:backgroundTint="#FF7F3E"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/needcal_breakfast" />
@@ -219,6 +229,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@color/cus_Gray"
+                    android:fontFamily="@font/autour_one"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -228,8 +239,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="@string/needcal"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:textColor="@color/cus_Gray"
+                    android:fontFamily="@font/akaya_telivigala"
                     app:layout_constraintStart_toStartOf="@id/addlunch"
                     app:layout_constraintTop_toBottomOf="@id/addlunch" />
 
@@ -238,9 +250,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="25dp"
+                    android:fontFamily="@font/akaya_telivigala"
                     android:text="@string/fillcal"
-                    android:textSize="12sp"
                     android:textColor="@color/cus_Gray"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/addlunch" />
 
@@ -253,6 +266,7 @@
                     android:backgroundTint="#FF7F3E"
                     android:text="@string/addfood"
                     android:textSize="12sp"
+                    android:fontFamily="@font/autour_one"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/needcal_lunch"/>
 
@@ -300,6 +314,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@color/white"
+                    android:fontFamily="@font/autour_one"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -309,8 +324,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="Membutuhkan 300kkal"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:textColor="@color/white"
+                    android:fontFamily="@font/akaya_telivigala"
                     app:layout_constraintStart_toStartOf="@id/adddinner"
                     app:layout_constraintTop_toBottomOf="@id/adddinner" />
 
@@ -320,8 +336,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="25dp"
                     android:text="300kkal telah terisi"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:textColor="@color/white"
+                    android:fontFamily="@font/akaya_telivigala"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/adddinner" />
 
@@ -334,6 +351,7 @@
                     android:backgroundTint="#FF7F3E"
                     android:text="Pilih Makanan"
                     android:textSize="12sp"
+                    android:fontFamily="@font/autour_one"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/needcal_dinner"/>
 

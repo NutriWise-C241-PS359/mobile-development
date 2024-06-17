@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
-        android:id="@+id/option_breakfast"
-        android:title="@string/opsisarapan"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/option_lunch"
-        android:title="@string/opsimakansiang"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/option_dinner"
-        android:title="@string/opsimakanmalam"
-        app:showAsAction="never"/>
+        android:id="@+id/eating_time"
+        android:title="Waktu Makan"
+        app:showAsAction="never">
+        <menu>
+            <item
+                android:id="@+id/option_breakfast"
+                android:title="@string/opsisarapan"
+                android:icon="@drawable/noto_sun"
+                app:showAsAction="always"/>
+
+            <item
+                android:id="@+id/option_lunch"
+                android:title="@string/opsimakansiang"
+                android:icon="@drawable/noto_sun_behind_cloud"
+                app:showAsAction="always"/>
+
+            <item
+                android:id="@+id/option_dinner"
+                android:title="@string/opsimakanmalam"
+                android:icon="@drawable/noto_crescent_moon"
+                app:showAsAction="always"/>
+        </menu>
+    </item>
 </menu>

@@ -5,11 +5,11 @@
     <string name="name">Nama Lengkap</string>
     <string name="username">Nama Akun</string>
     <string name="password">Kata Sandi</string>
-    <string name="to_signup">Belum punya akun? Klik disini untuk daftar</string>
+    <string name="to_signup">Daftar</string>
     <string name="tv_title_signup">Daftar</string>
 
     <string name="tv_title_login">Masuk</string>
-    <string name="to_login">Sudah punya akun? Klik disini untuk masuk</string>
+    <string name="to_login">Masuk</string>
 
     <string name="umur">Usia</string>
     <string name="gender">Jenis Kelamin</string>

@@ -15,87 +15,96 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_dasboard"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_3"
+            android:layout_height="180dp"
+            app:cardCornerRadius="16dp"
+            android:layout_marginTop="-16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#6750A4"
                 android:padding="16dp">
 
                 <TextView
                     android:id="@+id/tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:text="@string/hi_nama"
                     android:textSize="25sp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_title_bmi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/bmi"
                     android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@id/tv_name"
+                    android:text="@string/bmi"
+                    android:textColor="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
                 <TextView
                     android:id="@+id/tv_title_bmi2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@id/tv_name"
+                    android:textColor="@color/white"
                     app:layout_constraintStart_toEndOf="@id/tv_title_bmi"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
                 <TextView
                     android:id="@+id/tv_title_bmi3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@id/tv_name"
+                    android:textColor="@color/white"
                     app:layout_constraintStart_toEndOf="@id/tv_title_bmi2"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
                 <TextView
                     android:id="@+id/tv_title_cal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/jumlah_kalori_hari"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@id/tv_title_bmi"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    android:text="@string/jumlah_kalori_hari"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title_bmi" />
 
                 <TextView
                     android:id="@+id/tv_num_of_cal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/progress_kalori"
-                    app:layout_constraintTop_toBottomOf="@id/tv_title_cal"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title_cal" />
 
                 <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:id="@+id/pi_calorie"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
-                    android:progress="40"
                     android:max="100"
-                    app:layout_constraintTop_toBottomOf="@id/tv_num_of_cal"/>
+                    android:progress="40"
+                    app:indicatorColor="#FF7F3E"
+                    app:layout_constraintTop_toBottomOf="@id/tv_num_of_cal"
+                    app:trackColor="@color/white"
+                    tools:layout_editor_absoluteX="16dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_breakfast"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="140dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             app:cardCornerRadius="16dp"
@@ -106,44 +115,66 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="16dp">
+                android:background="#D4E9F2">
+
+                <ImageView
+                    android:id="@+id/icon_breakfast"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/noto_sun"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginBottom="16dp"
+                    android:rotation="55"
+                    app:layout_constraintStart_toStartOf="@id/needcal_breakfast"
+                    app:layout_constraintTop_toBottomOf="@id/needcal_breakfast"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
                 <TextView
                     android:id="@+id/addbreakfast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     android:text="@string/title_cv_breakfast"
                     android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/needcal_breakfast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintTop_toBottomOf="@id/addbreakfast"
-                    app:layout_constraintStart_toStartOf="@id/addbreakfast"
+                    android:layout_marginTop="10dp"
                     android:text="@string/needcal"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="@id/addbreakfast"
+                    app:layout_constraintTop_toBottomOf="@id/addbreakfast" />
 
                 <TextView
                     android:id="@+id/fillcal_breakfast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="@id/addbreakfast"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:text="@string/fillcal"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:layout_marginEnd="25dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/addbreakfast" />
 
                 <Button
                     android:id="@+id/addfood_breakfast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:text="@string/addfood"
-                    app:layout_constraintTop_toBottomOf="@id/needcal_breakfast"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    android:textSize="12sp"
+                    android:backgroundTint="#FF7F3E"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/needcal_breakfast" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -165,44 +196,65 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="16dp">
+                android:background="#136ECE">
+
+                <ImageView
+                    android:id="@+id/icon_lunch"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/noto_sun_behind_cloud"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    app:layout_constraintStart_toStartOf="@id/needcal_lunch"
+                    app:layout_constraintTop_toBottomOf="@id/needcal_lunch"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
                 <TextView
                     android:id="@+id/addlunch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/title_cv_lunch"
                     android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/cus_Gray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/needcal_lunch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintTop_toBottomOf="@id/addlunch"
-                    app:layout_constraintStart_toStartOf="@id/addlunch"
+                    android:layout_marginTop="10dp"
                     android:text="@string/needcal"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:textColor="@color/cus_Gray"
+                    app:layout_constraintStart_toStartOf="@id/addlunch"
+                    app:layout_constraintTop_toBottomOf="@id/addlunch" />
 
                 <TextView
                     android:id="@+id/fillcal_lunch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="@id/addlunch"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="25dp"
                     android:text="@string/fillcal"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:textColor="@color/cus_Gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/addlunch" />
 
                 <Button
                     android:id="@+id/addfood_lunch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="#FF7F3E"
                     android:text="@string/addfood"
-                    app:layout_constraintTop_toBottomOf="@id/needcal_lunch"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/needcal_lunch"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -224,44 +276,66 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="16dp">
+                android:background="#12135D">
+
+                <ImageView
+                    android:id="@+id/icon_dinner"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/noto_crescent_moon"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="16dp"
+                    android:rotation="80"
+                    app:layout_constraintStart_toStartOf="@id/needcal_dinner"
+                    app:layout_constraintTop_toBottomOf="@id/needcal_dinner"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
                 <TextView
                     android:id="@+id/adddinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/title_cv_dinner"
                     android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/needcal_dinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintTop_toBottomOf="@id/adddinner"
-                    app:layout_constraintStart_toStartOf="@id/adddinner"
+                    android:layout_marginTop="10dp"
                     android:text="Membutuhkan 300kkal"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="@id/adddinner"
+                    app:layout_constraintTop_toBottomOf="@id/adddinner" />
 
                 <TextView
                     android:id="@+id/fillcal_dinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="@id/adddinner"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="25dp"
                     android:text="300kkal telah terisi"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/adddinner" />
 
                 <Button
                     android:id="@+id/addfood_dinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="#FF7F3E"
                     android:text="Pilih Makanan"
-                    app:layout_constraintTop_toBottomOf="@id/needcal_dinner"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/needcal_dinner"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

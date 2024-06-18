@@ -41,13 +41,13 @@
     <string name="jumlah_kalori_hari">Jumlah kalori/hari</string>
     <string name="progress_kalori">(1000/5000)</string>
     <string name="title_cv_breakfast">Breakfast</string>
-    <string name="needcal">Membutuhkan 300kkal</string>
-    <string name="fillcal">300kkal telah terisi</string>
+    <string name="needcal">Membutuhkan </string>
+    <string name="fillcal"> telah terisi</string>
     <string name="addfood">Pilih Makanan</string>
     <string name="title_cv_lunch">Lunch</string>
     <string name="title_cv_dinner">Dinner</string>
     <string name="kategori_food">Kategori: Food</string>
     <string name="nama_recomendation">Nasi Goreng</string>
-    <string name="kalori_recomendation">Kalori: 250</string>
+    <string name="kalori_recomendation">Kalori:</string>
     <string name="button_addrecomendation">Pilih</string>
 </resources>

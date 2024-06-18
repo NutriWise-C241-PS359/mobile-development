@@ -32,11 +32,11 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireContext())).get(ProfileViewModel::class.java)
+        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireContext()))[ProfileViewModel::class.java]
 
         viewModel.getSession().observe(viewLifecycleOwner){
             binding.apply {
-                tvNameProfile.setText(it.name)
+                tvNameProfile.text = it.name
                 val token = BR+it.token
                 ivEdit.setOnClickListener {
                     changeName(token)
@@ -44,16 +44,29 @@ class ProfileFragment : Fragment() {
             }
         }
         viewModel.getProfile().observe(viewLifecycleOwner){
+            val genderMap = mapOf(
+                true to "Laki-laki",
+                false to "Perempuan"
+            )
+
+            val activityMap = mapOf(
+                1 to "sangat jarang berolahraga",
+                2 to "jarang berolahraga (1-3 kali perminggu)",
+                3 to "cukup berolahraga (3-5 kali perminggu)",
+                4 to "sering berolahraga (6-7 kali perminggu)",
+                5 to "sangat sering berolahraga(2 kali sehari)"
+            )
             binding.apply {
-                tvTbProfile2.setText(it.tinggibadan.toString())
-                tvBbProfile2.setText(it.beratbadan.toString())
-                tvGenderProfile2.setText(it.gender.toString())
-                tvActivityProfile2.setText(it.aktivitas.toString())
+                tvTbProfile2.text = it.tinggibadan.toString()
+                tvBbProfile2.text = it.beratbadan.toString()
+                tvGenderProfile2.text = genderMap[it.gender]
+                tvActivityProfile2.text = activityMap[it.aktivitas]
             }
         }
 
         binding.btnLogout.setOnClickListener {
             viewModel.clearProfile()
+            viewModel.clearCalorie()
             viewModel.logout()
             startActivity(Intent(requireContext(), LoginActivity::class.java))
             requireActivity().finish()
@@ -96,7 +109,7 @@ class ProfileFragment : Fragment() {
         input.hint = "Enter new name"
         builder.setView(input)
 
-        builder.setPositiveButton("OK") { dialog, which ->
+        builder.setPositiveButton("OK") { _, _ ->
             val newName = input.text.toString().trim()
             val apiService = ApiConfig.getApiService()
             lifecycleScope.launch {
@@ -112,7 +125,7 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
-        builder.setNegativeButton("Cancel") { dialog, which ->
+        builder.setNegativeButton("Cancel") { dialog, _ ->
             dialog.cancel()
         }
 

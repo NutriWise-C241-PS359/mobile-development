@@ -162,6 +162,17 @@
                     app:layout_constraintTop_toBottomOf="@id/addbreakfast" />
 
                 <TextView
+                    android:id="@+id/needcal_breakfast2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/akaya_telivigala"
+                    app:layout_constraintStart_toEndOf="@id/needcal_breakfast"
+                    app:layout_constraintTop_toBottomOf="@id/addbreakfast" />
+
+                <TextView
                     android:id="@+id/fillcal_breakfast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -171,6 +182,16 @@
                     android:fontFamily="@font/akaya_telivigala"
                     android:layout_marginEnd="25dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/addbreakfast" />
+
+                <TextView
+                    android:id="@+id/fillcal_breakfast2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/akaya_telivigala"
+                    app:layout_constraintEnd_toStartOf="@id/fillcal_breakfast"
                     app:layout_constraintTop_toTopOf="@id/addbreakfast" />
 
                 <Button
@@ -246,6 +267,17 @@
                     app:layout_constraintTop_toBottomOf="@id/addlunch" />
 
                 <TextView
+                    android:id="@+id/needcal_lunch2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/cus_Gray"
+                    android:fontFamily="@font/akaya_telivigala"
+                    app:layout_constraintStart_toEndOf="@id/needcal_lunch"
+                    app:layout_constraintTop_toBottomOf="@id/addlunch" />
+
+                <TextView
                     android:id="@+id/fillcal_lunch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -255,6 +287,16 @@
                     android:textColor="@color/cus_Gray"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/addlunch" />
+
+                <TextView
+                    android:id="@+id/fillcal_lunch2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/akaya_telivigala"
+                    android:textColor="@color/cus_Gray"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toStartOf="@id/fillcal_lunch"
                     app:layout_constraintTop_toTopOf="@id/addlunch" />
 
                 <Button
@@ -323,7 +365,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Membutuhkan 300kkal"
+                    android:text="@string/needcal"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:fontFamily="@font/akaya_telivigala"
@@ -331,15 +373,36 @@
                     app:layout_constraintTop_toBottomOf="@id/adddinner" />
 
                 <TextView
+                    android:id="@+id/needcal_dinner2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/akaya_telivigala"
+                    app:layout_constraintStart_toEndOf="@id/needcal_dinner"
+                    app:layout_constraintTop_toBottomOf="@id/adddinner" />
+
+                <TextView
                     android:id="@+id/fillcal_dinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="25dp"
-                    android:text="300kkal telah terisi"
+                    android:text="@string/fillcal"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:fontFamily="@font/akaya_telivigala"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/adddinner" />
+
+                <TextView
+                    android:id="@+id/fillcal_dinner2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/akaya_telivigala"
+                    app:layout_constraintEnd_toStartOf="@id/fillcal_dinner"
                     app:layout_constraintTop_toTopOf="@id/adddinner" />
 
                 <Button

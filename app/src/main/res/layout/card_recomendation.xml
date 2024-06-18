@@ -22,31 +22,20 @@
             android:src="@drawable/googlemaps" />
 
         <TextView
-            android:id="@+id/tv_category"
+            android:id="@+id/tv_namefood"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="18dp"
             card_view:layout_constraintStart_toEndOf="@id/gmaps"
             card_view:layout_constraintTop_toTopOf="@id/gmaps"
-            android:text="@string/kategori_food"
+            android:text="@string/nama_recomendation"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:fontFamily="@font/autour_one"/>
 
-        <TextView
-            android:id="@+id/tv_namefood"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="13dp"
-            card_view:layout_constraintStart_toEndOf="@id/gmaps"
-            card_view:layout_constraintTop_toBottomOf="@id/tv_category"
-            android:text="@string/nama_recomendation"
-            android:textSize="12sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/autour_one"/>
+
 
         <TextView
             android:id="@+id/tv_foodcal"
@@ -61,7 +50,20 @@
             android:textColor="@color/black"
             android:fontFamily="@font/autour_one"/>
 
+        <TextView
+            android:id="@+id/tv_foodcal2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            card_view:layout_constraintStart_toEndOf="@id/tv_foodcal"
+            card_view:layout_constraintTop_toBottomOf="@id/tv_namefood"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/autour_one"/>
+
         <Button
+            android:id="@+id/pilih"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"

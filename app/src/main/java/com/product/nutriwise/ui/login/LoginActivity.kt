@@ -3,6 +3,7 @@ package com.product.nutriwise.ui.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import com.google.gson.Gson
 import com.product.nutriwise.R
+import com.product.nutriwise.data.local.preference.calorie.CalorieModel
 import com.product.nutriwise.data.local.preference.profile.ProfileModel
 import com.product.nutriwise.data.local.preference.user.UserModel
 import com.product.nutriwise.data.remote.response.ErrorResponse
@@ -53,7 +55,6 @@ class LoginActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val response = apiService.login(user, password)
-                showToast(response.message.toString())
                 viewModel.saveSession(UserModel(user, response.user?.name.toString(), response.user?.token.toString()))
                 val getProfileResponse = apiService.getUser(BR+response.user?.token.toString())
                 viewModel.saveProfile(
@@ -65,6 +66,27 @@ class LoginActivity : AppCompatActivity() {
                         getProfileResponse.profile?.aktivitas ?: 0
                     )
                 )
+                ////besok di ambil dari data base
+                val responseCalCalorie = apiService.predictCal(BR+response.user?.token.toString())
+                viewModel.saveCalorie(
+                    CalorieModel(
+                        responseCalCalorie.result?.dailyCalories,
+                        responseCalCalorie.result?.breakfast?.calories,
+                        responseCalCalorie.result?.lunch?.calories,
+                        responseCalCalorie.result?.dinner?.calories,
+                        responseCalCalorie.result?.breakfast?.macronutrients?.carbohydrates,
+                        responseCalCalorie.result?.lunch?.macronutrients?.carbohydrates,
+                        responseCalCalorie.result?.dinner?.macronutrients?.carbohydrates,
+                        responseCalCalorie.result?.breakfast?.macronutrients?.fats,
+                        responseCalCalorie.result?.lunch?.macronutrients?.fats,
+                        responseCalCalorie.result?.dinner?.macronutrients?.fats,
+                        responseCalCalorie.result?.breakfast?.macronutrients?.proteins,
+                        responseCalCalorie.result?.lunch?.macronutrients?.proteins,
+                        responseCalCalorie.result?.dinner?.macronutrients?.proteins,
+                    )
+                )
+                ////
+                showToast(response.message.toString())
                 showLoading(false)
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK

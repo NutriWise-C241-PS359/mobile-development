@@ -32,6 +32,33 @@ class CaloriePreference private constructor(private val dataStore: DataStore<Pre
         }
     }
 
+    suspend fun updateCalorieB(calorieModel: CalorieModel) {
+        dataStore.edit { preferences ->
+            preferences[Keys.CARBOHYDRATES_B] = calorieModel.carbohydratesB ?: 0.0
+            preferences[Keys.FATS_B] = calorieModel.fatsB ?: 0.0
+            preferences[Keys.PROTEINS_B] = calorieModel.proteinsB ?: 0.0
+            preferences[Keys.ADDCALORIE_B] = calorieModel.addCalorieB ?: 0.0
+        }
+    }
+
+    suspend fun updateCalorieL(calorieModel: CalorieModel) {
+        dataStore.edit { preferences ->
+            preferences[Keys.CARBOHYDRATES_L] = calorieModel.carbohydratesL ?: 0.0
+            preferences[Keys.FATS_L] = calorieModel.fatsL ?: 0.0
+            preferences[Keys.PROTEINS_L] = calorieModel.proteinsL ?: 0.0
+            preferences[Keys.ADDCALORIE_L] = calorieModel.addCalorieL ?: 0.0
+        }
+    }
+
+    suspend fun updateCalorieD(calorieModel: CalorieModel) {
+        dataStore.edit { preferences ->
+            preferences[Keys.CARBOHYDRATES_D] = calorieModel.carbohydratesD ?: 0.0
+            preferences[Keys.FATS_D] = calorieModel.fatsD ?: 0.0
+            preferences[Keys.PROTEINS_D] = calorieModel.proteinsD ?: 0.0
+            preferences[Keys.ADDCALORIE_D] = calorieModel.addCalorieD ?: 0.0
+        }
+    }
+
     fun getCalorie(): Flow<CalorieModel> {
         return dataStore.data.map { preferences ->
             CalorieModel(
@@ -47,7 +74,10 @@ class CaloriePreference private constructor(private val dataStore: DataStore<Pre
                 fatsD = preferences[Keys.FATS_D],
                 proteinsB = preferences[Keys.PROTEINS_B],
                 proteinsL = preferences[Keys.PROTEINS_L],
-                proteinsD = preferences[Keys.PROTEINS_D]
+                proteinsD = preferences[Keys.PROTEINS_D],
+                addCalorieB = preferences[Keys.ADDCALORIE_B],
+                addCalorieL = preferences[Keys.ADDCALORIE_L],
+                addCalorieD = preferences[Keys.ADDCALORIE_D]
             )
         }
     }
@@ -77,6 +107,9 @@ class CaloriePreference private constructor(private val dataStore: DataStore<Pre
             val PROTEINS_B = doublePreferencesKey("proteins_b")
             val PROTEINS_L = doublePreferencesKey("proteins_l")
             val PROTEINS_D = doublePreferencesKey("proteins_d")
+            val ADDCALORIE_B = doublePreferencesKey("addcalorie_b")
+            val ADDCALORIE_L = doublePreferencesKey("addcalorie_l")
+            val ADDCALORIE_D = doublePreferencesKey("addcalorie_d")
         }
 
         fun getIntance(dataStore: DataStore<Preferences>): CaloriePreference {

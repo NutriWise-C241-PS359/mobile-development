@@ -14,6 +14,18 @@ class CalorieRepository private constructor(
         return caloriePreference.getCalorie()
     }
 
+    suspend fun updateCalorieB(calorieModel: CalorieModel) {
+        caloriePreference.updateCalorieB(calorieModel)
+    }
+
+    suspend fun updateCalorieL(calorieModel: CalorieModel) {
+        caloriePreference.updateCalorieL(calorieModel)
+    }
+
+    suspend fun updateCalorieD(calorieModel: CalorieModel) {
+        caloriePreference.updateCalorieD(calorieModel)
+    }
+
     suspend fun clearCalorie() {
         caloriePreference.clearCalorie()
     }

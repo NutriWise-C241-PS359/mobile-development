@@ -17,12 +17,13 @@ import com.product.nutriwise.ui.main.home.recomendation.RecomendationActivity
 import com.product.nutriwise.ui.signup.SignupActivity
 import com.product.nutriwise.ui.signup.inputProfile.InputProfileActivity
 import com.product.nutriwise.utils.Utils
+import kotlin.math.max
 
 class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
-    private var maxCalorie: Int = 0
-    private var proCalorie: Int = 0
+    private var maxCalorie: Double? = null
+    private var proCalorie: Double? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -37,45 +38,77 @@ class HomeFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireContext())).get(HomeViewModel::class.java)
+        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireContext())).get(
+            HomeViewModel::class.java
+        )
 
         binding.apply {
 
-            viewModel.getProfile().observe(viewLifecycleOwner){
-                if (it.beratbadan == 0.0){
+            viewModel.getProfile().observe(viewLifecycleOwner) {
+                if (it.beratbadan == 0.0) {
                     showErrorDialog("Belum isi data profile")
                 }
-                val bmi = Utils.calculateBMI(it.beratbadan,it.tinggibadan)
+                val bmi = Utils.calculateBMI(it.beratbadan, it.tinggibadan)
                 val categoryBMI = Utils.getBMICategory(bmi, it.gender)
 
                 tvTitleBmi2.text = String.format(" %.2f ", bmi)
                 tvTitleBmi3.setText("($categoryBMI)")
             }
 
-            maxCalorie = 5000
-            proCalorie = 2500
+            viewModel.getCalorie().observe(viewLifecycleOwner) {
+                maxCalorie = it.dailyCalories
+                proCalorie = (it.addCalorieB ?:0.0)+(it.addCalorieL ?:0.0)+(it.addCalorieD ?:0.0)
+                tvNumOfCal.text = String.format("%.2f/${maxCalorie?.toInt()}", proCalorie)
+                piCalorie.max = maxCalorie?.toInt() ?: 0
+                piCalorie.progress = proCalorie?.toInt() ?: 0
 
-            tvNumOfCal.text = "$proCalorie/$maxCalorie"
-            piCalorie.max = maxCalorie
-            piCalorie.progress = proCalorie
+                //Breakfast
+                needcalBreakfast2.text = String.format(" %.2f kkal", max(0.0, (it.caloriesB ?: 0.0) - (it.addCalorieB ?: 0.0)))
+                fillcalBreakfast2.text = String.format(" %.2f kkal", it.addCalorieB ?: 0.0)
+                addfoodBreakfast.setOnClickListener { br ->
+                    val tmp = it.addCalorieB ?: 0.0
+                    val intent = Intent(requireContext(), RecomendationActivity::class.java)
+                    intent.putExtra("ADD_FOOD_KEY", 1)
+                    intent.putExtra("addCal", tmp)
+                    intent.putExtra("cal", it.caloriesB)
+                    intent.putExtra("car", it.carbohydratesB)
+                    intent.putExtra("fat", it.fatsB)
+                    intent.putExtra("pro", it.proteinsB)
+                    startActivity(intent)
+                }
+                //Lunch
+                needcalLunch2.text = String.format(" %.2f kkal", max(0.0, (it.caloriesL ?: 0.0) - (it.addCalorieL ?: 0.0)))
+                fillcalLunch2.text = String.format(" %.2f kkal", it.addCalorieL ?: 0.0)
+                addfoodLunch.setOnClickListener { br ->
+                    val tmp = it.addCalorieL ?: 0.0
+                    val intent = Intent(requireContext(), RecomendationActivity::class.java)
+                    intent.putExtra("ADD_FOOD_KEY", 2)
+                    intent.putExtra("addCal", tmp)
+                    intent.putExtra("cal", it.caloriesL)
+                    intent.putExtra("car", it.carbohydratesL)
+                    intent.putExtra("fat", it.fatsL)
+                    intent.putExtra("pro", it.proteinsL)
+                    startActivity(intent)
+                }
+
+                //Diner
+                needcalDinner2.text = String.format(" %.2f kkal", max(0.0, (it.caloriesD ?: 0.0) - (it.addCalorieD ?: 0.0)))
+                fillcalDinner2.text = String.format(" %.2f kkal", it.addCalorieD ?: 0.0)
+                addfoodDinner.setOnClickListener { br ->
+                    val tmp = it.addCalorieD ?: 0.0
+                    val intent = Intent(requireContext(), RecomendationActivity::class.java)
+                    intent.putExtra("ADD_FOOD_KEY", 3)
+                    intent.putExtra("addCal", tmp)
+                    intent.putExtra("cal", it.caloriesD)
+                    intent.putExtra("car", it.carbohydratesD)
+                    intent.putExtra("fat", it.fatsD)
+                    intent.putExtra("pro", it.proteinsD)
+                    startActivity(intent)
+                }
+            }
 
             viewModel.getSession().observe(viewLifecycleOwner) {
                 tvName.text = "Hi, ${it.name}"
-            }
-
-            addfoodBreakfast.setOnClickListener {
-                val addBreakfast = Intent(activity, RecomendationActivity::class.java)
-                activity?.startActivity(addBreakfast)
-            }
-
-            addfoodLunch.setOnClickListener {
-                val addLunch = Intent(activity, RecomendationActivity::class.java)
-                activity?.startActivity(addLunch)
-            }
-
-            addfoodDinner.setOnClickListener {
-                val addDinner = Intent(activity, RecomendationActivity::class.java)
-                activity?.startActivity(addDinner)
             }
         }
     }

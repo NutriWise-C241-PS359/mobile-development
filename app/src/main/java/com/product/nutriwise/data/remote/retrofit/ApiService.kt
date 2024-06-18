@@ -3,6 +3,7 @@ package com.product.nutriwise.data.remote.retrofit
 import com.product.nutriwise.data.remote.response.CalculateCalorieResponse
 import com.product.nutriwise.data.remote.response.ErrorResponse
 import com.product.nutriwise.data.remote.response.LoginResponse
+import com.product.nutriwise.data.remote.response.RecommendResponse
 import com.product.nutriwise.data.remote.response.UserResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -50,13 +51,18 @@ interface ApiService {
         @Field("name") name: String,
     ) : ErrorResponse
 
-    @FormUrlEncoded
-    @POST("predictCal")
+    @GET("predictCal")
     suspend fun predictCal(
-        @Field("age") usia: Int,
-        @Field("gender") gender: Boolean,
-        @Field("height") tinggibandan: Double,
-        @Field("weight") beratbadan: Double,
-        @Field("activityLevel") aktivitas: Int
+        @Header("Authorization") token: String
     ) : CalculateCalorieResponse
+
+    @FormUrlEncoded
+    @POST("recommend")
+    suspend fun recommend(
+        @Field("carbs") carbs: Double,
+        @Field("protein") protein: Double,
+        @Field("fats") fats: Double,
+        @Field("calorie") calorie: Double,
+        //@Header("Authorization") token: String
+    ) : RecommendResponse
 }

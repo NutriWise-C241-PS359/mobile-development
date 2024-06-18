@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import com.google.gson.Gson
 import com.product.nutriwise.R
+import com.product.nutriwise.data.local.preference.calorie.CalorieModel
 import com.product.nutriwise.data.local.preference.profile.ProfileModel
 import com.product.nutriwise.data.remote.response.ErrorResponse
 import com.product.nutriwise.data.remote.retrofit.ApiConfig
@@ -93,6 +94,24 @@ class InputProfileActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val response = apiService.updateUser(token, usia, gender, tinggibadan, beratbadan, aktivitas)
+                val responseCalCalorie = apiService.predictCal(token)
+                viewModel.saveCalorie(
+                    CalorieModel(
+                        responseCalCalorie.result?.dailyCalories,
+                        responseCalCalorie.result?.breakfast?.calories,
+                        responseCalCalorie.result?.lunch?.calories,
+                        responseCalCalorie.result?.dinner?.calories,
+                        responseCalCalorie.result?.breakfast?.macronutrients?.carbohydrates,
+                        responseCalCalorie.result?.lunch?.macronutrients?.carbohydrates,
+                        responseCalCalorie.result?.dinner?.macronutrients?.carbohydrates,
+                        responseCalCalorie.result?.breakfast?.macronutrients?.fats,
+                        responseCalCalorie.result?.lunch?.macronutrients?.fats,
+                        responseCalCalorie.result?.dinner?.macronutrients?.fats,
+                        responseCalCalorie.result?.breakfast?.macronutrients?.proteins,
+                        responseCalCalorie.result?.lunch?.macronutrients?.proteins,
+                        responseCalCalorie.result?.dinner?.macronutrients?.proteins,
+                    )
+                )
                 showLoading(false)
                 Log.d("TAG", "updateProfile: $value")
                 if (value == 0) {

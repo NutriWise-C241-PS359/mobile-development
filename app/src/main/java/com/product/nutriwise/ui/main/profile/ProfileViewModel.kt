@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.product.nutriwise.data.local.preference.calorie.CalorieRepository
 import com.product.nutriwise.data.local.preference.profile.ProfileModel
 import com.product.nutriwise.data.local.preference.profile.ProfileRepository
 import com.product.nutriwise.data.local.preference.user.UserModel
@@ -12,7 +13,8 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel(
     private val userRepository: UserRepository,
-    private val profileRepository: ProfileRepository): ViewModel() {
+    private val profileRepository: ProfileRepository,
+    private val calorieRepository: CalorieRepository): ViewModel() {
     fun getSession(): LiveData<UserModel> {
         return userRepository.getSession().asLiveData()
     }
@@ -28,6 +30,12 @@ class ProfileViewModel(
     fun clearProfile() {
         viewModelScope.launch {
             profileRepository.clearProfile()
+        }
+    }
+
+    fun clearCalorie(){
+        viewModelScope.launch {
+            calorieRepository.clearCalorie()
         }
     }
 

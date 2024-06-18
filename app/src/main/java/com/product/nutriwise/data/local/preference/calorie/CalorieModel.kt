@@ -14,4 +14,7 @@ data class CalorieModel(
     val proteinsB: Double? = null,
     val proteinsL: Double? = null,
     val proteinsD: Double? = null,
+    val addCalorieB: Double? = null,
+    val addCalorieL: Double? = null,
+    val addCalorieD: Double? = null,
 )

@@ -20,7 +20,7 @@ data class Lunch(
 	val macronutrients: Macronutrients? = null,
 
 	@field:SerializedName("calories")
-	val calories: Any? = null
+	val calories: Double? = null
 )
 
 data class Result(
@@ -29,7 +29,7 @@ data class Result(
 	val lunch: Lunch? = null,
 
 	@field:SerializedName("dailyCalories")
-	val dailyCalories: Any? = null,
+	val dailyCalories: Double? = null,
 
 	@field:SerializedName("breakfast")
 	val breakfast: Breakfast? = null,
@@ -41,13 +41,13 @@ data class Result(
 data class Macronutrients(
 
 	@field:SerializedName("carbohydrates")
-	val carbohydrates: Any? = null,
+	val carbohydrates: Double? = null,
 
 	@field:SerializedName("fats")
-	val fats: Any? = null,
+	val fats: Double? = null,
 
 	@field:SerializedName("proteins")
-	val proteins: Any? = null
+	val proteins: Double? = null
 )
 
 data class Dinner(
@@ -56,7 +56,7 @@ data class Dinner(
 	val macronutrients: Macronutrients? = null,
 
 	@field:SerializedName("calories")
-	val calories: Any? = null
+	val calories: Double? = null
 )
 
 data class Breakfast(
@@ -65,5 +65,5 @@ data class Breakfast(
 	val macronutrients: Macronutrients? = null,
 
 	@field:SerializedName("calories")
-	val calories: Any? = null
+	val calories: Double? = null
 )

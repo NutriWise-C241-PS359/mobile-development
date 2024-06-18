@@ -33,9 +33,9 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/black"
+            android:ellipsize="end"
+            android:maxLines="5"
             android:fontFamily="@font/autour_one"/>
-
-
 
         <TextView
             android:id="@+id/tv_foodcal"

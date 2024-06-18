@@ -12,43 +12,36 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NutriWise"
+        android:theme="@style/Theme.NutriWise.NoActionBar"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.webView.WebViewActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".ui.webView.WebViewActivity"-->
+<!--            android:exported="false" />-->
 <!--        <activity-->
 <!--            android:name=".ui.main.home.recomendation.webView.WebViewActivity"-->
 <!--            android:exported="false"-->
 <!--            android:parentActivityName=".ui.main.home.recomendation.RecomendationActivity" />-->
         <activity
             android:name=".ui.main.home.recomendation.RecomendationActivity"
-            android:exported="false"
-            android:parentActivityName=".ui.main.home.HomeFragment" />
+            android:exported="false"/>
         <activity
             android:name=".ui.main.history.detail.DinnerActivity"
-            android:exported="false"
-            android:parentActivityName=".ui.main.history.detail.HistoryDetailActivity" />
+            android:exported="false"/>
         <activity
             android:name=".ui.main.history.detail.LunchActivity"
-            android:exported="false"
-            android:parentActivityName=".ui.main.history.detail.HistoryDetailActivity" />
+            android:exported="false" />
         <activity
             android:name=".ui.main.history.detail.BreakfastActivity"
-            android:exported="false"
-            android:parentActivityName=".ui.main.history.detail.HistoryDetailActivity" />
+            android:exported="false" />
         <activity
             android:name=".ui.main.history.detail.HistoryDetailActivity"
-            android:exported="false"
-            android:parentActivityName=".ui.main.history.HistoryFragment" />
+            android:exported="false" />
         <activity
             android:name=".ui.signup.inputTarget.InputTargetActivity"
-            android:exported="false"
-            android:parentActivityName=".ui.signup.inputProfile.InputProfileActivity" />
+            android:exported="false"/>
         <activity
             android:name=".ui.signup.inputProfile.InputProfileActivity"
-            android:exported="false"
-            android:parentActivityName=".ui.signup.SignupActivity" />
+            android:exported="false"/>
         <activity
             android:name=".ui.signup.SignupActivity"
             android:exported="false" />

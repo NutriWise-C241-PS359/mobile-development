@@ -194,7 +194,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Aktifitas"
+                    android:text="Aktivitas"
                     android:textSize="14sp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/autour_one"

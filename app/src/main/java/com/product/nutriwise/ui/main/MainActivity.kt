@@ -2,20 +2,16 @@ package com.product.nutriwise.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.viewModelScope
 import com.product.nutriwise.R
 import com.product.nutriwise.databinding.ActivityMainBinding
-import com.product.nutriwise.ui.ViewModelFactory
-import com.product.nutriwise.ui.login.LoginViewModel
 import com.product.nutriwise.ui.main.history.HistoryFragment
 import com.product.nutriwise.ui.main.home.HomeFragment
 import com.product.nutriwise.ui.main.profile.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -24,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             loadFragment(HomeFragment())
         }
-
+        @Suppress("DEPRECATION")
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             var fragment: Fragment? = null
             when (item.itemId) {

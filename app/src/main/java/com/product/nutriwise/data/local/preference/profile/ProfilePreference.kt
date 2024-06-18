@@ -51,6 +51,7 @@ class ProfilePreference private constructor(private val dataStore: DataStore<Pre
             it.clear()
         }
     }
+
     companion object {
 
         @Volatile

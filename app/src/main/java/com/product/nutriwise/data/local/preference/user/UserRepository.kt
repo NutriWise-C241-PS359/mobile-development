@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 class UserRepository private constructor(
     private val userPreference: UserPreference
-){
+) {
     suspend fun saveSession(userModel: UserModel) {
         userPreference.saveSession(userModel)
     }
@@ -13,7 +13,7 @@ class UserRepository private constructor(
         userPreference.updateName(newName)
     }
 
-    fun getSession(): Flow<UserModel>{
+    fun getSession(): Flow<UserModel> {
         return userPreference.getSession()
     }
 

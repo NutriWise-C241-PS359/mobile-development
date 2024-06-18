@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
@@ -19,7 +18,6 @@ import com.product.nutriwise.data.remote.retrofit.ApiConfig
 import com.product.nutriwise.databinding.ActivityInputProfileBinding
 import com.product.nutriwise.ui.ViewModelFactory
 import com.product.nutriwise.ui.main.MainActivity
-import com.product.nutriwise.ui.main.profile.ProfileFragment
 import com.product.nutriwise.ui.signup.inputTarget.InputTargetActivity
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -42,7 +40,8 @@ class InputProfileActivity : AppCompatActivity() {
         )
 
         val genderList = genderMap.keys.toList()
-        val adapterGender = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, genderList)
+        val adapterGender =
+            ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, genderList)
         binding.dbGender.setAdapter(adapterGender)
 
         val activityMap = mapOf(
@@ -54,12 +53,13 @@ class InputProfileActivity : AppCompatActivity() {
         )
 
         val activityList = activityMap.keys.toList()
-        val adapterActivity = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, activityList)
+        val adapterActivity =
+            ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, activityList)
         binding.dbActivity.setAdapter(adapterActivity)
-        value = intent.getIntExtra(EK,0)
+        value = intent.getIntExtra(EK, 0)
         binding.apply {
-            if (value == 1){
-                viewModel.getProfile().observe(this@InputProfileActivity){
+            if (value == 1) {
+                viewModel.getProfile().observe(this@InputProfileActivity) {
                     etBb.setText(it.beratbadan.toString())
                     etTb.setText(it.tinggibadan.toString())
                     etUmur.setText(it.umur.toString())
@@ -80,20 +80,34 @@ class InputProfileActivity : AppCompatActivity() {
 
                 val genderValue = genderMap[gender] ?: false
                 val activityValue = activityMap[aktivitas] ?: 1
-                viewModel.getSession().observe(this@InputProfileActivity){
-                    val token = BR+it.token
-                    updateProfile(token, usia.toInt(), genderValue, tinggibandan, beratbadan, activityValue)
+                viewModel.getSession().observe(this@InputProfileActivity) {
+                    val token = BR + it.token
+                    updateProfile(
+                        token,
+                        usia.toInt(),
+                        genderValue,
+                        tinggibandan,
+                        beratbadan,
+                        activityValue
+                    )
                 }
             }
         }
     }
 
-    private fun updateProfile(token: String, usia: Int, gender: Boolean, tinggibadan: Double, beratbadan: Double, aktivitas: Int){
+    private fun updateProfile(
+        token: String,
+        usia: Int,
+        gender: Boolean,
+        tinggibadan: Double,
+        beratbadan: Double,
+        aktivitas: Int
+    ) {
         showLoading(true)
         val apiService = ApiConfig.getApiService()
         lifecycleScope.launch {
             try {
-                val response = apiService.updateUser(token, usia, gender, tinggibadan, beratbadan, aktivitas)
+                apiService.updateUser(token, usia, gender, tinggibadan, beratbadan, aktivitas)
                 val responseCalCalorie = apiService.predictCal(token)
                 viewModel.saveCalorie(
                     CalorieModel(
@@ -128,7 +142,7 @@ class InputProfileActivity : AppCompatActivity() {
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
                     finish()
-                }else {
+                } else {
                     Log.d(" buorvbow sdvevwrvd ", "updateProfile: $tinggibadan")
                     viewModel.updateProfile(
                         ProfileModel(
@@ -144,7 +158,7 @@ class InputProfileActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
-            }catch (e: HttpException) {
+            } catch (e: HttpException) {
                 showLoading(false)
                 val errorBody = e.response()?.errorBody()?.string()
                 val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
@@ -152,10 +166,6 @@ class InputProfileActivity : AppCompatActivity() {
             }
 
         }
-    }
-
-    private fun showToast(message: String){
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun showErrorDialog(message: String) {
@@ -169,7 +179,7 @@ class InputProfileActivity : AppCompatActivity() {
         binding.progressCircular.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
-    companion object{
+    companion object {
         const val BR = "Bearer "
         const val EK = "EDIT_KEY"
     }

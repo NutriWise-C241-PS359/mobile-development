@@ -14,7 +14,8 @@ import kotlinx.coroutines.launch
 class ProfileViewModel(
     private val userRepository: UserRepository,
     private val profileRepository: ProfileRepository,
-    private val calorieRepository: CalorieRepository): ViewModel() {
+    private val calorieRepository: CalorieRepository
+) : ViewModel() {
     fun getSession(): LiveData<UserModel> {
         return userRepository.getSession().asLiveData()
     }
@@ -33,7 +34,7 @@ class ProfileViewModel(
         }
     }
 
-    fun clearCalorie(){
+    fun clearCalorie() {
         viewModelScope.launch {
             calorieRepository.clearCalorie()
         }

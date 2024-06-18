@@ -12,14 +12,16 @@ import com.product.nutriwise.data.local.preference.user.UserModel
 import com.product.nutriwise.data.local.preference.user.UserRepository
 import kotlinx.coroutines.launch
 
-class InputProfileViewModel(private val userRepository: UserRepository,
+class InputProfileViewModel(
+    private val userRepository: UserRepository,
     private val profileRepository: ProfileRepository,
-    private val calorieRepository: CalorieRepository) : ViewModel() {
+    private val calorieRepository: CalorieRepository
+) : ViewModel() {
     fun getSession(): LiveData<UserModel> {
         return userRepository.getSession().asLiveData()
     }
 
-    fun saveProfile(profileModel: ProfileModel){
+    fun saveProfile(profileModel: ProfileModel) {
         viewModelScope.launch {
             profileRepository.saveProfile(profileModel)
         }

@@ -10,9 +10,11 @@ import com.product.nutriwise.data.local.preference.profile.ProfileRepository
 import com.product.nutriwise.data.local.preference.user.UserModel
 import com.product.nutriwise.data.local.preference.user.UserRepository
 
-class HomeViewModel(private val userRepository: UserRepository,
+class HomeViewModel(
+    private val userRepository: UserRepository,
     private val profileRepository: ProfileRepository,
-    private val calorieRepository: CalorieRepository): ViewModel() {
+    private val calorieRepository: CalorieRepository
+) : ViewModel() {
     fun getSession(): LiveData<UserModel> {
         return userRepository.getSession().asLiveData()
     }
@@ -21,7 +23,7 @@ class HomeViewModel(private val userRepository: UserRepository,
         return profileRepository.getProfile().asLiveData()
     }
 
-    fun getCalorie(): LiveData<CalorieModel>{
+    fun getCalorie(): LiveData<CalorieModel> {
         return calorieRepository.getCalorie().asLiveData()
     }
 

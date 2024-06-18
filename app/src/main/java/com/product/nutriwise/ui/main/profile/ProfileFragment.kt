@@ -19,7 +19,6 @@ import com.product.nutriwise.databinding.FragmentProfileBinding
 import com.product.nutriwise.ui.ViewModelFactory
 import com.product.nutriwise.ui.login.LoginActivity
 import com.product.nutriwise.ui.signup.inputProfile.InputProfileActivity
-import com.product.nutriwise.ui.webView.WebViewActivity
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
@@ -32,18 +31,21 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireContext()))[ProfileViewModel::class.java]
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory.getInstance(requireContext())
+        )[ProfileViewModel::class.java]
 
-        viewModel.getSession().observe(viewLifecycleOwner){
+        viewModel.getSession().observe(viewLifecycleOwner) {
             binding.apply {
                 tvNameProfile.text = it.name
-                val token = BR+it.token
+                val token = BR + it.token
                 ivEdit.setOnClickListener {
                     changeName(token)
                 }
             }
         }
-        viewModel.getProfile().observe(viewLifecycleOwner){
+        viewModel.getProfile().observe(viewLifecycleOwner) {
             val genderMap = mapOf(
                 true to "Laki-laki",
                 false to "Perempuan"
@@ -73,13 +75,12 @@ class ProfileFragment : Fragment() {
         }
 
         binding.btnWebview.setOnClickListener {
-            val intent = Intent(requireContext(),WebViewActivity::class.java)
-            startActivity(intent)
+
         }
 
         binding.btnEdtProfile.setOnClickListener {
-            val intent = Intent(requireContext(),InputProfileActivity::class.java)
-            intent.putExtra(EK,1)
+            val intent = Intent(requireContext(), InputProfileActivity::class.java)
+            intent.putExtra(EK, 1)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
         }
@@ -101,7 +102,7 @@ class ProfileFragment : Fragment() {
         _binding = null
     }
 
-    private fun changeName(token: String){
+    private fun changeName(token: String) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Edit Name")
 
@@ -118,7 +119,7 @@ class ProfileFragment : Fragment() {
                     showToast(response.message.toString())
                     viewModel.updateName(newName)
                     binding.tvNameProfile.text = newName
-                }catch (e: HttpException) {
+                } catch (e: HttpException) {
                     val errorBody = e.response()?.errorBody()?.string()
                     val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
                     showToast(errorResponse.message.toString())
@@ -132,11 +133,11 @@ class ProfileFragment : Fragment() {
         builder.show()
     }
 
-    private fun showToast(message: String){
+    private fun showToast(message: String) {
         makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
-    companion object{
+    companion object {
         const val BR = "Bearer "
         const val EK = "EDIT_KEY"
     }

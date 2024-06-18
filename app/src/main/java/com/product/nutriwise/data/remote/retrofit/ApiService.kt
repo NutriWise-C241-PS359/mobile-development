@@ -15,10 +15,10 @@ import retrofit2.http.PUT
 interface ApiService {
     @FormUrlEncoded
     @POST("login")
-    suspend fun login (
+    suspend fun login(
         @Field("username") username: String,
         @Field("password") password: String
-    ) : LoginResponse
+    ): LoginResponse
 
     @FormUrlEncoded
     @POST("register")
@@ -26,7 +26,7 @@ interface ApiService {
         @Field("name") name: String,
         @Field("username") username: String,
         @Field("password") password: String
-    ) : ErrorResponse
+    ): ErrorResponse
 
     @FormUrlEncoded
     @PUT("updateUser")
@@ -37,7 +37,7 @@ interface ApiService {
         @Field("tinggibadan") tinggibandan: Double,
         @Field("beratbadan") beratbadan: Double,
         @Field("aktivitas") aktivitas: Int
-    ) : ErrorResponse
+    ): ErrorResponse
 
     @GET("users")
     suspend fun getUser(
@@ -49,12 +49,12 @@ interface ApiService {
     suspend fun updateName(
         @Header("Authorization") token: String,
         @Field("name") name: String,
-    ) : ErrorResponse
+    ): ErrorResponse
 
     @GET("predictCal")
     suspend fun predictCal(
         @Header("Authorization") token: String
-    ) : CalculateCalorieResponse
+    ): CalculateCalorieResponse
 
     @FormUrlEncoded
     @POST("recommend")
@@ -64,5 +64,5 @@ interface ApiService {
         @Field("fats") fats: Double,
         @Field("calorie") calorie: Double,
         //@Header("Authorization") token: String
-    ) : RecommendResponse
+    ): RecommendResponse
 }

@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
@@ -47,12 +46,12 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
-    private fun register(name: String, user: String, password: String){
+    private fun register(name: String, user: String, password: String) {
         showLoading(true)
         val apiService = ApiConfig.getApiService()
         lifecycleScope.launch {
             try {
-                val response = apiService.register(name, user, password)
+                apiService.register(name, user, password)
                 showLoading(false)
                 val responseLogin = apiService.login(user, password)
                 viewModel.saveSession(UserModel(user, name, responseLogin.user?.token.toString()))
@@ -61,16 +60,13 @@ class SignupActivity : AppCompatActivity() {
                 intent.putExtra(EK, 0)
                 startActivity(intent)
                 finish()
-            }catch (e: HttpException) {
+            } catch (e: HttpException) {
                 showLoading(false)
                 val errorBody = e.response()?.errorBody()?.string()
                 val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
                 showErrorDialog(errorResponse.message.toString())
             }
         }
-    }
-    private fun showToast(message: String){
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun showErrorDialog(message: String) {
@@ -84,8 +80,7 @@ class SignupActivity : AppCompatActivity() {
         binding.progressCircular.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
-    companion object{
-        val TAG = "SignupActivityLOG"
+    companion object {
         const val EK = "EDIT_KEY"
     }
 }

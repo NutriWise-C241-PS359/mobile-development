@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.product.nutriwise.data.remote.response.ResultItem
 import com.product.nutriwise.databinding.CardRecomendationBinding
 
-class ListRecomendationAdapter(private val list: ArrayList<ResultItem>) : RecyclerView.Adapter<ListRecomendationAdapter.ListViewHolder>() {
+class ListRecomendationAdapter(private val list: ArrayList<ResultItem>) :
+    RecyclerView.Adapter<ListRecomendationAdapter.ListViewHolder>() {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
 
@@ -17,12 +18,13 @@ class ListRecomendationAdapter(private val list: ArrayList<ResultItem>) : Recycl
         this.onItemClickCallback = onItemClickCallback
     }
 
-    fun setOnButtonClickCallback(onButtonClickCallback: OnButtonClickCallback){
+    fun setOnButtonClickCallback(onButtonClickCallback: OnButtonClickCallback) {
         this.onButtonClickCallback = onButtonClickCallback
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val binding = CardRecomendationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            CardRecomendationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder(binding)
     }
 
@@ -33,10 +35,11 @@ class ListRecomendationAdapter(private val list: ArrayList<ResultItem>) : Recycl
 
     override fun getItemCount(): Int = list.size
 
-    inner class ListViewHolder(private val binding: CardRecomendationBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ListViewHolder(private val binding: CardRecomendationBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ResultItem) {
-            binding.tvNamefood.setText(item.name)
-            binding.tvFoodcal2.setText(item.calorie.toString())
+            binding.tvNamefood.text = item.name
+            binding.tvFoodcal2.text = item.calorie.toString()
             binding.pilih.setOnClickListener {
                 onButtonClickCallback.onItemClicked(item)
             }

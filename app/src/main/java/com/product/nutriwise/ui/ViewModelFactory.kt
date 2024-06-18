@@ -16,36 +16,43 @@ import com.product.nutriwise.ui.signup.inputProfile.InputProfileViewModel
 import com.product.nutriwise.ui.splash.SplashViewModel
 
 
-class ViewModelFactory (
+class ViewModelFactory(
     private val userRepository: UserRepository,
     private val profileRepository: ProfileRepository,
     private val calorieRepository: CalorieRepository
-): ViewModelProvider.NewInstanceFactory() {
+) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(SplashViewModel::class.java) -> {
                 SplashViewModel(userRepository) as T
             }
+
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
-                LoginViewModel(userRepository , profileRepository, calorieRepository) as T
+                LoginViewModel(userRepository, profileRepository, calorieRepository) as T
             }
+
             modelClass.isAssignableFrom(SignupViewModel::class.java) -> {
                 SignupViewModel(userRepository) as T
             }
+
             modelClass.isAssignableFrom(InputProfileViewModel::class.java) -> {
                 InputProfileViewModel(userRepository, profileRepository, calorieRepository) as T
             }
+
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(userRepository, profileRepository, calorieRepository) as T
             }
+
             modelClass.isAssignableFrom(RecomendationViewModel::class.java) -> {
                 RecomendationViewModel(calorieRepository) as T
             }
-            modelClass.isAssignableFrom(ProfileViewModel::class.java)-> {
+
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
                 ProfileViewModel(userRepository, profileRepository, calorieRepository) as T
             }
-           else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
+
+            else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
 
@@ -62,7 +69,7 @@ class ViewModelFactory (
             val userRepository = Injection.providerUserRepository(context)
             val profileRepository = Injection.providerProfileRepository(context)
             val calorieRepository = Injection.providerCalorieRepository(context)
-            return ViewModelFactory(userRepository, profileRepository,calorieRepository)
+            return ViewModelFactory(userRepository, profileRepository, calorieRepository)
         }
     }
 }

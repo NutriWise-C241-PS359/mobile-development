@@ -46,6 +46,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
             it.clear()
         }
     }
+
     companion object {
         @Volatile
         private var INSTANCE: UserPreference? = null

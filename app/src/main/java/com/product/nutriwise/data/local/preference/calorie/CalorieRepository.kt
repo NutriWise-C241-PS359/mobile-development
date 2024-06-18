@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 class CalorieRepository private constructor(
     private val caloriePreference: CaloriePreference
-){
+) {
 
     suspend fun saveCalorie(calorieModel: CalorieModel) {
         caloriePreference.saveCalorie(calorieModel)
@@ -35,7 +35,7 @@ class CalorieRepository private constructor(
         private var instance: CalorieRepository? = null
         fun getInstance(
             caloriePreference: CaloriePreference
-        ): CalorieRepository = synchronized(this){
+        ): CalorieRepository = synchronized(this) {
             instance ?: CalorieRepository(caloriePreference)
         }.also { instance = it }
     }

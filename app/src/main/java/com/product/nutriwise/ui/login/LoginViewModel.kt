@@ -15,8 +15,9 @@ import kotlinx.coroutines.launch
 class LoginViewModel(
     private val userRepository: UserRepository,
     private val profileRepository: ProfileRepository,
-    private val calorieRepository: CalorieRepository): ViewModel() {
-    fun saveSession(userModel: UserModel){
+    private val calorieRepository: CalorieRepository
+) : ViewModel() {
+    fun saveSession(userModel: UserModel) {
         viewModelScope.launch {
             userRepository.saveSession(userModel)
         }
@@ -26,7 +27,7 @@ class LoginViewModel(
         return userRepository.getSession().asLiveData()
     }
 
-    fun saveProfile(profileModel: ProfileModel){
+    fun saveProfile(profileModel: ProfileModel) {
         viewModelScope.launch {
             profileRepository.saveProfile(profileModel)
         }

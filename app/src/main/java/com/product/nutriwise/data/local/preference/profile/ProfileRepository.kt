@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 class ProfileRepository private constructor(
     private val profilePreference: ProfilePreference
-){
+) {
     suspend fun saveProfile(profileModel: ProfileModel) {
         profilePreference.saveProfile(profileModel)
     }
@@ -21,12 +21,12 @@ class ProfileRepository private constructor(
         profilePreference.clearProfile()
     }
 
-    companion object{
+    companion object {
         @Volatile
         private var instance: ProfileRepository? = null
         fun getInstance(
             profilePreference: ProfilePreference
-        ): ProfileRepository = synchronized(this){
+        ): ProfileRepository = synchronized(this) {
             instance ?: ProfileRepository(profilePreference)
         }.also { instance = it }
     }

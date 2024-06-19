@@ -2,6 +2,7 @@ package com.product.nutriwise.ui.main.home
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Message
 import android.util.Log
@@ -63,44 +64,23 @@ class HomeFragment : Fragment() {
                 val date = LocalDate.now()
                 val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
                 dateString = date.format(formatter)
-                Log.d("TAGndjndnnfdnanfiabeouabofe", "onViewCreated: $dateString")
-                Log.d("TAGndjndnnfdnanfiabeouabofe", "onViewCreated: ${it.date}")
+                val formatter2 = Utils.convertDateFormat(dateString)
+                if (it.isTarget){
+                    tvTitleTarget.setText("Target tanggal $formatter2")
+                    tvTitleTarget.visibility = view.visibility
+                }
                 if (dateString != it.date){
-                    showToast(dateString)
-                    val apiService = ApiConfig.getApiService()
-                    lifecycleScope.launch {
-                        try {
-                            val responseCalCalorie = apiService.predict(BR+it.token)
-                            viewModel.saveCalorie(
-                                CalorieModel(
-                                    responseCalCalorie.result?.dailyCalories,
-                                    responseCalCalorie.result?.breakfast?.calories,
-                                    responseCalCalorie.result?.lunch?.calories,
-                                    responseCalCalorie.result?.dinner?.calories,
-                                    responseCalCalorie.result?.breakfast?.macronutrients?.carbohydrates,
-                                    responseCalCalorie.result?.lunch?.macronutrients?.carbohydrates,
-                                    responseCalCalorie.result?.dinner?.macronutrients?.carbohydrates,
-                                    responseCalCalorie.result?.breakfast?.macronutrients?.fats,
-                                    responseCalCalorie.result?.lunch?.macronutrients?.fats,
-                                    responseCalCalorie.result?.dinner?.macronutrients?.fats,
-                                    responseCalCalorie.result?.breakfast?.macronutrients?.proteins,
-                                    responseCalCalorie.result?.lunch?.macronutrients?.proteins,
-                                    responseCalCalorie.result?.dinner?.macronutrients?.proteins,
-                                )
-                            )
-                            viewModel.updateDate(dateString)
-                        } catch (e: HttpException){
-                            val errorBody = e.response()?.errorBody()?.string()
-                            val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
-                            showErrorDialog(errorResponse.message.toString())
-                        }
+                    if (it.isTarget){
+                        getCalorieTarget(it.token)
+                    }else{
+                        newCalculateCalorie(it.token)
                     }
                 }
             }
 
             viewModel.getProfile().observe(viewLifecycleOwner) {
                 if (it.beratbadan == 0.0) {
-                    showErrorDialog("Belum isi data profile")
+                    showErrorDialogP("Belum isi data profile")
                 }
                 val bmi = Utils.calculateBMI(it.beratbadan, it.tinggibadan)
                 val categoryBMI = Utils.getBMICategory(bmi, it.gender)
@@ -173,12 +153,87 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun getCalorieTarget(token: String) {
+        val apiService = ApiConfig.getApiService()
+        lifecycleScope.launch {
+            try {
+                val response = apiService.getTargetByDate(BR+token, dateString)
+                viewModel.saveCalorie(
+                    CalorieModel(
+                        response.temp?.dailyCalories,
+                        response.temp?.calorieB,
+                        response.temp?.calorieL,
+                        response.temp?.calorieD,
+                        response.temp?.carbohydratesB,
+                        response.temp?.carbohydratesL,
+                        response.temp?.carbohydratesD,
+                        response.temp?.fatsB,
+                        response.temp?.fatsL,
+                        response.temp?.fatsD,
+                        response.temp?.proteinsB,
+                        response.temp?.proteinsL,
+                        response.temp?.proteinsD,
+                    )
+                )
+            }catch (e: HttpException){
+                val errorBody = e.response()?.errorBody()?.string()
+                val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
+                if (errorResponse.status == "error"){
+                    binding.tvTitleTarget.visibility = View.GONE
+                    newCalculateCalorie(BR+token)
+                }
+                showErrorDialog(errorResponse.message.toString())
+            }
+        }
+    }
+
+    private fun newCalculateCalorie(token: String) {
+        showToast(dateString)
+        val apiService = ApiConfig.getApiService()
+        lifecycleScope.launch {
+            try {
+                val responseCalCalorie = apiService.predict(BR+token)
+                viewModel.saveCalorie(
+                    CalorieModel(
+                        responseCalCalorie.result?.dailyCalories,
+                        responseCalCalorie.result?.breakfast?.calories,
+                        responseCalCalorie.result?.lunch?.calories,
+                        responseCalCalorie.result?.dinner?.calories,
+                        responseCalCalorie.result?.breakfast?.macronutrients?.carbohydrates,
+                        responseCalCalorie.result?.lunch?.macronutrients?.carbohydrates,
+                        responseCalCalorie.result?.dinner?.macronutrients?.carbohydrates,
+                        responseCalCalorie.result?.breakfast?.macronutrients?.fats,
+                        responseCalCalorie.result?.lunch?.macronutrients?.fats,
+                        responseCalCalorie.result?.dinner?.macronutrients?.fats,
+                        responseCalCalorie.result?.breakfast?.macronutrients?.proteins,
+                        responseCalCalorie.result?.lunch?.macronutrients?.proteins,
+                        responseCalCalorie.result?.dinner?.macronutrients?.proteins,
+                    )
+                )
+                viewModel.updateDate(dateString)
+            } catch (e: HttpException){
+                val errorBody = e.response()?.errorBody()?.string()
+                val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
+                showErrorDialog(errorResponse.message.toString())
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
     private fun showErrorDialog(message: String) {
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.failed)
+            .setMessage(message)
+            .setPositiveButton("Ok") { dialog, _ ->
+                dialog.dismiss()
+            }.show()
+    }
+
+    private fun showErrorDialogP(message: String) {
         AlertDialog.Builder(requireContext()).setTitle(R.string.failed).setMessage(message)
             .setPositiveButton("Ok") { _, _ ->
                 val intent = Intent(requireContext(), InputProfileActivity::class.java)

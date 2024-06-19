@@ -116,6 +116,7 @@ class HistoryDetailActivity : AppCompatActivity() {
     }
 
     private fun showErrorDialog(message: String) {
+        showLoading(false)
         AlertDialog.Builder(this).setTitle(R.string.failed).setMessage(message)
             .setPositiveButton("Ok") { dialog, _ ->
                 dialog.dismiss()

@@ -291,6 +291,17 @@
         </TableLayout>
 
         <Button
+            android:id="@+id/btn_edt_target"
+            android:layout_width="176dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Target"
+            android:fontFamily="@font/autour_one"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/table_profile"/>
+
+        <Button
             android:id="@+id/btn_edt_profile"
             android:layout_width="176dp"
             android:layout_height="wrap_content"
@@ -299,7 +310,7 @@
             android:fontFamily="@font/autour_one"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/table_profile"/>
+            app:layout_constraintTop_toBottomOf="@id/btn_edt_target"/>
 
         <Button
             android:id="@+id/btn_logout"

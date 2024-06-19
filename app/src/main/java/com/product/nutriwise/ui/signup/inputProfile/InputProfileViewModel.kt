@@ -21,6 +21,9 @@ class InputProfileViewModel(
         return userRepository.getSession().asLiveData()
     }
 
+    suspend fun updateTarget(newTarget: Boolean){
+        userRepository.updateTarget(newTarget)
+    }
     fun saveProfile(profileModel: ProfileModel) {
         viewModelScope.launch {
             profileRepository.saveProfile(profileModel)

@@ -13,6 +13,10 @@ class UserRepository private constructor(
         userPreference.updateName(newName)
     }
 
+    suspend fun updateTarget(newTarget: Boolean){
+        userPreference.updateTarget(newTarget)
+    }
+
     suspend fun updateDate(newDate: String) {
         userPreference.updateDate(newDate)
     }

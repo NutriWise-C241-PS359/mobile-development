@@ -16,6 +16,7 @@ import com.product.nutriwise.ui.main.home.recomendation.RecomendationViewModel
 import com.product.nutriwise.ui.main.profile.ProfileViewModel
 import com.product.nutriwise.ui.signup.SignupViewModel
 import com.product.nutriwise.ui.signup.inputProfile.InputProfileViewModel
+import com.product.nutriwise.ui.signup.inputTarget.InputTargetViewModel
 import com.product.nutriwise.ui.splash.SplashViewModel
 
 
@@ -41,6 +42,10 @@ class ViewModelFactory(
 
             modelClass.isAssignableFrom(InputProfileViewModel::class.java) -> {
                 InputProfileViewModel(userRepository, profileRepository, calorieRepository) as T
+            }
+
+            modelClass.isAssignableFrom(InputTargetViewModel::class.java) -> {
+                InputTargetViewModel(userRepository, calorieRepository) as T
             }
 
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {

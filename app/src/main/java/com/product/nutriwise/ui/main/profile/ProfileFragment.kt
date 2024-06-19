@@ -20,6 +20,7 @@ import com.product.nutriwise.databinding.FragmentProfileBinding
 import com.product.nutriwise.ui.ViewModelFactory
 import com.product.nutriwise.ui.login.LoginActivity
 import com.product.nutriwise.ui.signup.inputProfile.InputProfileActivity
+import com.product.nutriwise.ui.signup.inputTarget.InputTargetActivity
 import com.product.nutriwise.ui.splash.SplashActivity
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -44,6 +45,11 @@ class ProfileFragment : Fragment() {
                 token = BR + it.token
                 ivEdit.setOnClickListener {
                     changeName(token)
+                }
+
+                btnEdtTarget.setOnClickListener {
+                    startActivity(Intent(requireContext(), InputTargetActivity::class.java))
+                    requireActivity().finish()
                 }
 
                 btnLogout.setOnClickListener {

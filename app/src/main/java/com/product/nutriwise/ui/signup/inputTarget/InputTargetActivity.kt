@@ -3,17 +3,35 @@ package com.product.nutriwise.ui.signup.inputTarget
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.gson.Gson
+import com.product.nutriwise.R
+import com.product.nutriwise.data.local.preference.calorie.CalorieModel
+import com.product.nutriwise.data.remote.response.ErrorResponse
+import com.product.nutriwise.data.remote.retrofit.ApiConfig
 import com.product.nutriwise.databinding.ActivityInputTargetBinding
+import com.product.nutriwise.ui.ViewModelFactory
 import com.product.nutriwise.ui.main.MainActivity
+import com.product.nutriwise.ui.main.home.HomeFragment
+import com.product.nutriwise.ui.splash.SplashViewModel
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import java.text.SimpleDateFormat
 import java.util.*
 
 class InputTargetActivity : AppCompatActivity() {
 
+    private val viewModel by viewModels<InputTargetViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+
     private lateinit var binding: ActivityInputTargetBinding
+    private var durationInDays: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,17 +41,13 @@ class InputTargetActivity : AppCompatActivity() {
         setActionBar()
 
         val calendar = Calendar.getInstance()
-        calendar.add(Calendar.DAY_OF_YEAR,14)
         val today = calendar.timeInMillis
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-        val dateToday: Date
-        dateToday = calendar.time
-        val format = dateFormat.format(dateToday)
-
-        Log.d("tangal", format)
+        val dateString = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(today)
+        calendar.add(Calendar.DAY_OF_YEAR, 14)
+        val minDate = calendar.timeInMillis
 
         val constraintsBuilder = CalendarConstraints.Builder()
-            .setValidator(DateValidatorPointForwardCustom.from(today))
+            .setValidator(DateValidatorPointForwardCustom.from(minDate))
 
         val datePicker = MaterialDatePicker.Builder.datePicker()
             .setTitleText("Pilih Tanggal")
@@ -53,18 +67,78 @@ class InputTargetActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.btnNext.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+        datePicker.addOnPositiveButtonClickListener { selectedDateInMillis ->
+            binding.etDate.setText(datePicker.headerText)
+            durationInDays = calculateDurationToDate(selectedDateInMillis).toInt()
         }
 
-        datePicker.addOnPositiveButtonClickListener {
-            binding.etDate.setText(datePicker.headerText)
+        binding.btnNext.setOnClickListener {
+            val tbb = binding.etTb.text.toString().trim().toInt()
+            Log.d("TAG -------------------------", "onCreate: $durationInDays")
+            Log.d("TAG -------------------------", "onCreate: $tbb")
+            viewModel.getSession().observe(this){
+                val token = BR+it.token
+                getPredictTarget(token, tbb, durationInDays, dateString)
+            }
         }
+    }
+
+    private fun calculateDurationToDate(chosenDate: Long): Long {
+        val todayInMillis = Calendar.getInstance().timeInMillis
+        val diffInMillis = chosenDate - todayInMillis
+        return diffInMillis / (1000 * 60 * 60 * 24)
+    }
+
+    private fun getPredictTarget(token: String, tbb: Int, duration: Int, dateString: String) {
+        val apiService = ApiConfig.getApiService()
+        lifecycleScope.launch {
+            try {
+                apiService.addTarget(token, tbb, duration)
+                apiService.getTarget(token)
+                val response = apiService.getTargetByDate(token, dateString)
+                viewModel.updateTarget(true)
+                viewModel.saveCalorie(
+                    CalorieModel(
+                        response.temp?.dailyCalories,
+                        response.temp?.calorieB,
+                        response.temp?.calorieL,
+                        response.temp?.calorieD,
+                        response.temp?.carbohydratesB,
+                        response.temp?.carbohydratesL,
+                        response.temp?.carbohydratesD,
+                        response.temp?.fatsB,
+                        response.temp?.fatsL,
+                        response.temp?.fatsD,
+                        response.temp?.proteinsB,
+                        response.temp?.proteinsL,
+                        response.temp?.proteinsD,
+                    )
+                )
+                startActivity(Intent(this@InputTargetActivity, MainActivity::class.java))
+                finish()
+            } catch (e: HttpException) {
+                val errorBody = e.response()?.errorBody()?.string()
+                val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
+                showErrorDialog(errorResponse.message.toString())
+            }
+        }
+    }
+
+    private fun showErrorDialog(message: String) {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.failed)
+            .setMessage(message)
+            .setPositiveButton("Ok") { dialog, _ ->
+                dialog.dismiss()
+            }.show()
     }
 
     private fun setActionBar() {
         supportActionBar?.hide()
+    }
+
+    companion object{
+        const val BR = "Bearer "
     }
 }
 

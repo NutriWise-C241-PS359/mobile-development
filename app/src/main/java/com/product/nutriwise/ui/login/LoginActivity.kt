@@ -65,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val response = apiService.login(user, password)
-                viewModel.saveSession(UserModel(user, response.user?.name.toString(), response.user?.token.toString(), true,date))
+                viewModel.saveSession(UserModel(user, response.user?.name.toString(), response.user?.token.toString(), true,false,date))
                 val getProfileResponse = apiService.getUser(BR+response.user?.token.toString())
                 viewModel.saveProfile(
                     ProfileModel(

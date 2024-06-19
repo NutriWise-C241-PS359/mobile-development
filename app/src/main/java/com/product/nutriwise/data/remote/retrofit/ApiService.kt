@@ -1,8 +1,11 @@
 package com.product.nutriwise.data.remote.retrofit
 
+import com.product.nutriwise.data.remote.response.AddTargetResponse
 import com.product.nutriwise.data.remote.response.CalculateCalorieResponse
 import com.product.nutriwise.data.remote.response.CalorieFromDBResponse
 import com.product.nutriwise.data.remote.response.ErrorResponse
+import com.product.nutriwise.data.remote.response.GetTargetByDateResponse
+import com.product.nutriwise.data.remote.response.GetTargetResponse
 import com.product.nutriwise.data.remote.response.HistoryDetailResponse
 import com.product.nutriwise.data.remote.response.HistoryResponse
 import com.product.nutriwise.data.remote.response.LoginResponse
@@ -123,4 +126,23 @@ interface ApiService {
         @Field("date") date: String,
     ): HistoryDetailResponse
 
+    @FormUrlEncoded
+    @PUT("updateTarget")//save targetnya
+    suspend fun addTarget(
+        @Header("Authorization") token: String,
+        @Field("targetberatbadan") targetberatbadan: Int,
+        @Field("duration") duration: Int
+    ) : AddTargetResponse
+
+    @GET("predictTarget")
+    suspend fun getTarget(
+        @Header("Authorization") token: String
+    ) : GetTargetResponse
+
+    @FormUrlEncoded
+    @POST("historyTarget")
+    suspend fun getTargetByDate(
+        @Header("Authorization") token: String,
+        @Field("date") date: String
+    ): GetTargetByDateResponse
 }

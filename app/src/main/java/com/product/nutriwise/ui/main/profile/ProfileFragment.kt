@@ -68,7 +68,7 @@ class ProfileFragment : Fragment() {
                 2 to "jarang berolahraga (1-3 kali perminggu)",
                 3 to "cukup berolahraga (3-5 kali perminggu)",
                 4 to "sering berolahraga (6-7 kali perminggu)",
-                5 to "sangat sering berolahraga(2 kali sehari)"
+                5 to "sangat sering berolahraga (2 kali sehari)"
             )
             binding.apply {
                 tvTbProfile2.text = it.tinggibadan.toString()
@@ -78,19 +78,12 @@ class ProfileFragment : Fragment() {
             }
         }
 
-
-
-        binding.btnWebview.setOnClickListener {
-
-        }
-
         binding.btnEdtProfile.setOnClickListener {
             val intent = Intent(requireContext(), InputProfileActivity::class.java)
             intent.putExtra(EK, 1)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
         }
-
 
     }
 

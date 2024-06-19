@@ -51,7 +51,7 @@ class InputProfileActivity : AppCompatActivity() {
             "jarang berolahraga (1-3 kali perminggu)" to 2,
             "cukup berolahraga (3-5 kali perminggu)" to 3,
             "sering berolahraga (6-7 kali perminggu)" to 4,
-            "sangat sering berolahraga(2 kali sehari)" to 5
+            "sangat sering berolahraga (2 kali sehari)" to 5
         )
 
         val activityList = activityMap.keys.toList()

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white">
 
     <ImageView
@@ -70,7 +71,9 @@
             android:elevation="8dp"
             android:background="@color/cus_Gray">
 
-            <TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tv_tb_profile"
@@ -95,22 +98,38 @@
                     android:textSize="14sp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/autour_one"
-                    app:layout_constraintTop_toBottomOf="@id/tv_name_profile"
+                    app:layout_constraintTop_toTopOf="@id/tv_tb_profile"
                     app:layout_constraintStart_toEndOf="@+id/tv_tb_profile"/>
 
                 <TextView
                     android:id="@+id/tv_tb_profile2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    tools:text="153.0"
                     android:textSize="14sp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/autour_one"
-                    app:layout_constraintTop_toBottomOf="@id/tv_name_profile"
+                    app:layout_constraintTop_toTopOf="@id/tv_tb_profile3"
                     app:layout_constraintStart_toEndOf="@+id/tv_tb_profile3"/>
+
+                <TextView
+                    android:id="@+id/tv_tb_profile4"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="-240dp"
+                    android:text="cm"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/autour_one"
+                    app:layout_constraintTop_toTopOf="@id/tv_tb_profile2"
+                    app:layout_constraintStart_toEndOf="@+id/tv_tb_profile2"/>
             </TableRow>
 
-            <TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/tv_bb_profile"
                     android:layout_width="wrap_content"
@@ -121,7 +140,7 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/autour_one"
                     app:layout_constraintTop_toBottomOf="@id/tv_tb_profile"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="@id/tv_tb_profile"/>
 
                 <TextView
                     android:id="@+id/tv_bb_profile3"
@@ -134,22 +153,39 @@
                     android:textSize="14sp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/autour_one"
-                    app:layout_constraintTop_toBottomOf="@id/tv_name_profile"
-                    app:layout_constraintStart_toEndOf="@+id/tv_tb_profile"/>
+                    app:layout_constraintTop_toTopOf="@id/tv_bb_profile"
+                    app:layout_constraintStart_toEndOf="@+id/tv_bb_profile"/>
 
                 <TextView
                     android:id="@+id/tv_bb_profile2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    tools:text="47.0"
                     android:textSize="14sp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/autour_one"
-                    app:layout_constraintTop_toBottomOf="@id/tv_tb_profile"
-                    app:layout_constraintStart_toEndOf="@id/tv_bb_profile3"/>
+                    app:layout_constraintTop_toTopOf="@id/tv_bb_profile3"
+                    app:layout_constraintStart_toEndOf="@+id/tv_bb_profile3"/>
+
+                <TextView
+                    android:id="@+id/tv_bb_profile4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="-240dp"
+                    android:text="Kg"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/autour_one"
+                    app:layout_constraintTop_toTopOf="@id/tv_bb_profile2"
+                    app:layout_constraintStart_toEndOf="@+id/tv_bb_profile2"/>
+
             </TableRow>
 
-            <TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/tv_gender_profile"
                     android:layout_width="wrap_content"
@@ -160,7 +196,7 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/autour_one"
                     app:layout_constraintTop_toBottomOf="@id/tv_bb_profile"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="@id/tv_bb_profile"/>
 
                 <TextView
                     android:id="@+id/tv_gender_profile3"
@@ -173,8 +209,8 @@
                     android:textSize="14sp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/autour_one"
-                    app:layout_constraintTop_toBottomOf="@id/tv_name_profile"
-                    app:layout_constraintStart_toEndOf="@+id/tv_tb_profile"/>
+                    app:layout_constraintTop_toTopOf="@id/tv_gender_profile"
+                    app:layout_constraintStart_toEndOf="@+id/tv_gender_profile"/>
 
                 <TextView
                     android:id="@+id/tv_gender_profile2"
@@ -184,11 +220,14 @@
                     android:textSize="14sp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/autour_one"
-                    app:layout_constraintTop_toBottomOf="@id/tv_bb_profile"
+                    tools:text="Perempuan"
+                    app:layout_constraintTop_toTopOf="@id/tv_gender_profile3"
                     app:layout_constraintStart_toEndOf="@id/tv_gender_profile3"/>
             </TableRow>
 
-            <TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/tv_activity_profile"
                     android:layout_width="wrap_content"
@@ -199,7 +238,7 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/autour_one"
                     app:layout_constraintTop_toBottomOf="@id/tv_gender_profile"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="@id/tv_gender_profile"/>
 
                 <TextView
                     android:id="@+id/tv_activity_profile3"
@@ -212,21 +251,30 @@
                     android:textSize="14sp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/autour_one"
-                    app:layout_constraintTop_toBottomOf="@id/tv_name_profile"
-                    app:layout_constraintStart_toEndOf="@+id/tv_tb_profile"/>
+                    app:layout_constraintTop_toTopOf="@id/tv_activity_profile"
+                    app:layout_constraintStart_toEndOf="@+id/tv_activity_profile"/>
 
-                <TextView
-                    android:id="@+id/tv_activity_profile2"
-                    android:layout_width="wrap_content"
+                <LinearLayout
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:textSize="14sp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/autour_one"
-                    android:ellipsize="end"
-                    android:maxLines="4"
-                    app:layout_constraintTop_toBottomOf="@id/tv_gender_profile"
-                    app:layout_constraintStart_toEndOf="@id/tv_activity_profile3"/>
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_activity_profile2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="160dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/autour_one"
+                        android:maxLines="3"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        tools:text="sangat jarang berolahraga (2 kali sehari)"
+                        app:layout_constraintStart_toEndOf="@id/tv_activity_profile3"
+                        app:layout_constraintTop_toTopOf="@id/tv_activity_profile3" />
+                </LinearLayout>
+
             </TableRow>
 
         </TableLayout>
@@ -235,12 +283,12 @@
             android:id="@+id/btn_edt_profile"
             android:layout_width="176dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="30dp"
             android:text="Edit profile"
             android:fontFamily="@font/autour_one"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_webview"/>
+            app:layout_constraintTop_toBottomOf="@id/table_profile"/>
 
         <Button
             android:id="@+id/btn_logout"
@@ -252,17 +300,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_edt_profile"/>
-
-        <Button
-            android:id="@+id/btn_webview"
-            android:layout_width="176dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Tes webView"
-            android:fontFamily="@font/autour_one"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/table_profile"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideHorizontal"

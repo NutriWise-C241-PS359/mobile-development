@@ -3,6 +3,7 @@ package com.product.nutriwise.ui.signup.inputTarget
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -90,9 +91,11 @@ class InputTargetActivity : AppCompatActivity() {
     }
 
     private fun getPredictTarget(token: String, tbb: Int, duration: Int, dateString: String) {
+        showLoading(true)
         val apiService = ApiConfig.getApiService()
         lifecycleScope.launch {
             try {
+                showLoading(false)
                 apiService.addTarget(token, tbb, duration)
                 apiService.getTarget(token)
                 val response = apiService.getTargetByDate(token, dateString)
@@ -117,6 +120,7 @@ class InputTargetActivity : AppCompatActivity() {
                 startActivity(Intent(this@InputTargetActivity, MainActivity::class.java))
                 finish()
             } catch (e: HttpException) {
+                showLoading(false)
                 val errorBody = e.response()?.errorBody()?.string()
                 val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
                 showErrorDialog(errorResponse.message.toString())
@@ -135,6 +139,10 @@ class InputTargetActivity : AppCompatActivity() {
 
     private fun setActionBar() {
         supportActionBar?.hide()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressCircular.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     companion object{
@@ -168,5 +176,6 @@ class DateValidatorPointForwardCustom(private val minDate: Long) : CalendarConst
         fun from(minDate: Long): DateValidatorPointForwardCustom {
             return DateValidatorPointForwardCustom(minDate)
         }
+
     }
 }

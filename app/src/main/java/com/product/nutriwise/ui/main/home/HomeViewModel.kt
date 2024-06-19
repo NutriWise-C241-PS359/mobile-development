@@ -43,4 +43,8 @@ class HomeViewModel(
         }
     }
 
+    suspend fun updateTarget(newTarget : Boolean){
+        userRepository.updateTarget(newTarget)
+    }
+
 }

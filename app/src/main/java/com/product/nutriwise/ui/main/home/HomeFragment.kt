@@ -179,10 +179,11 @@ class HomeFragment : Fragment() {
                 val errorBody = e.response()?.errorBody()?.string()
                 val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
                 if (errorResponse.status == "error"){
+                    viewModel.updateTarget(false)
                     binding.tvTitleTarget.visibility = View.GONE
                     newCalculateCalorie(BR+token)
                 }
-                showErrorDialog(errorResponse.message.toString())
+                showErrorDialogTarget(errorResponse.message.toString())
             }
         }
     }
@@ -222,6 +223,15 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showErrorDialogTarget(message: String) {
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.failed)
+            .setMessage(message)
+            .setPositiveButton("Ok") { dialog, _ ->
+                dialog.dismiss()
+            }.show()
     }
 
     private fun showErrorDialog(message: String) {

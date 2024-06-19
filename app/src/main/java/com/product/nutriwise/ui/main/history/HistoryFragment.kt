@@ -39,10 +39,6 @@ class HistoryFragment : Fragment() {
     ): View {
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
         return binding.root
-
-        viewModel.isLoading.observe(viewLifecycleOwner) {
-            showLoading(it)
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,9 +71,11 @@ class HistoryFragment : Fragment() {
     }
 
     private fun fetchHistoryData(token: String) {
+        showLoading(true)
         val apiService = ApiConfig.getApiService()
         lifecycleScope.launch {
             try {
+                showLoading(false)
                 val response = apiService.history(token)
                 withContext(Dispatchers.Main) {
                     list.clear()
@@ -85,6 +83,7 @@ class HistoryFragment : Fragment() {
                     historyAdapter.notifyDataSetChanged()
                 }
             } catch (e: HttpException) {
+                showLoading(false)
                 val errorBody = e.response()?.errorBody()?.string()
                 val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
                 showErrorDialog(errorResponse.message.toString())

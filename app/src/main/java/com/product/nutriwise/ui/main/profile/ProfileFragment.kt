@@ -47,6 +47,9 @@ class ProfileFragment : Fragment() {
                 }
 
                 btnLogout.setOnClickListener {
+                    viewModel.isLoading.observe(viewLifecycleOwner) {
+                    showLoading(it)
+                }
                     postCalorietoDb(token)
                     viewModel.clearProfile()
                     viewModel.clearCalorie()
@@ -94,6 +97,7 @@ class ProfileFragment : Fragment() {
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
+        showLoading(true)
     }
 
     override fun onDestroyView() {
@@ -102,6 +106,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun changeName(token: String) {
+        showLoading(true)
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Edit Name")
 
@@ -130,6 +135,7 @@ class ProfileFragment : Fragment() {
         }
 
         builder.show()
+        showLoading(false)
     }
 
     private fun postCalorietoDb(token: String){
@@ -174,6 +180,10 @@ class ProfileFragment : Fragment() {
             .setPositiveButton("Ok") { dialog, _ ->
                 dialog.dismiss()
             }.show()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.pbProfile.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     companion object {

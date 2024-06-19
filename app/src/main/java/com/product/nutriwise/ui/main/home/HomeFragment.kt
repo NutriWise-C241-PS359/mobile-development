@@ -45,14 +45,18 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
+
+        showLoading(true)
     }
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireContext()))[HomeViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory
+            .getInstance(requireContext()))[HomeViewModel::class.java]
 
         binding.apply {
+            showLoading(false)
 
             viewModel.getSession().observe(viewLifecycleOwner) {
                 tvName.text = "Hi, ${it.name}"
@@ -188,6 +192,10 @@ class HomeFragment : Fragment() {
 
     private fun showToast(message: String){
         Toast.makeText(requireContext(), "Today $message", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.pbHome.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     companion object {

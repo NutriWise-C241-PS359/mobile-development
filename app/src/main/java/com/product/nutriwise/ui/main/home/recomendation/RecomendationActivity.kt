@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
@@ -37,6 +38,7 @@ class RecomendationActivity : AppCompatActivity() {
     private val list = ArrayList<ResultItem>()
     private lateinit var token: String
     private lateinit var dateString: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRecomendationBinding.inflate(layoutInflater)
@@ -93,7 +95,12 @@ class RecomendationActivity : AppCompatActivity() {
         supportActionBar?.setTitle("Recommendation")
     }
 
+    private fun showLoading(isLoading: Boolean) {
+        binding.pbRecommendation.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
     private fun showRecyclerList() {
+        showLoading(false)
         val addFood = intent.getIntExtra("ADD_FOOD_KEY", 1)
         Log.d("TAGTESRECO>>>>>>>>>>>>>>>>>>>", "onItemClicked: $addFood")
         rvRecomendation.layoutManager = LinearLayoutManager(this)
@@ -153,6 +160,7 @@ class RecomendationActivity : AppCompatActivity() {
                         label = "diner"
                     }
                 }
+
                 val apiService = ApiConfig.getApiService()
                 lifecycleScope.launch {
                     apiService.addFoodHistory(data.id.toString().toInt(), label, dateString, token)
@@ -178,6 +186,7 @@ class RecomendationActivity : AppCompatActivity() {
         calorie: Double,
         token: String
     ) {
+        showLoading(true)
         val apiService = ApiConfig.getApiService()
         lifecycleScope.launch {
             try {

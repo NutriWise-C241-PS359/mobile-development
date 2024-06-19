@@ -1,6 +1,7 @@
 package com.product.nutriwise.ui.main.history.detail
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.product.nutriwise.data.local.preference.user.UserModel

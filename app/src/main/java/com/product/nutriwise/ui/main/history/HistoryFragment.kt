@@ -39,6 +39,10 @@ class HistoryFragment : Fragment() {
     ): View {
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
         return binding.root
+
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -99,6 +103,14 @@ class HistoryFragment : Fragment() {
             .setPositiveButton("Ok") { dialog, _ ->
                 dialog.dismiss()
             }.show()
+    }
+
+    private fun showLoading(isLoading: Boolean){
+        if (isLoading) {
+            binding.pbHistory.visibility = View.VISIBLE
+        } else {
+            binding.pbHistory.visibility = View.GONE
+        }
     }
 
     companion object {

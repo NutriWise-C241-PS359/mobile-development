@@ -1,6 +1,7 @@
 package com.product.nutriwise.ui.main.home
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -17,6 +18,7 @@ class HomeViewModel(
     private val profileRepository: ProfileRepository,
     private val calorieRepository: CalorieRepository
 ) : ViewModel() {
+
     fun getSession(): LiveData<UserModel> {
         return userRepository.getSession().asLiveData()
     }

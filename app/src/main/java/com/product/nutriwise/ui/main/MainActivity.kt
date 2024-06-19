@@ -1,6 +1,7 @@
 package com.product.nutriwise.ui.main
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             var fragment: Fragment? = null
             when (item.itemId) {
+
                 R.id.navigation_home -> fragment = HomeFragment()
                 R.id.navigation_profile -> fragment = ProfileFragment()
                 R.id.navigation_history -> fragment = HistoryFragment()
@@ -65,4 +67,5 @@ class MainActivity : AppCompatActivity() {
         // Reset the backPressedOnce flag after 2 seconds
         android.os.Handler().postDelayed({ backPressedOnce = false }, 2000)
     }
+
 }

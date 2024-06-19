@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
@@ -32,16 +33,20 @@ class HistoryDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHistoryDetailBinding
     private val list = ArrayList<DataItem>()
     private lateinit var dateString: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val label = intent.getStringExtra("label")
         dateString = intent.getStringExtra("date").toString()
         val dateString2 = Utils.convertDateFormat(dateString) + " ($label)"
 
         rv = binding.rvDetail
         rv.setHasFixedSize(true)
+
+        showLoading(true)
 
         viewModel.getSession().observe(this){
             val token = BR+it.token
@@ -53,11 +58,13 @@ class HistoryDetailActivity : AppCompatActivity() {
     }
 
     private fun showRecyclerList(){
+        showLoading(false)
         rv.layoutManager = LinearLayoutManager(this)
         rv.adapter = HistoryDetailAdapter(list)
     }
 
     private fun getListHistoryDetail(token: String, label: String, date: String){
+        showLoading(true)
         val apiService = ApiConfig.getApiService()
         lifecycleScope.launch {
             try {
@@ -113,6 +120,10 @@ class HistoryDetailActivity : AppCompatActivity() {
             .setPositiveButton("Ok") { dialog, _ ->
                 dialog.dismiss()
             }.show()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.pbHistorydetail.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     companion object{

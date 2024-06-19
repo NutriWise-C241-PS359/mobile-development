@@ -14,11 +14,13 @@ import java.util.*
 class InputTargetActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityInputTargetBinding
-//test123
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityInputTargetBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setActionBar()
 
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DAY_OF_YEAR,14)
@@ -59,6 +61,10 @@ class InputTargetActivity : AppCompatActivity() {
         datePicker.addOnPositiveButtonClickListener {
             binding.etDate.setText(datePicker.headerText)
         }
+    }
+
+    private fun setActionBar() {
+        supportActionBar?.hide()
     }
 }
 

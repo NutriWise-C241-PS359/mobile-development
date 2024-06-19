@@ -28,6 +28,9 @@ class CaloriePreference private constructor(private val dataStore: DataStore<Pre
             preferences[Keys.PROTEINS_B] = calorieModel.proteinsB ?: 0.0
             preferences[Keys.PROTEINS_L] = calorieModel.proteinsL ?: 0.0
             preferences[Keys.PROTEINS_D] = calorieModel.proteinsD ?: 0.0
+            preferences[Keys.ADDCALORIE_B] = calorieModel.addCalorieB ?: 0.0
+            preferences[Keys.ADDCALORIE_L] = calorieModel.addCalorieL ?: 0.0
+            preferences[Keys.ADDCALORIE_D] = calorieModel.addCalorieD ?: 0.0
         }
     }
 

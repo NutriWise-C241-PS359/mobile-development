@@ -1,5 +1,8 @@
 package com.product.nutriwise.utils
 
+import java.text.SimpleDateFormat
+import java.util.Locale
+
 object Utils {
     fun calculateBMI(weight: Double, height: Double): Double {
         return weight / ((height/100) * (height/100))
@@ -9,6 +12,17 @@ object Utils {
         return when (gender) {
             true -> getBMICategoryForMale(bmi)
             false -> getBMICategoryForFemale(bmi)
+        }
+    }
+
+    fun convertDateFormat(dateString: String, fromFormat: String = "yyyy-MM-dd", toFormat: String = "dd-MM-yyyy"): String {
+        return try {
+            val sdfFrom = SimpleDateFormat(fromFormat, Locale.getDefault())
+            val sdfTo = SimpleDateFormat(toFormat, Locale.getDefault())
+            val date = sdfFrom.parse(dateString)
+            date?.let { sdfTo.format(it) } ?: ""
+        } catch (e: Exception) {
+            ""
         }
     }
 

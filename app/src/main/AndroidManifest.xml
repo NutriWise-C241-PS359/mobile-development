@@ -14,34 +14,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NutriWise.NoActionBar"
         tools:targetApi="31">
-<!--        <activity-->
-<!--            android:name=".ui.webView.WebViewActivity"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".ui.main.home.recomendation.webView.WebViewActivity"-->
-<!--            android:exported="false"-->
-<!--            android:parentActivityName=".ui.main.home.recomendation.RecomendationActivity" />-->
         <activity
             android:name=".ui.main.home.recomendation.RecomendationActivity"
-            android:exported="false"/>
-        <activity
-            android:name=".ui.main.history.detail.DinnerActivity"
-            android:exported="false"/>
-        <activity
-            android:name=".ui.main.history.detail.LunchActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.main.history.detail.BreakfastActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ui.main.MainActivity" />
         <activity
             android:name=".ui.main.history.detail.HistoryDetailActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ui.main.history.HistoryFragment" />
         <activity
             android:name=".ui.signup.inputTarget.InputTargetActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:parentActivityName=".ui.signup.inputProfile.InputProfileActivity" />
         <activity
             android:name=".ui.signup.inputProfile.InputProfileActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:parentActivityName=".ui.signup.SignupActivity" />
         <activity
             android:name=".ui.signup.SignupActivity"
             android:exported="false" />

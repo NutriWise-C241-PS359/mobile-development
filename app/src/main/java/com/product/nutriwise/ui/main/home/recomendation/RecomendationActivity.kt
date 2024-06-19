@@ -22,6 +22,8 @@ import com.product.nutriwise.ui.ViewModelFactory
 import com.product.nutriwise.ui.main.MainActivity
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import kotlin.math.max
 
 class RecomendationActivity : AppCompatActivity() {
@@ -33,16 +35,23 @@ class RecomendationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRecomendationBinding
     private lateinit var rvRecomendation: RecyclerView
     private val list = ArrayList<ResultItem>()
+    private lateinit var token: String
+    private lateinit var dateString: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRecomendationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val date = LocalDate.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        dateString = date.format(formatter)
         rvRecomendation = binding.rvRecomendation
         rvRecomendation.setHasFixedSize(true)
 
         val addFood = intent.getIntExtra("ADD_FOOD_KEY", 1)
-
+        viewModel.getUser().observe(this){
+            token =  BR+it.token
+        }
         viewModel.getCalorie().observe(this) {
             when (addFood) {
                 1 -> {
@@ -51,7 +60,8 @@ class RecomendationActivity : AppCompatActivity() {
                         it.carbohydratesB ?: 0.0,
                         it.proteinsB ?: 0.0,
                         it.fatsB ?: 0.0,
-                        calorie
+                        calorie,
+                        token
 
                     )
                 }
@@ -62,7 +72,8 @@ class RecomendationActivity : AppCompatActivity() {
                         it.carbohydratesL ?: 0.0,
                         it.proteinsL ?: 0.0,
                         it.fatsL ?: 0.0,
-                        calorie
+                        calorie,
+                        token
                     )
                 }
 
@@ -72,7 +83,8 @@ class RecomendationActivity : AppCompatActivity() {
                         it.carbohydratesD ?: 0.0,
                         it.proteinsD ?: 0.0,
                         it.fatsD ?: 0.0,
-                        calorie
+                        calorie,
+                        token
                     )
                 }
             }
@@ -105,6 +117,7 @@ class RecomendationActivity : AppCompatActivity() {
                 val carbs = max(0.0,intent.getDoubleExtra("car", 0.0) - data.carbohydrates.toString().toDouble())
                 val fats = max(0.0, intent.getDoubleExtra("fat", 0.0) - data.fats.toString().toDouble())
                 val protein = max(0.0, intent.getDoubleExtra("pro", 0.0) - data.protein.toString().toDouble())
+                var label : String
                 when (addFood) {
                     1 -> {
                         viewModel.updateCalorieB(
@@ -115,6 +128,7 @@ class RecomendationActivity : AppCompatActivity() {
                                 proteinsB = protein
                             )
                         )
+                        label = "breakfast"
                     }
                     2 -> {
                         viewModel.updateCalorieL(
@@ -125,6 +139,7 @@ class RecomendationActivity : AppCompatActivity() {
                                 proteinsL = protein
                             )
                         )
+                        label = "lunch"
                     }
                     else -> {
                         viewModel.updateCalorieD(
@@ -135,11 +150,23 @@ class RecomendationActivity : AppCompatActivity() {
                                 proteinsD = protein
                             )
                         )
+                        label = "diner"
                     }
                 }
-                val intent = Intent(this@RecomendationActivity, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                val apiService = ApiConfig.getApiService()
+                lifecycleScope.launch {
+                    apiService.addFoodHistory(data.id.toString().toInt(), label, dateString, token)
+                    try {
+                        val intent = Intent(this@RecomendationActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } catch (e: HttpException) {
+                        val errorBody = e.response()?.errorBody()?.string()
+                        val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
+                        showErrorDialog(errorResponse.message.toString())
+                    }
+                }
+
             }
         })
     }
@@ -148,12 +175,13 @@ class RecomendationActivity : AppCompatActivity() {
         carbs: Double,
         protein: Double,
         fats: Double,
-        calorie: Double
+        calorie: Double,
+        token: String
     ) {
         val apiService = ApiConfig.getApiService()
         lifecycleScope.launch {
             try {
-                val response = apiService.recommend(carbs, protein, fats, calorie)
+                val response = apiService.recommend(carbs, protein, fats, calorie, token)
                 list.clear()
                 response.result?.let { list.addAll(it.filterNotNull()) }
                 showRecyclerList()
@@ -171,5 +199,9 @@ class RecomendationActivity : AppCompatActivity() {
             .setPositiveButton("Ok") { dialog, _ ->
                 dialog.dismiss()
             }.show()
+    }
+
+    companion object {
+        const val BR = "Bearer "
     }
 }

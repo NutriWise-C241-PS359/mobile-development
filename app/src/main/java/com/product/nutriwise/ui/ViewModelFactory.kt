@@ -3,11 +3,14 @@ package com.product.nutriwise.ui
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.product.nutriwise.adapter.HistoryAdapter
 import com.product.nutriwise.data.local.preference.calorie.CalorieRepository
 import com.product.nutriwise.data.local.preference.profile.ProfileRepository
 import com.product.nutriwise.data.local.preference.user.UserRepository
 import com.product.nutriwise.di.Injection
 import com.product.nutriwise.ui.login.LoginViewModel
+import com.product.nutriwise.ui.main.history.HistoryViewModel
+import com.product.nutriwise.ui.main.history.detail.HistoryDetailViewModel
 import com.product.nutriwise.ui.main.home.HomeViewModel
 import com.product.nutriwise.ui.main.home.recomendation.RecomendationViewModel
 import com.product.nutriwise.ui.main.profile.ProfileViewModel
@@ -45,7 +48,15 @@ class ViewModelFactory(
             }
 
             modelClass.isAssignableFrom(RecomendationViewModel::class.java) -> {
-                RecomendationViewModel(calorieRepository) as T
+                RecomendationViewModel(calorieRepository, userRepository) as T
+            }
+
+            modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
+                HistoryViewModel(userRepository) as T
+            }
+
+            modelClass.isAssignableFrom(HistoryDetailViewModel::class.java) -> {
+                HistoryDetailViewModel(userRepository) as T
             }
 
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {

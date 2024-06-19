@@ -18,17 +18,26 @@ import com.product.nutriwise.ui.login.LoginActivity
 import com.product.nutriwise.ui.signup.inputProfile.InputProfileActivity
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class SignupActivity : AppCompatActivity() {
     private val viewModel by viewModels<SignupViewModel> {
         ViewModelFactory.getInstance(this)
     }
     private lateinit var binding: ActivitySignupBinding
+    private lateinit var dateString: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setActionBar()
+
+        val date = LocalDate.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        dateString = date.format(formatter)
 
         binding.apply {
             btnSignup.setOnClickListener {
@@ -36,7 +45,7 @@ class SignupActivity : AppCompatActivity() {
                 val user = etUsername.text.toString().trim()
                 val password = etPassword.text.toString().trim()
 
-                register(name, user, password)
+                register(name, user, password, dateString)
             }
 
             tvToLogin.setOnClickListener {
@@ -46,7 +55,7 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
-    private fun register(name: String, user: String, password: String) {
+    private fun register(name: String, user: String, password: String, date: String) {
         showLoading(true)
         val apiService = ApiConfig.getApiService()
         lifecycleScope.launch {
@@ -54,7 +63,7 @@ class SignupActivity : AppCompatActivity() {
                 apiService.register(name, user, password)
                 showLoading(false)
                 val responseLogin = apiService.login(user, password)
-                viewModel.saveSession(UserModel(user, name, responseLogin.user?.token.toString()))
+                viewModel.saveSession(UserModel(user, name, responseLogin.user?.token.toString(),true,date))
                 val intent = Intent(this@SignupActivity, InputProfileActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 intent.putExtra(EK, 0)
@@ -78,6 +87,10 @@ class SignupActivity : AppCompatActivity() {
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressCircular.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun setActionBar() {
+        supportActionBar?.hide()
     }
 
     companion object {

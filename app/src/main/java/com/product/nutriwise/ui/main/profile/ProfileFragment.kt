@@ -13,12 +13,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.google.gson.Gson
+import com.product.nutriwise.R
 import com.product.nutriwise.data.remote.response.ErrorResponse
 import com.product.nutriwise.data.remote.retrofit.ApiConfig
 import com.product.nutriwise.databinding.FragmentProfileBinding
 import com.product.nutriwise.ui.ViewModelFactory
 import com.product.nutriwise.ui.login.LoginActivity
 import com.product.nutriwise.ui.signup.inputProfile.InputProfileActivity
+import com.product.nutriwise.ui.splash.SplashActivity
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
@@ -26,7 +28,7 @@ class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-
+    private lateinit var token: String
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,12 +41,22 @@ class ProfileFragment : Fragment() {
         viewModel.getSession().observe(viewLifecycleOwner) {
             binding.apply {
                 tvNameProfile.text = it.name
-                val token = BR + it.token
+                token = BR + it.token
                 ivEdit.setOnClickListener {
                     changeName(token)
                 }
+
+                btnLogout.setOnClickListener {
+                    postCalorietoDb(token)
+                    viewModel.clearProfile()
+                    viewModel.clearCalorie()
+                    viewModel.logout()
+                    startActivity(Intent(requireContext(), SplashActivity::class.java))
+                    requireActivity().finish()
+                }
             }
         }
+
         viewModel.getProfile().observe(viewLifecycleOwner) {
             val genderMap = mapOf(
                 true to "Laki-laki",
@@ -66,13 +78,7 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        binding.btnLogout.setOnClickListener {
-            viewModel.clearProfile()
-            viewModel.clearCalorie()
-            viewModel.logout()
-            startActivity(Intent(requireContext(), LoginActivity::class.java))
-            requireActivity().finish()
-        }
+
 
         binding.btnWebview.setOnClickListener {
 
@@ -133,8 +139,48 @@ class ProfileFragment : Fragment() {
         builder.show()
     }
 
+    private fun postCalorietoDb(token: String){
+        viewModel.getCalorie().observe(viewLifecycleOwner) {
+            val apiService = ApiConfig.getApiService()
+            lifecycleScope.launch {
+                try {
+                    val response = apiService.updatePredict(
+                        it.dailyCalories,
+                        it.caloriesB,
+                        it.caloriesL,
+                        it.caloriesD,
+                        it.carbohydratesB,
+                        it.carbohydratesL,
+                        it.carbohydratesD,
+                        it.fatsB,
+                        it.fatsL,
+                        it.fatsD,
+                        it.proteinsB,
+                        it.proteinsL,
+                        it.proteinsD,
+                        it.addCalorieB,
+                        it.addCalorieL,
+                        it.addCalorieD,
+                        token
+                    )
+                    showToast(response.status.toString())
+                } catch (e: HttpException) {
+                    val errorBody = e.response()?.errorBody()?.string()
+                    val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
+                    showErrorDialog(errorResponse.message.toString())
+                }
+            }
+        }
+    }
     private fun showToast(message: String) {
         makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showErrorDialog(message: String) {
+        AlertDialog.Builder(requireContext()).setTitle(R.string.failed).setMessage(message)
+            .setPositiveButton("Ok") { dialog, _ ->
+                dialog.dismiss()
+            }.show()
     }
 
     companion object {

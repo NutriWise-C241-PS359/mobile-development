@@ -1,7 +1,10 @@
 package com.product.nutriwise.data.remote.retrofit
 
 import com.product.nutriwise.data.remote.response.CalculateCalorieResponse
+import com.product.nutriwise.data.remote.response.CalorieFromDBResponse
 import com.product.nutriwise.data.remote.response.ErrorResponse
+import com.product.nutriwise.data.remote.response.HistoryDetailResponse
+import com.product.nutriwise.data.remote.response.HistoryResponse
 import com.product.nutriwise.data.remote.response.LoginResponse
 import com.product.nutriwise.data.remote.response.RecommendResponse
 import com.product.nutriwise.data.remote.response.UserResponse
@@ -56,6 +59,11 @@ interface ApiService {
         @Header("Authorization") token: String
     ): CalculateCalorieResponse
 
+    @GET("historyPredic")
+    suspend fun getHistoryPredict(
+        @Header("Authorization") token: String
+    ): CalorieFromDBResponse
+
     @FormUrlEncoded
     @POST("recommend")
     suspend fun recommend(
@@ -63,6 +71,56 @@ interface ApiService {
         @Field("protein") protein: Double,
         @Field("fats") fats: Double,
         @Field("calorie") calorie: Double,
-        //@Header("Authorization") token: String
+        @Header("Authorization") token: String
     ): RecommendResponse
+
+    @FormUrlEncoded
+    @PUT("updatePredict")
+    suspend fun updatePredict(
+        @Field("dailyCalories") dailyCalories: Double?,
+        @Field("calorieB") calorieB: Double?,
+        @Field("calorieL") calorieL: Double?,
+        @Field("calorieD") calorieD: Double?,
+        @Field("carbohydratesB") carbohydratesB: Double?,
+        @Field("carbohydratesL") carbohydratesL: Double?,
+        @Field("carbohydratesD") carbohydratesD: Double?,
+        @Field("fatsB") fatsB: Double?,
+        @Field("fatsL") fatsL: Double?,
+        @Field("fatsD") fatsD: Double?,
+        @Field("proteinsB") proteinsB: Double?,
+        @Field("proteinsL") proteinsL: Double?,
+        @Field("proteinsD") proteinsD: Double?,
+        @Field("addCalorieB") addCalorieB: Double?,
+        @Field("addCalorieL") addCalorieL: Double?,
+        @Field("addCalorieD") addCalorieD: Double?,
+        @Header("Authorization") token: String
+    ): ErrorResponse
+
+    @FormUrlEncoded
+    @POST("postFood")
+    suspend fun addFoodHistory(
+        @Field("foodID") foodID: Int,
+        @Field("label") label: String,
+        @Field("date") date: String,
+        @Header("Authorization") token: String
+    )
+
+    @GET("history")
+    suspend fun history(
+        @Header("Authorization") token: String
+    ) : HistoryResponse
+
+    @GET("predict")
+    suspend fun predict(
+        @Header("Authorization") token: String
+    ) : CalculateCalorieResponse
+
+    @FormUrlEncoded
+    @POST("historydetail")
+    suspend fun historyDetail(
+        @Header("Authorization") token: String,
+        @Field("label") label: String,
+        @Field("date") date: String,
+    ): HistoryDetailResponse
+
 }

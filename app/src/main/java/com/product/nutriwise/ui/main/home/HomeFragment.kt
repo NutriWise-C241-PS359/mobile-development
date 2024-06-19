@@ -3,19 +3,31 @@ package com.product.nutriwise.ui.main.home
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Message
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import com.google.gson.Gson
 import com.product.nutriwise.R
+import com.product.nutriwise.data.local.preference.calorie.CalorieModel
+import com.product.nutriwise.data.remote.response.ErrorResponse
+import com.product.nutriwise.data.remote.retrofit.ApiConfig
 import com.product.nutriwise.databinding.FragmentHomeBinding
 import com.product.nutriwise.ui.ViewModelFactory
 import com.product.nutriwise.ui.main.home.recomendation.RecomendationActivity
 import com.product.nutriwise.ui.signup.SignupActivity
 import com.product.nutriwise.ui.signup.inputProfile.InputProfileActivity
 import com.product.nutriwise.utils.Utils
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import kotlin.math.max
 
 class HomeFragment : Fragment() {
@@ -24,6 +36,7 @@ class HomeFragment : Fragment() {
     private var maxCalorie: Double? = null
     private var proCalorie: Double? = null
     private val binding get() = _binding!!
+    private lateinit var dateString: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +53,46 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(requireContext()))[HomeViewModel::class.java]
 
         binding.apply {
+
+            viewModel.getSession().observe(viewLifecycleOwner) {
+                tvName.text = "Hi, ${it.name}"
+                val date = LocalDate.now()
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                dateString = date.format(formatter)
+                Log.d("TAGndjndnnfdnanfiabeouabofe", "onViewCreated: $dateString")
+                Log.d("TAGndjndnnfdnanfiabeouabofe", "onViewCreated: ${it.date}")
+                if (dateString != it.date){
+                    showToast(dateString)
+                    val apiService = ApiConfig.getApiService()
+                    lifecycleScope.launch {
+                        try {
+                            val responseCalCalorie = apiService.predict(BR+it.token)
+                            viewModel.saveCalorie(
+                                CalorieModel(
+                                    responseCalCalorie.result?.dailyCalories,
+                                    responseCalCalorie.result?.breakfast?.calories,
+                                    responseCalCalorie.result?.lunch?.calories,
+                                    responseCalCalorie.result?.dinner?.calories,
+                                    responseCalCalorie.result?.breakfast?.macronutrients?.carbohydrates,
+                                    responseCalCalorie.result?.lunch?.macronutrients?.carbohydrates,
+                                    responseCalCalorie.result?.dinner?.macronutrients?.carbohydrates,
+                                    responseCalCalorie.result?.breakfast?.macronutrients?.fats,
+                                    responseCalCalorie.result?.lunch?.macronutrients?.fats,
+                                    responseCalCalorie.result?.dinner?.macronutrients?.fats,
+                                    responseCalCalorie.result?.breakfast?.macronutrients?.proteins,
+                                    responseCalCalorie.result?.lunch?.macronutrients?.proteins,
+                                    responseCalCalorie.result?.dinner?.macronutrients?.proteins,
+                                )
+                            )
+                            viewModel.updateDate(dateString)
+                        } catch (e: HttpException){
+                            val errorBody = e.response()?.errorBody()?.string()
+                            val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
+                            showErrorDialog(errorResponse.message.toString())
+                        }
+                    }
+                }
+            }
 
             viewModel.getProfile().observe(viewLifecycleOwner) {
                 if (it.beratbadan == 0.0) {
@@ -113,10 +166,6 @@ class HomeFragment : Fragment() {
                     startActivity(intent)
                 }
             }
-
-            viewModel.getSession().observe(viewLifecycleOwner) {
-                tvName.text = "Hi, ${it.name}"
-            }
         }
     }
 
@@ -135,5 +184,13 @@ class HomeFragment : Fragment() {
             }
             .setCancelable(false)
             .show()
+    }
+
+    private fun showToast(message: String){
+        Toast.makeText(requireContext(), "Today $message", Toast.LENGTH_SHORT).show()
+    }
+
+    companion object {
+        const val BR = "Bearer "
     }
 }

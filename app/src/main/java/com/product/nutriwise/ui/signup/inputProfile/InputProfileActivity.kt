@@ -34,6 +34,8 @@ class InputProfileActivity : AppCompatActivity() {
         binding = ActivityInputProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setActionBar()
+
         val genderMap = mapOf(
             "Laki-laki" to true,
             "Perempuan" to false
@@ -143,7 +145,6 @@ class InputProfileActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-                    Log.d(" buorvbow sdvevwrvd ", "updateProfile: $tinggibadan")
                     viewModel.updateProfile(
                         ProfileModel(
                             usia,
@@ -177,6 +178,10 @@ class InputProfileActivity : AppCompatActivity() {
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressCircular.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun setActionBar() {
+        supportActionBar?.hide()
     }
 
     companion object {

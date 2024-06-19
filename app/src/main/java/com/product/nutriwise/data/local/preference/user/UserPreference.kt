@@ -21,6 +21,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
             it[NAME_KEY] = userModel.name
             it[TOKEN_KEY] = userModel.token
             it[IS_LOGIN_KEY] = true
+            it[DATE_KEY] = userModel.date
         }
     }
 
@@ -31,6 +32,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
                 it[NAME_KEY] ?: "",
                 it[TOKEN_KEY] ?: "",
                 it[IS_LOGIN_KEY] ?: false,
+                it[DATE_KEY] ?: ""
             )
         }
     }
@@ -38,6 +40,12 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
     suspend fun updateName(newName: String) {
         dataStore.edit {
             it[NAME_KEY] = newName
+        }
+    }
+
+    suspend fun updateDate(newDate: String) {
+        dataStore.edit {
+            it[DATE_KEY] = newDate
         }
     }
 
@@ -55,6 +63,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         private val NAME_KEY = stringPreferencesKey("name")
         private val TOKEN_KEY = stringPreferencesKey("token")
         private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")
+        private val DATE_KEY = stringPreferencesKey("date")
 
         fun getInstance(dataStore: DataStore<Preferences>): UserPreference {
             return INSTANCE ?: synchronized(this) {

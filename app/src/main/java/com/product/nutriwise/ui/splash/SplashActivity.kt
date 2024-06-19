@@ -19,6 +19,8 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        setActionBar()
+
         Handler().postDelayed({
             viewModel.getSession().observe(this){
                 if (it.isLogin){
@@ -31,5 +33,9 @@ class SplashActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }, 1000)
+    }
+
+    private fun setActionBar() {
+        supportActionBar?.hide()
     }
 }

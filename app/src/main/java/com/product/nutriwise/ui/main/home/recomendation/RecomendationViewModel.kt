@@ -6,9 +6,16 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.product.nutriwise.data.local.preference.calorie.CalorieModel
 import com.product.nutriwise.data.local.preference.calorie.CalorieRepository
+import com.product.nutriwise.data.local.preference.user.UserModel
+import com.product.nutriwise.data.local.preference.user.UserRepository
 import kotlinx.coroutines.launch
 
-class RecomendationViewModel (private val calorieRepository: CalorieRepository): ViewModel(){
+class RecomendationViewModel (private val calorieRepository: CalorieRepository,
+    private val userRepository: UserRepository): ViewModel(){
+
+    fun getUser(): LiveData<UserModel> {
+        return userRepository.getSession().asLiveData()
+    }
 
     fun getCalorie(): LiveData<CalorieModel> {
         return calorieRepository.getCalorie().asLiveData()

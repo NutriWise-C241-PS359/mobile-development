@@ -21,23 +21,32 @@ import com.product.nutriwise.ui.main.MainActivity
 import com.product.nutriwise.ui.signup.SignupActivity
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class LoginActivity : AppCompatActivity() {
     private val viewModel by viewModels<LoginViewModel> {
         ViewModelFactory.getInstance(this)
     }
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var dateString: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setActionBar()
+
+        val date = LocalDate.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        dateString = date.format(formatter)
+
         binding.apply {
             btnLogin.setOnClickListener {
                 val user = etUsername.text.toString().trim()
                 val password = etPassword.text.toString().trim()
-                loginUser(user, password)
+                loginUser(user, password, dateString)
             }
 
             tvToSignup.setOnClickListener {
@@ -47,13 +56,16 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun loginUser(user: String, password: String){
+    private fun setActionBar() {
+        supportActionBar?.hide()
+    }
+    private fun loginUser(user: String, password: String, date: String){
         showLoading(true)
         val apiService = ApiConfig.getApiService()
         lifecycleScope.launch {
             try {
                 val response = apiService.login(user, password)
-                viewModel.saveSession(UserModel(user, response.user?.name.toString(), response.user?.token.toString()))
+                viewModel.saveSession(UserModel(user, response.user?.name.toString(), response.user?.token.toString(), true,date))
                 val getProfileResponse = apiService.getUser(BR+response.user?.token.toString())
                 viewModel.saveProfile(
                     ProfileModel(
@@ -64,26 +76,29 @@ class LoginActivity : AppCompatActivity() {
                         getProfileResponse.profile?.aktivitas ?: 0
                     )
                 )
-                ////besok di ambil dari data base
-                val responseCalCalorie = apiService.predictCal(BR+response.user?.token.toString())
+
+                val responseCalCalorie = apiService.getHistoryPredict(BR+response.user?.token.toString())
                 viewModel.saveCalorie(
                     CalorieModel(
-                        responseCalCalorie.result?.dailyCalories,
-                        responseCalCalorie.result?.breakfast?.calories,
-                        responseCalCalorie.result?.lunch?.calories,
-                        responseCalCalorie.result?.dinner?.calories,
-                        responseCalCalorie.result?.breakfast?.macronutrients?.carbohydrates,
-                        responseCalCalorie.result?.lunch?.macronutrients?.carbohydrates,
-                        responseCalCalorie.result?.dinner?.macronutrients?.carbohydrates,
-                        responseCalCalorie.result?.breakfast?.macronutrients?.fats,
-                        responseCalCalorie.result?.lunch?.macronutrients?.fats,
-                        responseCalCalorie.result?.dinner?.macronutrients?.fats,
-                        responseCalCalorie.result?.breakfast?.macronutrients?.proteins,
-                        responseCalCalorie.result?.lunch?.macronutrients?.proteins,
-                        responseCalCalorie.result?.dinner?.macronutrients?.proteins,
+                        responseCalCalorie.temp?.dailyCalories,
+                        responseCalCalorie.temp?.calorieB,
+                        responseCalCalorie.temp?.calorieL,
+                        responseCalCalorie.temp?.calorieD,
+                        responseCalCalorie.temp?.carbohydratesB,
+                        responseCalCalorie.temp?.carbohydratesL,
+                        responseCalCalorie.temp?.carbohydratesD,
+                        responseCalCalorie.temp?.fatsB,
+                        responseCalCalorie.temp?.fatsL,
+                        responseCalCalorie.temp?.fatsD,
+                        responseCalCalorie.temp?.proteinsB,
+                        responseCalCalorie.temp?.proteinsL,
+                        responseCalCalorie.temp?.proteinsD,
+                        responseCalCalorie.temp?.addCalorieB,
+                        responseCalCalorie.temp?.addCalorieL,
+                        responseCalCalorie.temp?.addCalorieD
                     )
                 )
-                ////
+
                 showToast(response.message.toString())
                 showLoading(false)
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
@@ -95,6 +110,12 @@ class LoginActivity : AppCompatActivity() {
                 val errorBody = e.response()?.errorBody()?.string()
                 val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
                 showErrorDialog(errorResponse.message.toString())
+//                if (errorResponse.message.toString() == "No prediction data found for the user") {
+//                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+//                    startActivity(intent)
+//                    finish()
+//                }
             }
         }
     }

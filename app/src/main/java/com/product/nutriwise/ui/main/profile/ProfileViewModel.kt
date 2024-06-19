@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.product.nutriwise.data.local.preference.calorie.CalorieModel
 import com.product.nutriwise.data.local.preference.calorie.CalorieRepository
 import com.product.nutriwise.data.local.preference.profile.ProfileModel
 import com.product.nutriwise.data.local.preference.profile.ProfileRepository
@@ -26,6 +27,10 @@ class ProfileViewModel(
 
     suspend fun updateName(newName: String) {
         userRepository.updateName(newName)
+    }
+
+    fun getCalorie(): LiveData<CalorieModel> {
+        return calorieRepository.getCalorie().asLiveData()
     }
 
     fun clearProfile() {

@@ -3,4 +3,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="cus_Gray">#EAEAEA</color>
+    <color name="light_purple">#BEADFA</color>
+    <color name="dark_purple">#6750A4</color>
+    <color name="orange">#FF7F3E</color>
+    <color name="light_blue">#D4E9F2</color>
+    <color name="medium_blue">#136ECE</color>
+    <color name="dark_blue">#12135D</color>
 </resources>

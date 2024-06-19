@@ -36,7 +36,7 @@
                 android:layout_marginTop="18dp"
                 card_view:layout_constraintStart_toEndOf="@id/gmaps"
                 card_view:layout_constraintTop_toTopOf="@id/gmaps"
-                tools:text="Nasi Goreng dengan Bumbu Rendang yang enak asal Padang"
+                tools:text="Nasi Goreng dengan bumbu rendang pekat yang enak dan murah ditambah daging sapi asli asal Padang, Sumatera Barat"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -64,6 +64,19 @@
             android:layout_marginStart="5dp"
             card_view:layout_constraintStart_toEndOf="@id/tv_foodcal"
             card_view:layout_constraintTop_toTopOf="@id/tv_foodcal"
+            tools:text="100.0"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/autour_one"/>
+
+        <TextView
+            android:id="@+id/tv_foodcal3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            card_view:layout_constraintStart_toEndOf="@id/tv_foodcal2"
+            card_view:layout_constraintTop_toTopOf="@id/tv_foodcal2"
+            android:text="@string/satuan_cal_cardrecommendation"
             android:textSize="12sp"
             android:textColor="@color/black"
             android:fontFamily="@font/autour_one"/>
@@ -72,11 +85,12 @@
             android:id="@+id/pilih"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:text="@string/button_addrecomendation"
             android:fontFamily="@font/autour_one"
-            card_view:layout_constraintTop_toBottomOf="@id/tv_foodcal2"
+            card_view:layout_constraintTop_toBottomOf="@id/tv_foodcal3"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"/>
 

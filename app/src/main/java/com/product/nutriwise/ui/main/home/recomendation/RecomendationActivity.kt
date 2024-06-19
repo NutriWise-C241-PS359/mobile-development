@@ -90,7 +90,7 @@ class RecomendationActivity : AppCompatActivity() {
             }
 
         }
-        supportActionBar?.setTitle("Recomendation")
+        supportActionBar?.setTitle("Recommendation")
     }
 
     private fun showRecyclerList() {

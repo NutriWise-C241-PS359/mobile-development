@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="30dp"
     tools:context=".ui.main.history.detail.HistoryDetailActivity">
 
     <ImageView
@@ -15,40 +16,44 @@
         android:rotation="-8"
         android:src="@drawable/note"
         app:layout_constraintStart_toEndOf="@id/cv_catatan"
-        app:layout_constraintTop_toBottomOf="@id/rv_detail" />
+        app:layout_constraintTop_toBottomOf="@id/rv_detail"
+        app:layout_constraintBottom_toTopOf="@id/cv_catatan"/>
 
     <TextView
         android:id="@+id/label_makanan"
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/autour_one"
         android:text="@string/nama_makanan"
         android:textSize="12sp"
         android:textStyle="bold"
+        android:ellipsize="end"
+        android:maxLines="2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_detail"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="5dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="100dp"
         app:layout_constraintStart_toStartOf="@+id/label_makanan"
         app:layout_constraintTop_toBottomOf="@+id/label_makanan"
-        tools:itemCount="7"
+        app:layout_constraintBottom_toTopOf="@id/cv_catatan"
+        tools:itemCount="5"
         tools:listitem="@layout/list_history_makanan" />
 
     <TextView
         android:id="@+id/label_karbo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="65dp"
         android:fontFamily="@font/autour_one"
-        android:text="Kb"
+        android:text="@string/column_karbo"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/label_makanan"
@@ -58,10 +63,10 @@
         android:id="@+id/label_protein"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="130dp"
+        android:layout_marginStart="115dp"
         android:fontFamily="@font/autour_one"
-        android:text="Pro"
-        android:textSize="12dp"
+        android:text="@string/column_protein"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/label_makanan"
         app:layout_constraintTop_toTopOf="@id/label_makanan"
@@ -71,9 +76,9 @@
         android:id="@+id/label_lemak"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="180dp"
+        android:layout_marginStart="165dp"
         android:fontFamily="@font/autour_one"
-        android:text="Lem"
+        android:text="@string/column_lemak"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/label_makanan"
@@ -83,9 +88,9 @@
         android:id="@+id/label_kalori"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="235dp"
+        android:layout_marginStart="220dp"
         android:fontFamily="@font/autour_one"
-        android:text="Kal"
+        android:text="@string/column_calorie"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/label_makanan"
@@ -96,33 +101,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="-8dp"
+        android:layout_marginBottom="20dp"
         android:elevation="10dp"
         android:padding="8dp"
-        app:cardBackgroundColor="#BEADFA"
+        app:cardBackgroundColor="@color/light_purple"
         app:cardCornerRadius="8dp"
         app:layout_constraintStart_toStartOf="@id/rv_detail"
-        app:layout_constraintTop_toBottomOf="@+id/icon_catatan">
+        app:layout_constraintTop_toBottomOf="@+id/icon_catatan"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <TableLayout
             android:id="@+id/table_catatan"
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="4dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="4dp"
             android:padding="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_detail">
 
-            <TableRow>
+            <TableRow
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/catatan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/autour_one"
-                    android:text="Catatan: "
-                    android:textColor="#6750A4"
+                    android:text="@string/catatan"
+                    android:textColor="@color/dark_purple"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@id/rv_detail"
@@ -132,61 +141,121 @@
             <TableRow>
 
                 <TextView
-                    android:id="@+id/karbo"
+                    android:id="@+id/karbo1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="50dp"
                     android:fontFamily="@font/autour_one"
-                    android:text="Kb = Karbohidrat"
-                    android:textColor="#6750A4"
+                    android:text="@string/kb"
+                    android:textColor="@color/dark_purple"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="@id/catatan"
                     app:layout_constraintTop_toBottomOf="@id/catatan" />
+
+                <TextView
+                    android:id="@+id/karbo2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="-26dp"
+                    android:layout_marginEnd="30dp"
+                    android:fontFamily="@font/autour_one"
+                    android:text="@string/karbohidrat"
+                    android:textColor="@color/dark_purple"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@id/karbo1"
+                    app:layout_constraintTop_toTopOf="@id/karbo2" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                    android:id="@+id/protein"
+                    android:id="@+id/protein1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="50dp"
                     android:fontFamily="@font/autour_one"
-                    android:text="Pro = Protein"
-                    android:textColor="#6750A4"
+                    android:text="@string/pro"
+                    android:textColor="@color/dark_purple"
                     android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="@id/karbo"
-                    app:layout_constraintTop_toBottomOf="@id/karbo" />
+                    app:layout_constraintStart_toStartOf="@id/karbo1"
+                    app:layout_constraintTop_toBottomOf="@id/karbo1" />
+
+                <TextView
+                    android:id="@+id/protein2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="-26dp"
+                    android:layout_marginEnd="30dp"
+                    android:fontFamily="@font/autour_one"
+                    android:text="@string/protein"
+                    android:textColor="@color/dark_purple"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@id/protein1"
+                    app:layout_constraintTop_toTopOf="@id/protein1" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                    android:id="@+id/lemak"
+                    android:id="@+id/lemak1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="50dp"
                     android:fontFamily="@font/autour_one"
-                    android:text="Lem = Lemak"
-                    android:textColor="#6750A4"
+                    android:text="@string/lem"
+                    android:textColor="@color/dark_purple"
                     android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="@id/protein"
-                    app:layout_constraintTop_toBottomOf="@id/protein" />
+                    app:layout_constraintStart_toStartOf="@id/protein1"
+                    app:layout_constraintTop_toBottomOf="@id/protein1" />
+
+                <TextView
+                    android:id="@+id/lemak2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="-26dp"
+                    android:layout_marginEnd="30dp"
+                    android:fontFamily="@font/autour_one"
+                    android:text="@string/lemak"
+                    android:textColor="@color/dark_purple"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@id/lemak1"
+                    app:layout_constraintTop_toTopOf="@id/lemak1" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                    android:id="@+id/kalori"
+                    android:id="@+id/kalori1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="50dp"
                     android:fontFamily="@font/autour_one"
-                    android:text="Kal = Kalori"
-                    android:textColor="#6750A4"
+                    android:text="@string/kal"
+                    android:textColor="@color/dark_purple"
                     android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="@id/lemak"
-                    app:layout_constraintTop_toBottomOf="@id/lemak" />
+                    app:layout_constraintStart_toStartOf="@id/lemak1"
+                    app:layout_constraintTop_toBottomOf="@id/lemak1" />
+
+                <TextView
+                    android:id="@+id/kalori2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="-26dp"
+                    android:layout_marginEnd="30dp"
+                    android:fontFamily="@font/autour_one"
+                    android:text="@string/kalori"
+                    android:textColor="@color/dark_purple"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@id/kalori1"
+                    app:layout_constraintTop_toTopOf="@id/kalori1" />
             </TableRow>
 
             <TableRow>
@@ -206,11 +275,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="18dp"
                     android:fontFamily="@font/autour_one"
-                    android:text="= 100kkal"
-                    android:textColor="#6750A4"
+                    android:text="@string/ket_circle_indicator"
+                    android:textColor="@color/dark_purple"
                     android:textSize="12sp"
+                    android:ellipsize="end"
+                    android:maxLines="3"
                     app:layout_constraintStart_toEndOf="@id/pi"
                     app:layout_constraintTop_toTopOf="@id/pi" />
             </TableRow>

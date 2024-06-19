@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -24,7 +24,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#6750A4"
+                android:background="@color/dark_purple"
                 android:padding="16dp">
 
                 <TextView
@@ -55,6 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    tools:text="20.08"
                     android:textColor="@color/white"
                     android:fontFamily="@font/autour_one"
                     app:layout_constraintStart_toEndOf="@id/tv_title_bmi"
@@ -65,6 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    tools:text="(Normal Weight)"
                     android:textColor="@color/white"
                     android:fontFamily="@font/autour_one"
                     app:layout_constraintStart_toEndOf="@id/tv_title_bmi2"
@@ -75,7 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/jumlah_kalori_hari"
+                    android:text="@string/kalori_harianmu"
                     android:textColor="@color/white"
                     android:fontFamily="@font/autour_one"
                     app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +87,7 @@
                     android:id="@+id/tv_num_of_cal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/progress_kalori"
+                    tools:text="@string/progress_kalori"
                     android:textColor="@color/white"
                     android:fontFamily="@font/autour_one"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -96,9 +98,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
-                    android:max="100"
-                    android:progress="40"
-                    app:indicatorColor="#FF7F3E"
+                    tools:max="846"
+                    tools:progress="257"
+                    app:indicatorColor="@color/orange"
                     app:layout_constraintTop_toBottomOf="@id/tv_num_of_cal"
                     app:trackColor="@color/white"
                     tools:layout_editor_absoluteX="16dp" />
@@ -121,7 +123,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#D4E9F2">
+                android:background="@color/light_blue">
 
                 <ImageView
                     android:id="@+id/icon_breakfast"
@@ -166,6 +168,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    tools:text="257.00 gram"
                     android:textSize="14sp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/akaya_telivigala"
@@ -188,6 +191,7 @@
                     android:id="@+id/fillcal_breakfast2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    tools:text="257.00 gram"
                     android:textSize="14sp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/akaya_telivigala"
@@ -203,7 +207,7 @@
                     android:text="@string/addfood"
                     android:textSize="12sp"
                     android:fontFamily="@font/autour_one"
-                    android:backgroundTint="#FF7F3E"
+                    android:backgroundTint="@color/orange"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/needcal_breakfast" />
 
@@ -227,7 +231,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#136ECE">
+                android:background="@color/medium_blue">
 
                 <ImageView
                     android:id="@+id/icon_lunch"
@@ -271,6 +275,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    tools:text="338.43 gram"
                     android:textSize="14sp"
                     android:textColor="@color/cus_Gray"
                     android:fontFamily="@font/akaya_telivigala"
@@ -294,6 +299,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/akaya_telivigala"
+                    tools:text="0.00 gram"
                     android:textColor="@color/cus_Gray"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toStartOf="@id/fillcal_lunch"
@@ -305,7 +311,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:backgroundTint="#FF7F3E"
+                    android:backgroundTint="@color/orange"
                     android:text="@string/addfood"
                     android:textSize="12sp"
                     android:fontFamily="@font/autour_one"
@@ -332,7 +338,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#12135D">
+                android:background="@color/dark_blue">
 
                 <ImageView
                     android:id="@+id/icon_dinner"
@@ -377,6 +383,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    tools:text="253.83 gram"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:fontFamily="@font/akaya_telivigala"
@@ -399,6 +406,7 @@
                     android:id="@+id/fillcal_dinner2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    tools:text="0.00 gram"
                     android:textSize="14sp"
                     android:textColor="@color/white"
                     android:fontFamily="@font/akaya_telivigala"
@@ -411,8 +419,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:backgroundTint="#FF7F3E"
-                    android:text="Pilih Makanan"
+                    android:backgroundTint="@color/orange"
+                    android:text="@string/addfood"
                     android:textSize="12sp"
                     android:fontFamily="@font/autour_one"
                     app:layout_constraintEnd_toEndOf="parent"

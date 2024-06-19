@@ -44,11 +44,13 @@
         app:boxBackgroundMode="filled"
         app:endIconMode="clear_text"
         app:layout_constraintTop_toBottomOf="@id/layout_tb">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_bb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"/>
+            android:inputType="numberDecimal"
+            tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

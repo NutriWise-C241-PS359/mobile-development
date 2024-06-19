@@ -2,52 +2,96 @@
     <string name="app_name">NutriWise</string>
     <string name="logo_setting">Pengaturan Bahasa</string>
     <string name="logo_app">Logo Aplikasi</string>
+    <string name="failed">Kesalahan</string>
+
+    <!-- SignUp -->
+    <string name="sudah_punya_akun">Sudah punya akun?</string>
+    <string name="tv_title_signup">Daftar</string>
     <string name="name">Nama Lengkap</string>
     <string name="username">Nama Akun</string>
     <string name="password">Kata Sandi</string>
-    <string name="to_signup">Daftar</string>
-    <string name="tv_title_signup">Daftar</string>
-
-    <string name="tv_title_login">Masuk</string>
     <string name="to_login">Masuk</string>
 
+    <!-- Input Profile -->
     <string name="umur">Usia</string>
     <string name="gender">Jenis Kelamin</string>
     <string name="activity">Aktivitas</string>
     <string name="berat_badan">Berat Badan</string>
     <string name="tinggi_badan">Tinggi Badan</string>
-    <string name="tambah_photo">Tambah Photo</string>
     <string name="next">Selanjutnya</string>
 
-    <string name="tgl_history">DD/MM/YYYY</string>
-    <string name="label_totalkalori_harian">Total Kalori: </string>
-    <string name="total_kalori_harian">1000</string>
-    <string name="satuan_kalori_harian">kkal</string>
+    <!-- Input Target -->
+    <string name="berat_badan_tujuan">Berat Badan tujuan</string>
+    <string name="pilih_tanggal">Pilih Tanggal</string>
+    <string name="skip_target">Skip Target..</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- Login -->
+    <string name="belum_punya_akun">Belum punya akun?</string>
+    <string name="tv_title_login">Masuk</string>
+    <string name="to_signup">Daftar</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Bottom Navigation -->
     <string name="home">Home</string>
     <string name="history">History</string>
     <string name="profile">Profile</string>
+
+    <!-- Fragment Profile -->
+    <string name="name_profile">Name</string>
+    <string name="icon_edit">edit</string>
+    <string name="tinggi_badan_profile">Tinggi Badan</string>
+    <string name="titik_dua">:</string>
+    <string name="cm">cm</string>
+    <string name="berat_badan_profile">Berat Badan</string>
+    <string name="kg">Kg</string>
+    <string name="jenis_kelamin_profile">Jenis Kelamin</string>
+    <string name="aktivitas_profile">Aktivitas</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="logout">Logout</string>
+
+    <!-- Fragment Home -->
+    <string name="hi_nama">Hi, Nama</string>
+    <string name="bmi">BMI: </string>
+    <string name="kalori_harianmu">Kalori harianmu</string>
+    <string name="progress_kalori">(257/846)</string>
+    <string name="needcal">Membutuhkan</string>
+    <string name="fillcal">telah terisi</string>
+    <string name="addfood">Pilih Makanan</string>
+    <string name="title_cv_breakfast">Breakfast</string>
+    <string name="title_cv_lunch">Lunch</string>
+    <string name="title_cv_dinner">Dinner</string>
+
+    <!-- Card Recommendation -->
+    <string name="kalori_recomendation">Kalori:</string>
+    <string name="satuan_cal_cardrecommendation">gram</string>
+    <string name="button_addrecomendation">Pilih</string>
+
+    <!-- Card History -->
+    <string name="tgl_history">DD/MM/YYYY</string>
+    <string name="label_totalkalori_harian">Total Kalori: </string>
+    <string name="total_kalori_harian">1000</string>
+    <string name="satuan_kalori_harian">gram</string>
+
+    <!-- Menu History -->
     <string name="opsisarapan">Sarapan</string>
     <string name="opsimakansiang">Makan Siang</string>
     <string name="opsimakanmalam">Makan Malam</string>
-    <string name="hint">Tekan menu titik tiga di kanan atas untuk melihat komposisi nutrisi harian Anda berdasarkan waktu makan</string>
+
+    <!-- History Detail -->
     <string name="nama_makanan">Nama Makanan</string>
-    <string name="failed">Kesalahan</string>
-    <string name="hi_nama">Hi, Nama</string>
-    <string name="bmi">BMI: </string>
-    <string name="jumlah_kalori_hari">Jumlah kalori/hari</string>
-    <string name="progress_kalori">(1000/5000)</string>
-    <string name="title_cv_breakfast">Breakfast</string>
-    <string name="needcal">Membutuhkan </string>
-    <string name="fillcal"> telah terisi</string>
-    <string name="addfood">Pilih Makanan</string>
-    <string name="title_cv_lunch">Lunch</string>
-    <string name="title_cv_dinner">Dinner</string>
-    <string name="kategori_food">Kategori: Food</string>
-    <string name="nama_recomendation">Nasi Goreng</string>
-    <string name="kalori_recomendation">Kalori:</string>
-    <string name="button_addrecomendation">Pilih</string>
+    <string name="column_karbo">Kb</string>
+    <string name="column_protein">Pro</string>
+    <string name="column_lemak">Lem</string>
+    <string name="column_calorie">Kal</string>
+    <string name="kb">Kb</string>
+    <string name="karbohidrat">= Karbohidrat</string>
+    <string name="pro">Pro</string>
+    <string name="protein">= Protein</string>
+    <string name="lem">Lem</string>
+    <string name="lemak">= Lemak</string>
+    <string name="kal">Kal</string>
+    <string name="kalori">= Kalori</string>
+    <string name="catatan">Catatan:</string>
+    <string name="ket_circle_indicator">= 100gram (Kb, Pro, Lem)\n= 1000gram (Kal)</string>
+
+
 </resources>

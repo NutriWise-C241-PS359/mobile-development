@@ -115,10 +115,10 @@ class HomeFragment : Fragment() {
 
                 //Breakfast
                 needcalBreakfast2.text = String.format(
-                    " %.2f kkal",
+                    " %.2f gram ",
                     max(0.0, (it.caloriesB ?: 0.0) - (it.addCalorieB ?: 0.0))
                 )
-                fillcalBreakfast2.text = String.format(" %.2f kkal", it.addCalorieB ?: 0.0)
+                fillcalBreakfast2.text = String.format(" %.2f gram ", it.addCalorieB ?: 0.0)
                 addfoodBreakfast.setOnClickListener { _ ->
                     val tmp = it.addCalorieB ?: 0.0
                     val intent = Intent(requireContext(), RecomendationActivity::class.java)
@@ -132,10 +132,10 @@ class HomeFragment : Fragment() {
                 }
                 //Lunch
                 needcalLunch2.text = String.format(
-                    " %.2f kkal",
+                    " %.2f gram ",
                     max(0.0, (it.caloriesL ?: 0.0) - (it.addCalorieL ?: 0.0))
                 )
-                fillcalLunch2.text = String.format(" %.2f kkal", it.addCalorieL ?: 0.0)
+                fillcalLunch2.text = String.format(" %.2f gram ", it.addCalorieL ?: 0.0)
                 addfoodLunch.setOnClickListener { _ ->
                     val tmp = it.addCalorieL ?: 0.0
                     val intent = Intent(requireContext(), RecomendationActivity::class.java)
@@ -150,10 +150,10 @@ class HomeFragment : Fragment() {
 
                 //Diner
                 needcalDinner2.text = String.format(
-                    " %.2f kkal",
+                    " %.2f gram ",
                     max(0.0, (it.caloriesD ?: 0.0) - (it.addCalorieD ?: 0.0))
                 )
-                fillcalDinner2.text = String.format(" %.2f kkal", it.addCalorieD ?: 0.0)
+                fillcalDinner2.text = String.format(" %.2f gram ", it.addCalorieD ?: 0.0)
                 addfoodDinner.setOnClickListener { _ ->
                     val tmp = it.addCalorieD ?: 0.0
                     val intent = Intent(requireContext(), RecomendationActivity::class.java)

@@ -64,11 +64,12 @@
         app:boxBackgroundMode="outline"
         app:endIconMode="clear_text"
         app:layout_constraintTop_toBottomOf="@id/layout_name">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"/>
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -92,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Sudah punya akun?"
+        android:text="@string/sudah_punya_akun"
         android:textColor="@color/black"
         android:fontFamily="@font/autour_one"
         app:layout_constraintTop_toBottomOf="@id/layout_password"
@@ -106,7 +107,7 @@
         android:layout_marginStart="6dp"
         android:text="@string/to_login"
         android:textStyle="bold"
-        android:textColor="#FF7F3E"
+        android:textColor="@color/orange"
         android:fontFamily="@font/autour_one"
         app:layout_constraintTop_toBottomOf="@id/layout_password"
         app:layout_constraintStart_toEndOf="@id/tv_confirmacc"/>

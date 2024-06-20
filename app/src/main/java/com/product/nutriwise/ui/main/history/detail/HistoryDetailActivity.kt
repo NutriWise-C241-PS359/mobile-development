@@ -54,7 +54,7 @@ class HistoryDetailActivity : AppCompatActivity() {
         }
 
         supportActionBar?.setTitle(dateString2)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(false)
     }
 
     private fun showRecyclerList(){
@@ -84,8 +84,6 @@ class HistoryDetailActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_history, menu)
         return super.onCreateOptionsMenu(menu)
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

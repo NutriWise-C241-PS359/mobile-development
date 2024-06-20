@@ -77,14 +77,13 @@
                     android:id="@+id/tv_title_target"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Target tanggal 22-02-2024"
+                    android:layout_marginTop="6dp"
+                    tools:text="Target tanggal 22-02-2024"
                     android:textSize="10sp"
                     android:textColor="@color/white"
                     android:fontFamily="@font/autour_one"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_title_bmi"
+                    app:layout_constraintStart_toStartOf="@id/tv_title_cal"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title_cal"
                     tools:ignore="SmallSp" />
 
                 <TextView
@@ -111,7 +110,7 @@
                 <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:id="@+id/pi_calorie"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     tools:max="846"
                     tools:progress="257"

@@ -45,6 +45,7 @@
     <string name="kg">Kg</string>
     <string name="jenis_kelamin_profile">Jenis Kelamin</string>
     <string name="aktivitas_profile">Aktivitas</string>
+    <string name="button_target">Target</string>
     <string name="edit_profile">Edit profile</string>
     <string name="logout">Logout</string>
 
@@ -92,6 +93,5 @@
     <string name="kalori">= Kalori</string>
     <string name="catatan">Catatan:</string>
     <string name="ket_circle_indicator">= 100gram (Kb, Pro, Lem)\n= 1000gram (Kal)</string>
-
 
 </resources>

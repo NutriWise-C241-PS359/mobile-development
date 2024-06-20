@@ -15,6 +15,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField ("String", "API_BASE_URL", "\"https://backend1test-cxjlxkffvq-et.a.run.app/\"")
+
     }
 
     buildTypes {
@@ -24,11 +26,20 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField ("String", "API_BASE_URL", "\"https://backend1test-cxjlxkffvq-et.a.run.app/\"")
+        }
+        debug {
+            isDebuggable = true
+            buildConfigField ("String", "API_BASE_URL", "\"https://backend1test-cxjlxkffvq-et.a.run.app/\"")
+            isMinifyEnabled = false
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-DEBUG"
         }
     }
 
     buildFeatures {
         viewBinding = true
+        buildConfig =  true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -60,6 +71,4 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.2")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.2")
-    //photo circle
-//    implementation("de.hdodenhof:circleimageview:3.1.0")
 }

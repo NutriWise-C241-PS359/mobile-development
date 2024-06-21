@@ -16,7 +16,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_dasboard"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="180dp"
             app:cardCornerRadius="16dp"
             android:layout_marginTop="-16dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -110,7 +110,6 @@
                     android:id="@+id/pi_calorie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="8dp"
                     android:layout_marginTop="8dp"
                     tools:max="846"
                     tools:progress="257"

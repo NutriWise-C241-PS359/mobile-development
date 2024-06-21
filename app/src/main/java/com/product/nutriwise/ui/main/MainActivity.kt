@@ -13,7 +13,6 @@ import com.product.nutriwise.ui.main.profile.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private var backPressedOnce = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,18 +53,4 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment_container, fragment)
             .commit()
     }
-
-    override fun onBackPressed() {
-        if (backPressedOnce) {
-            super.onBackPressed()
-            return
-        }
-
-        this.backPressedOnce = true
-        Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show()
-
-        // Reset the backPressedOnce flag after 2 seconds
-        android.os.Handler().postDelayed({ backPressedOnce = false }, 2000)
-    }
-
 }

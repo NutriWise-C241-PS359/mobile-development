@@ -59,14 +59,15 @@ class LoginActivity : AppCompatActivity() {
     private fun setActionBar() {
         supportActionBar?.hide()
     }
-    private fun loginUser(user: String, password: String, date: String){
+
+    private fun loginUser(user: String, password: String, date: String) {
         showLoading(true)
         val apiService = ApiConfig.getApiService()
         lifecycleScope.launch {
             try {
                 val response = apiService.login(user, password)
-                viewModel.saveSession(UserModel(user, response.user?.name.toString(), response.user?.token.toString(), true,false,date))
-                val getProfileResponse = apiService.getUser(BR+response.user?.token.toString())
+                viewModel.saveSession(UserModel(user, response.user?.name.toString(), response.user?.token.toString(), true, false, date))
+                val getProfileResponse = apiService.getUser(BR + response.user?.token.toString())
                 viewModel.saveProfile(
                     ProfileModel(
                         getProfileResponse.profile?.usia ?: 0,
@@ -77,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
                     )
                 )
 
-                val responseCalCalorie = apiService.getHistoryPredict(BR+response.user?.token.toString())
+                val responseCalCalorie = apiService.getHistoryPredict(BR + response.user?.token.toString())
                 viewModel.saveCalorie(
                     CalorieModel(
                         responseCalCalorie.temp?.dailyCalories,
@@ -100,31 +101,24 @@ class LoginActivity : AppCompatActivity() {
                 )
 
                 showToast(response.message.toString())
+                navigateToMainActivity()
+            } catch (e: HttpException) {
+                handleHttpException(e)
+            } catch (e: Exception) {
+                showErrorDialog(e.message ?: getString(R.string.failed))
+            } finally {
                 showLoading(false)
-                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
-                finish()
-            }catch (e: HttpException) {
-                showLoading(false)
-                val errorBody = e.response()?.errorBody()?.string()
-                val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
-                showErrorDialog(errorResponse.message.toString())
-//                if (errorResponse.message.toString() == "No prediction data found for the user") {
-//                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-//                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-//                    startActivity(intent)
-//                    finish()
-//                }
             }
         }
     }
 
     private fun showLoading(isLoading: Boolean) {
-        binding.progressCircular.visibility = if (isLoading) View.VISIBLE else View.GONE
+        runOnUiThread {
+            binding.progressCircular.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
     }
 
-    private fun showToast(message: String){
+    private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
@@ -135,7 +129,20 @@ class LoginActivity : AppCompatActivity() {
             }.show()
     }
 
-    companion object{
+    private fun handleHttpException(e: HttpException) {
+        val errorBody = e.response()?.errorBody()?.string()
+        val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
+        showErrorDialog(errorResponse.message.toString())
+    }
+
+    private fun navigateToMainActivity() {
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
+    }
+
+    companion object {
         const val BR = "Bearer "
     }
 }
